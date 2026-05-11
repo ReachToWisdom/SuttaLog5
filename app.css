@@ -503,3 +503,68 @@ body {
   padding: 0.5rem;
   text-decoration: underline;
 }
+
+/* MEMO FAB + sheet */
+.memo-fab {
+  position: fixed;
+  right: 0.9rem;
+  bottom: calc(3.8rem + var(--safe-bottom));
+  background: var(--accent);
+  color: white;
+  border: none;
+  width: 3rem; height: 3rem;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 14px rgba(40,30,60,0.25);
+  cursor: pointer;
+  z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.12s;
+}
+.memo-fab:active { transform: scale(0.94); }
+.memo-fab.has-memo { background: #4d9a4d; }
+.memo-fab.has-memo::after {
+  content: "";
+  position: absolute;
+  top: 0.15rem; right: 0.15rem;
+  width: 0.55rem; height: 0.55rem;
+  background: #ffd84d;
+  border-radius: 50%;
+  border: 1.5px solid white;
+}
+.memo-sheet { gap: 0.4rem; }
+.memo-page-info {
+  font-size: 0.82em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.memo-textarea {
+  width: 100%;
+  min-height: 9rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+  font-size: 0.95em;
+  line-height: 1.55;
+  resize: vertical;
+  -webkit-appearance: none;
+  background: #fbfaf6;
+}
+.memo-textarea:focus { outline: none; border-color: var(--accent); background: white; }
+.memo-updated {
+  font-size: 0.76em;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+.memo-actions {
+  display: flex; gap: 0.5rem; align-items: center;
+  margin-top: 0.8rem;
+}
+.memo-actions .btn-primary { flex: 1; margin-top: 0; }
+.memo-actions .btn-text { margin-top: 0; }
+.memo-loading {
+  text-align: center; color: var(--muted);
+  padding: 0.8rem;
+  font-size: 0.85em;
+}

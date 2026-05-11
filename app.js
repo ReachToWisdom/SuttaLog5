@@ -443,6 +443,284 @@ function renderQuizResult(sheet) {
   sheet.appendChild(actions);
 }
 
+
+/* ===== MEMO (GitHub-backed) ===== */
+
+const REPO = "ReachToWisdom/SuttaLog5";
+const PAT_KEY = "suttalog5:gh_pat";
+const MEMO_CACHE_PREFIX = "suttalog5:memo:";
+const MEMO_INDEX_KEY = "suttalog5:memo_index";
+
+function loadMemoIndex() {
+  try {
+    const raw = localStorage.getItem(MEMO_INDEX_KEY);
+    if (!raw) return new Set();
+    return new Set(JSON.parse(raw));
+  } catch { return new Set(); }
+}
+
+function saveMemoIndex(set) {
+  localStorage.setItem(MEMO_INDEX_KEY, JSON.stringify([...set]));
+}
+
+function pageHasMemo(pageId) {
+  return loadMemoIndex().has(pageId);
+}
+
+function markPageMemo(pageId, has) {
+  const s = loadMemoIndex();
+  if (has) s.add(pageId);
+  else s.delete(pageId);
+  saveMemoIndex(s);
+}
+
+function getPat() { return localStorage.getItem(PAT_KEY); }
+function setPat(t) { if (t) localStorage.setItem(PAT_KEY, t); else localStorage.removeItem(PAT_KEY); }
+
+function promptForPat() {
+  const cur = getPat() || "";
+  const msg = "GitHub Personal Access Token을 입력하세요.\n\n발급: https://github.com/settings/tokens\n권한: repo (또는 fine-grained: SuttaLog5 contents write)";
+  const t = prompt(msg, cur);
+  if (t && t.trim()) {
+    setPat(t.trim());
+    return true;
+  }
+  return false;
+}
+
+function currentPageId() {
+  const p = state.pages[state.pageIdx];
+  if (!p) return "p" + (state.pageIdx + 1);
+  if (p.kind === "cover") return "cover";
+  if (p.kind === "words") return `v${p.verse.n}-w${p.wordPageIdx}`;
+  if (p.kind === "trans") return `v${p.verse.n}-trans`;
+  return "p" + (state.pageIdx + 1);
+}
+
+function pageSnapshot() {
+  const p = state.pages[state.pageIdx];
+  const snap = { kind: p.kind, sutta_id: state.sutta.id };
+  if (p.verse) {
+    snap.verseN = p.verse.n;
+    snap.pali = p.verse.pali;
+  }
+  if (p.kind === "words") {
+    snap.wordPageIdx = p.wordPageIdx;
+    snap.terms = (p.words || []).map(w => w.term);
+  }
+  return snap;
+}
+
+function memoUrl(pageId) {
+  return `https://api.github.com/repos/${REPO}/contents/memos/${pageId}.json`;
+}
+
+function b64encode(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+function b64decode(b64) {
+  return decodeURIComponent(escape(atob(b64)));
+}
+
+async function fetchMemo(pageId) {
+  const cached = localStorage.getItem(MEMO_CACHE_PREFIX + pageId);
+  const pat = getPat();
+  if (!pat) return cached ? JSON.parse(cached) : null;
+  try {
+    const resp = await fetch(memoUrl(pageId), {
+      headers: { Authorization: `token ${pat}` },
+      cache: "no-store",
+    });
+    if (resp.status === 404) {
+      localStorage.removeItem(MEMO_CACHE_PREFIX + pageId);
+      markPageMemo(pageId, false);
+      return null;
+    }
+    if (!resp.ok) return cached ? JSON.parse(cached) : null;
+    const data = await resp.json();
+    const content = b64decode(data.content.replace(/\s/g, ""));
+    const memo = JSON.parse(content);
+    memo._sha = data.sha;
+    localStorage.setItem(MEMO_CACHE_PREFIX + pageId, JSON.stringify(memo));
+    markPageMemo(pageId, !!memo.memo);
+    return memo;
+  } catch (e) {
+    return cached ? JSON.parse(cached) : null;
+  }
+}
+
+async function saveMemoApi(pageId, text) {
+  if (!getPat() && !promptForPat()) return false;
+  const pat = getPat();
+  const cached = localStorage.getItem(MEMO_CACHE_PREFIX + pageId);
+  const existing = cached ? JSON.parse(cached) : await fetchMemo(pageId);
+  const memo = {
+    page_id: pageId,
+    page_snapshot: pageSnapshot(),
+    memo: text,
+    status: "active",
+    updated_at: new Date().toISOString(),
+  };
+  const body = {
+    message: `memo(${pageId}): ${text.slice(0, 50).replace(/\n/g, " ")}`,
+    content: b64encode(JSON.stringify(memo, null, 2)),
+  };
+  if (existing && existing._sha) body.sha = existing._sha;
+  try {
+    const resp = await fetch(memoUrl(pageId), {
+      method: "PUT",
+      headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (!resp.ok) {
+      const t = await resp.text();
+      alert(`저장 실패 (${resp.status}): ${t.slice(0, 200)}`);
+      return false;
+    }
+    const data = await resp.json();
+    memo._sha = data.content.sha;
+    localStorage.setItem(MEMO_CACHE_PREFIX + pageId, JSON.stringify(memo));
+    markPageMemo(pageId, !!text);
+    return true;
+  } catch (e) {
+    alert(`네트워크 에러: ${e.message}`);
+    return false;
+  }
+}
+
+async function deleteMemoApi(pageId) {
+  if (!getPat() && !promptForPat()) return false;
+  const pat = getPat();
+  const cached = localStorage.getItem(MEMO_CACHE_PREFIX + pageId);
+  let sha = cached ? JSON.parse(cached)._sha : null;
+  if (!sha) {
+    const fetched = await fetchMemo(pageId);
+    sha = fetched ? fetched._sha : null;
+  }
+  if (!sha) {
+    localStorage.removeItem(MEMO_CACHE_PREFIX + pageId);
+    markPageMemo(pageId, false);
+    return true;
+  }
+  try {
+    const resp = await fetch(memoUrl(pageId), {
+      method: "DELETE",
+      headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ message: `memo(${pageId}): delete`, sha }),
+    });
+    if (!resp.ok && resp.status !== 404) {
+      const t = await resp.text();
+      alert(`삭제 실패 (${resp.status}): ${t.slice(0, 200)}`);
+      return false;
+    }
+    localStorage.removeItem(MEMO_CACHE_PREFIX + pageId);
+    markPageMemo(pageId, false);
+    return true;
+  } catch (e) {
+    alert(`네트워크 에러: ${e.message}`);
+    return false;
+  }
+}
+
+function closeMemoSheet() {
+  const o = document.getElementById("memo-overlay");
+  if (o) o.remove();
+}
+
+async function openMemoSheet() {
+  closeMemoSheet();
+  const pageId = currentPageId();
+
+  const overlay = el("div", "dict-overlay");
+  overlay.id = "memo-overlay";
+  const sheet = el("div", "dict-sheet memo-sheet");
+
+  const close = el("button", "dict-close", "✕");
+  close.addEventListener("click", closeMemoSheet);
+  sheet.appendChild(close);
+
+  sheet.appendChild(el("div", "dict-term", `메모 · ${pageId}`));
+  sheet.appendChild(el("div", "memo-page-info", describeCurrentPage()));
+
+  const loading = el("div", "memo-loading", "로딩…");
+  sheet.appendChild(loading);
+
+  const memo = await fetchMemo(pageId);
+  loading.remove();
+
+  const textarea = el("textarea", "memo-textarea");
+  textarea.placeholder = "이 페이지 메모 — 오타 수정 제안, 해석 의견, 인용 등.\nClaude에게 \"메모 확인해서 수정해줘\" 하면 일괄 반영.";
+  textarea.value = memo?.memo || "";
+  sheet.appendChild(textarea);
+
+  if (memo?.updated_at) {
+    sheet.appendChild(el("div", "memo-updated",
+      `최종 수정: ${new Date(memo.updated_at).toLocaleString()}`));
+  }
+
+  const actions = el("div", "memo-actions");
+  const saveBtn = el("button", "btn-primary", "저장");
+  saveBtn.addEventListener("click", async () => {
+    if (!textarea.value.trim()) {
+      alert("메모 내용을 입력하세요.");
+      return;
+    }
+    saveBtn.disabled = true;
+    saveBtn.textContent = "저장 중…";
+    const ok = await saveMemoApi(pageId, textarea.value);
+    if (ok) {
+      updateMemoFab();
+      closeMemoSheet();
+    } else {
+      saveBtn.disabled = false;
+      saveBtn.textContent = "저장";
+    }
+  });
+  actions.appendChild(saveBtn);
+
+  if (memo?.memo) {
+    const delBtn = el("button", "btn-text", "삭제");
+    delBtn.style.color = "#c44a4a";
+    delBtn.addEventListener("click", async () => {
+      if (!confirm("이 메모를 삭제할까요?")) return;
+      delBtn.disabled = true;
+      const ok = await deleteMemoApi(pageId);
+      if (ok) {
+        updateMemoFab();
+        closeMemoSheet();
+      } else {
+        delBtn.disabled = false;
+      }
+    });
+    actions.appendChild(delBtn);
+  }
+
+  sheet.appendChild(actions);
+
+  overlay.appendChild(sheet);
+  overlay.addEventListener("click", e => {
+    if (e.target === overlay) closeMemoSheet();
+  });
+  document.body.appendChild(overlay);
+  setTimeout(() => textarea.focus(), 50);
+}
+
+function describeCurrentPage() {
+  const p = state.pages[state.pageIdx];
+  if (!p) return "";
+  if (p.kind === "cover") return "표지";
+  if (p.kind === "words") return `${p.verse.n}게송 · 단어 ${p.wordPageIdx}/${p.totalWordPages}`;
+  if (p.kind === "trans") return `${p.verse.n}게송 · 독해`;
+  return "";
+}
+
+function updateMemoFab() {
+  const fab = document.getElementById("memo-fab");
+  if (!fab) return;
+  if (pageHasMemo(currentPageId())) fab.classList.add("has-memo");
+  else fab.classList.remove("has-memo");
+}
+
 /* ===== RENDER (학습 모드) ===== */
 
 function renderCover(card) {
@@ -534,6 +812,8 @@ function render() {
   document.getElementById("prev-btn").disabled = state.pageIdx === 0;
   document.getElementById("next-btn").disabled = state.pageIdx === state.pages.length - 1;
   syncHash();
+  updateMemoFab();
+  fetchMemo(currentPageId()).then(() => updateMemoFab());
 }
 
 function go(dir) {
@@ -547,6 +827,7 @@ function attachNav() {
   document.getElementById("prev-btn").addEventListener("click", () => go(-1));
   document.getElementById("next-btn").addEventListener("click", () => go(1));
   document.getElementById("quiz-btn").addEventListener("click", onQuizButton);
+  document.getElementById("memo-fab").addEventListener("click", openMemoSheet);
 
   let touchStartX = 0, touchStartY = 0;
   document.addEventListener("touchstart", e => {
@@ -554,7 +835,7 @@ function attachNav() {
     touchStartY = e.changedTouches[0].clientY;
   }, { passive: true });
   document.addEventListener("touchend", e => {
-    if (document.getElementById("dict-overlay") || document.getElementById("quiz-overlay")) return;
+    if (document.getElementById("dict-overlay") || document.getElementById("quiz-overlay") || document.getElementById("memo-overlay")) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
@@ -566,6 +847,7 @@ function attachNav() {
     if (e.key === "Escape") {
       closeDictionary();
       closeQuiz();
+      closeMemoSheet();
       return;
     }
     if (document.getElementById("quiz-overlay")) return;
