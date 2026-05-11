@@ -860,3 +860,16 @@ button, .badge, .verse-header-num, .word-grammar-chip,
   margin-top: 0.2rem;
   text-align: right;
 }
+
+/* Exposure suppression note */
+.exposure-note {
+  text-align: center;
+  font-size: 0.78em;
+  color: var(--muted);
+  padding: 0.6rem;
+  background: #f5f1ec;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 0.4rem;
+}
+.exposure-note:active { background: var(--accent-soft); }
