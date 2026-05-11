@@ -41,7 +41,6 @@ function buildPages(sutta) {
   for (const verse of sutta.verses) {
     const words = verse.words || [];
     const wordPageCount = Math.ceil(words.length / WORDS_PER_PAGE);
-    pages.push({ kind: "main", verse });
     for (let i = 0; i < wordPageCount; i++) {
       pages.push({
         kind: "words",

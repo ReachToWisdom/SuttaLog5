@@ -127,11 +127,8 @@ body {
 /* WORDS / TRANS 헤더 */
 .verse-header {
   background: var(--accent-soft);
-  border-radius: 10px;
-  padding: 0.5rem 0.7rem;
-  font-size: 0.78em;
-  display: flex; flex-wrap: wrap; gap: 0.3rem;
-  align-items: baseline;
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
   flex-shrink: 0;
 }
 .verse-header-num {
@@ -139,10 +136,18 @@ body {
   background: var(--accent); color: white;
   font-weight: 700;
   border-radius: 999px;
-  padding: 0.1em 0.6em;
-  font-size: 0.95em;
+  padding: 0.15em 0.7em;
+  font-size: 0.78em;
+  margin-bottom: 0.45rem;
 }
-.verse-header-pali { color: var(--pali); font-style: italic; }
+.verse-header-pali {
+  display: block;
+  color: var(--pali);
+  font-style: italic;
+  font-size: 1em;
+  line-height: 1.7;
+  font-weight: 500;
+}
 
 /* WORDS */
 .kind-words { gap: 0.5rem; }
