@@ -822,10 +822,13 @@ function openCalendar() {
   const days = loadStudyDays();
   const dayKeys = Object.keys(days);
   const total = Object.values(days).reduce((a, b) => a + b, 0);
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0, 10);
+  const todayLabel = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일`;
+  sheet.appendChild(el("div", "calendar-today-banner", `📍 오늘 · ${todayLabel}`));
   sheet.appendChild(el("div", "calendar-stats",
     `학습일 ${dayKeys.length}일 · 누적 ${total}회 페이지 이동`));
 
-  const now = new Date();
   const weeks = 12;
   const startDate = new Date(now);
   startDate.setDate(now.getDate() - (weeks * 7 - 1));
@@ -838,8 +841,16 @@ function openCalendar() {
   grid.appendChild(labelRow);
 
   const cur = new Date(startDate);
-  const todayStr = now.toISOString().slice(0, 10);
+  let lastMonthShown = -1;
   while (cur <= now) {
+    // Month separator row if month changes at start of this week
+    const weekStartMonth = cur.getMonth();
+    if (weekStartMonth !== lastMonthShown) {
+      const monthRow = el("div", "calendar-month-row");
+      monthRow.textContent = `${cur.getFullYear()}년 ${weekStartMonth + 1}월`;
+      grid.appendChild(monthRow);
+      lastMonthShown = weekStartMonth;
+    }
     const row = el("div", "calendar-row");
     for (let i = 0; i < 7; i++) {
       const dateStr = cur.toISOString().slice(0, 10);
@@ -853,7 +864,13 @@ function openCalendar() {
         cell.title = `${dateStr}: ${count}회`;
       }
       if (dateStr === todayStr) cell.classList.add("today");
-      cell.textContent = cur.getDate();
+      // Show "M/D" for first of month, just D otherwise
+      if (cur.getDate() === 1) {
+        cell.textContent = `${cur.getMonth() + 1}/1`;
+        cell.classList.add("month-start");
+      } else {
+        cell.textContent = cur.getDate();
+      }
       row.appendChild(cell);
       cur.setDate(cur.getDate() + 1);
     }
