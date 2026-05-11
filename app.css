@@ -1144,3 +1144,99 @@ button, .badge, .verse-header-num, .word-grammar-chip,
   border-radius: 8px;
   margin-bottom: 0.5rem;
 }
+
+/* === NEW TOPBAR LAYOUT === */
+#topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.5rem;
+  padding-top: calc(0.4rem + var(--safe-top));
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+#topbar #prev-btn,
+#topbar #next-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--accent);
+  padding: 0.15rem 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+#topbar #prev-btn:disabled,
+#topbar #next-btn:disabled {
+  color: var(--muted);
+  opacity: 0.35;
+}
+#topbar-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  min-width: 0;
+}
+#topbar-center #page-info {
+  font-size: 0.78em;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  font-weight: 500;
+}
+#topbar-center #page-num {
+  font-size: 0.65em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* === BOTTOM TABS (suttalog2 style) === */
+#bottom-tabs {
+  display: flex;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  padding-bottom: var(--safe-bottom);
+  flex-shrink: 0;
+  box-shadow: 0 -2px 8px rgba(40, 30, 60, 0.04);
+}
+#bottom-tabs button {
+  flex: 1;
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.45rem 0.2rem;
+  cursor: pointer;
+  color: var(--muted);
+  font: inherit;
+  transition: color 0.15s;
+}
+#bottom-tabs button:active {
+  background: var(--accent-soft);
+}
+#bottom-tabs button.active {
+  color: var(--accent);
+}
+#bottom-tabs .tab-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+#bottom-tabs .tab-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Memo FAB moves up since no bottom nav with prev/next */
+.memo-fab {
+  bottom: calc(4.5rem + var(--safe-bottom));
+}
+
+/* Hide old #nav if present (legacy) */
+#nav { display: none !important; }
