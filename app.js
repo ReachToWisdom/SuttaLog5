@@ -1045,33 +1045,20 @@ function renderCover(card) {
   const t = state.sutta.title;
 
   const hero = el("div", "cover-hero");
-  hero.appendChild(el("div", "cover-emoji", "🪷"));
-  hero.appendChild(el("div", "cover-ko", t.ko || ""));
-  if (t.pali) hero.appendChild(el("div", "cover-pali", t.pali));
-  if (t.ref) hero.appendChild(el("div", "cover-ref", t.ref));
+  hero.appendChild(el("div", "cover-lotus", "🪷"));
+  hero.appendChild(el("div", "cover-mantra-1", "Namo Tassa"));
+  hero.appendChild(el("div", "cover-mantra-2", "Bhagavato Arahato Sammāsambuddhassa"));
+  hero.appendChild(el("div", "cover-welcome", "빠알리어 심층 학습"));
+  hero.appendChild(el("div", "cover-subtitle",
+    "경전을 음절·단어·어근까지 분해해\n붓다의 가르침을 깊이 읽어보세요"));
+
+  const chip = el("div", "cover-chip");
+  chip.appendChild(el("span", "chip-icon", "🪷"));
+  const chipText = `${t.ko || ""}${t.pali ? " · " + t.pali : ""}${t.ref ? " (" + t.ref + ")" : ""}`;
+  chip.appendChild(el("span", "chip-text", chipText));
+  hero.appendChild(chip);
+
   card.appendChild(hero);
-
-  const actions = el("div", "cover-actions");
-  const lastId = localStorage.getItem(LAST_PAGE_KEY);
-  if (lastId && lastId !== "cover") {
-    const resumeBtn = el("button", "cover-btn cover-btn-primary");
-    resumeBtn.appendChild(el("span", "cover-btn-main", "📖 이어 학습하기"));
-    resumeBtn.appendChild(el("span", "cover-btn-sub", lastId));
-    resumeBtn.addEventListener("click", () => navigateToPageId(lastId));
-    actions.appendChild(resumeBtn);
-  }
-  const tocBtn = el("button", "cover-btn", "");
-  tocBtn.appendChild(el("span", "cover-btn-main", "📚 목차에서 선택"));
-  tocBtn.addEventListener("click", openTOC);
-  actions.appendChild(tocBtn);
-
-  const startBtn = el("button", "cover-btn", "");
-  startBtn.appendChild(el("span", "cover-btn-main", "▶ 처음부터 학습"));
-  startBtn.addEventListener("click", () => {
-    if (state.pages.length > 1) { state.pageIdx = 1; render(); }
-  });
-  actions.appendChild(startBtn);
-  card.appendChild(actions);
 
   const stats = el("div", "cover-stats");
   const exposure = loadExposure();
@@ -1082,6 +1069,28 @@ function renderCover(card) {
   stats.appendChild(_coverStat("📅", studyDays, "학습일"));
   stats.appendChild(_coverStat("🔁", wrongCount, "복습 단어"));
   card.appendChild(stats);
+
+  const cta = el("button", "cover-cta");
+  const lastId = localStorage.getItem(LAST_PAGE_KEY);
+  if (lastId && lastId !== "cover") {
+    cta.textContent = "이어 학습하기";
+    cta.addEventListener("click", () => navigateToPageId(lastId));
+  } else {
+    cta.textContent = "시작하기";
+    cta.addEventListener("click", () => {
+      if (state.pages.length > 1) { state.pageIdx = 1; render(); }
+    });
+  }
+  card.appendChild(cta);
+
+  const links = el("div", "cover-links");
+  const tocLink = el("button", "cover-link", "📚 목차");
+  tocLink.addEventListener("click", openTOC);
+  links.appendChild(tocLink);
+  const calLink = el("button", "cover-link", "📅 캘린더");
+  calLink.addEventListener("click", openCalendar);
+  links.appendChild(calLink);
+  card.appendChild(links);
 }
 
 function _coverStat(icon, value, label) {
