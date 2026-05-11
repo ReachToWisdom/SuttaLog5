@@ -34,6 +34,7 @@ async function init() {
   attachNav();
   render();
   updateQuizBadge();
+  getGithubMemos().then(() => updateMemoFab());
 }
 
 function buildPages(sutta) {
@@ -448,6 +449,36 @@ function renderQuizResult(sheet) {
 
 const MEMO_PREFIX = "suttalog5:memo:";
 const MEMO_INDEX_KEY = "suttalog5:memo_index";
+const MEMO_REPO = "ReachToWisdom/SuttaLog5";
+
+let _githubMemosCache = null;
+async function fetchGithubMemos() {
+  try {
+    const resp = await fetch(`https://api.github.com/repos/${MEMO_REPO}/contents/memos`);
+    if (resp.status === 404) return [];
+    if (!resp.ok) return [];
+    const files = await resp.json();
+    if (!Array.isArray(files)) return [];
+    const results = await Promise.all(
+      files
+        .filter(f => f.name && f.name.endsWith(".json") && f.type === "file")
+        .map(async f => {
+          try {
+            const r = await fetch(f.download_url);
+            if (!r.ok) return null;
+            const memo = await r.json();
+            memo._source = "github";
+            return memo;
+          } catch { return null; }
+        })
+    );
+    return results.filter(m => m && m.memo);
+  } catch { return []; }
+}
+async function getGithubMemos() {
+  if (_githubMemosCache === null) _githubMemosCache = await fetchGithubMemos();
+  return _githubMemosCache;
+}
 
 // Clean up old PAT-era key
 try { localStorage.removeItem("suttalog5:gh_pat"); } catch {}
@@ -537,7 +568,7 @@ function closeMemoSheet() {
   if (o) o.remove();
 }
 
-function openMemoSheet() {
+async function openMemoSheet() {
   closeMemoSheet();
   const pageId = currentPageId();
 
@@ -552,7 +583,14 @@ function openMemoSheet() {
   sheet.appendChild(el("div", "dict-term", `메모 · ${pageId}`));
   sheet.appendChild(el("div", "memo-page-info", describeCurrentPage()));
 
-  const memo = getMemo(pageId);
+  const local = getMemo(pageId);
+  const remote = local ? null : (await getGithubMemos()).find(m => m.page_id === pageId);
+  const memo = local || remote;
+
+  if (remote && !local) {
+    sheet.appendChild(el("div", "memo-source-note",
+      "🌐 공유된 메모입니다. 수정하면 본인 기기에만 저장됩니다."));
+  }
 
   const textarea = el("textarea", "memo-textarea");
   textarea.placeholder = "이 페이지 메모 — 오타, 의견, 인용 등.\n수정 후 [저장] 클릭.";
@@ -596,11 +634,19 @@ function openMemoSheet() {
   setTimeout(() => textarea.focus(), 50);
 }
 
-function updateMemoFab() {
+async function updateMemoFab() {
   const fab = document.getElementById("memo-fab");
   if (!fab) return;
-  if (pageHasMemo(currentPageId())) fab.classList.add("has-memo");
-  else fab.classList.remove("has-memo");
+  const pageId = currentPageId();
+  fab.classList.remove("has-memo", "has-local-memo");
+  if (pageHasMemo(pageId)) {
+    fab.classList.add("has-memo", "has-local-memo");
+    return;
+  }
+  const remote = await getGithubMemos();
+  if (remote.some(m => m.page_id === pageId)) {
+    fab.classList.add("has-memo");
+  }
 }
 
 function navigateToPageId(pageId) {
@@ -639,7 +685,7 @@ function downloadMemosJson() {
   setTimeout(() => URL.revokeObjectURL(url), 100);
 }
 
-function openMemoList() {
+async function openMemoList() {
   closeMemoSheet();
   closeDictionary();
   closeQuiz();
@@ -654,7 +700,23 @@ function openMemoList() {
 
   sheet.appendChild(el("div", "dict-term", "메모 목록"));
 
-  const memos = listAllMemos();
+  const loading = el("div", "memo-loading", "공유 메모 로딩…");
+  sheet.appendChild(loading);
+  overlay.appendChild(sheet);
+  overlay.addEventListener("click", e => {
+    if (e.target === overlay) closeMemoSheet();
+  });
+  document.body.appendChild(overlay);
+
+  const localMemos = listAllMemos().map(m => ({ ...m, _source: "local" }));
+  const remoteMemos = await getGithubMemos();
+  loading.remove();
+
+  const byId = new Map();
+  for (const m of remoteMemos) byId.set(m.page_id, m);
+  for (const m of localMemos) byId.set(m.page_id, m);
+  const memos = Array.from(byId.values())
+    .sort((a, b) => (b.updated_at || "").localeCompare(a.updated_at || ""));
   if (memos.length === 0) {
     sheet.appendChild(el("div", "memo-empty",
       "아직 메모가 없습니다.\n페이지에서 ✏️ 버튼으로 추가하세요."));
@@ -664,7 +726,12 @@ function openMemoList() {
     for (const memo of memos) {
       const item = el("div", "memo-item");
       const headRow = el("div", "memo-item-head");
-      headRow.appendChild(el("span", "memo-item-id", memo.page_id));
+      const idGroup = el("div", "memo-item-id-group");
+      idGroup.appendChild(el("span", "memo-item-id", memo.page_id));
+      idGroup.appendChild(el("span",
+        "memo-item-source " + (memo._source === "github" ? "src-github" : "src-local"),
+        memo._source === "github" ? "🌐 공유됨" : "📱 본인"));
+      headRow.appendChild(idGroup);
       const goBtn = el("button", "memo-item-go", "→ 이동");
       goBtn.addEventListener("click", () => {
         if (navigateToPageId(memo.page_id)) closeMemoSheet();
@@ -677,20 +744,28 @@ function openMemoList() {
           new Date(memo.updated_at).toLocaleString()));
       }
       const actions = el("div", "memo-item-actions");
-      const editBtn = el("button", "btn-text-small", "✎ 수정");
-      editBtn.addEventListener("click", () => {
-        if (navigateToPageId(memo.page_id)) {
-          setTimeout(openMemoSheet, 100);
-        }
-      });
-      actions.appendChild(editBtn);
-      const delBtn = el("button", "btn-text-small btn-danger", "🗑 삭제");
-      delBtn.addEventListener("click", () => {
-        if (!confirm(`"${memo.page_id}" 메모를 삭제할까요?`)) return;
-        deleteMemo(memo.page_id);
-        openMemoList();
-      });
-      actions.appendChild(delBtn);
+      if (memo._source === "github") {
+        const viewBtn = el("button", "btn-text-small", "🔍 페이지 열기");
+        viewBtn.addEventListener("click", () => {
+          if (navigateToPageId(memo.page_id)) closeMemoSheet();
+        });
+        actions.appendChild(viewBtn);
+      } else {
+        const editBtn = el("button", "btn-text-small", "✎ 수정");
+        editBtn.addEventListener("click", () => {
+          if (navigateToPageId(memo.page_id)) {
+            setTimeout(openMemoSheet, 100);
+          }
+        });
+        actions.appendChild(editBtn);
+        const delBtn = el("button", "btn-text-small btn-danger", "🗑 삭제");
+        delBtn.addEventListener("click", () => {
+          if (!confirm(`"${memo.page_id}" 메모를 삭제할까요?`)) return;
+          deleteMemo(memo.page_id);
+          openMemoList();
+        });
+        actions.appendChild(delBtn);
+      }
       item.appendChild(actions);
       list.appendChild(item);
     }
@@ -700,12 +775,6 @@ function openMemoList() {
     exportBtn.addEventListener("click", downloadMemosJson);
     sheet.appendChild(exportBtn);
   }
-
-  overlay.appendChild(sheet);
-  overlay.addEventListener("click", e => {
-    if (e.target === overlay) closeMemoSheet();
-  });
-  document.body.appendChild(overlay);
 }
 
 /* ===== RENDER (학습 모드) ===== */
