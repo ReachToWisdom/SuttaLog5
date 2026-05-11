@@ -667,3 +667,41 @@ button, .badge, .verse-header-num, .word-grammar-chip,
 .btn-text-small.btn-danger { color: #c44a4a; }
 .btn-text-small:active { background: var(--accent-soft); }
 .memo-list-sheet .btn-secondary { margin-top: 1rem; }
+
+/* Memo source indicators */
+.memo-item-id-group {
+  display: flex; align-items: center; gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.memo-item-source {
+  font-size: 0.7em;
+  padding: 0.15em 0.5em;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.memo-item-source.src-github {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+.memo-item-source.src-local {
+  background: #fff8e1;
+  color: #b78a00;
+}
+.memo-source-note {
+  background: #e3f2fd;
+  color: #1976d2;
+  font-size: 0.82em;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+.memo-fab.has-memo:not(.has-local-memo) { background: #1976d2; }
+.memo-fab.has-memo:not(.has-local-memo)::after {
+  content: "";
+  position: absolute;
+  top: 0.15rem; right: 0.15rem;
+  width: 0.55rem; height: 0.55rem;
+  background: #fff;
+  border-radius: 50%;
+  border: 1.5px solid white;
+}
