@@ -39,6 +39,9 @@ async function init() {
 
 function buildPages(sutta) {
   const pages = [{ kind: "cover" }];
+  const settings = getSettings();
+  const allMeanings = collectAllMeanings(sutta);
+
   for (const verse of sutta.verses) {
     const words = verse.words || [];
     const wordPageCount = Math.ceil(words.length / WORDS_PER_PAGE);
@@ -54,8 +57,59 @@ function buildPages(sutta) {
     if (verse.translations && Object.keys(verse.translations).length) {
       pages.push({ kind: "trans", verse });
     }
+    if (settings.quizPerVerse > 0) {
+      const qs = buildVerseQuestions(verse, allMeanings, settings.quizPerVerse);
+      for (let i = 0; i < qs.length; i++) {
+        pages.push({
+          kind: "verseQuiz",
+          verse,
+          question: qs[i],
+          quizIdx: i + 1,
+          quizTotal: qs.length,
+        });
+      }
+    }
   }
   return pages;
+}
+
+function collectAllMeanings(sutta) {
+  const map = new Map();
+  for (const v of sutta.verses) {
+    for (const w of v.words || []) {
+      const m = parseGloss(w.gloss).meaning;
+      if (!m || m.length < 2) continue;
+      if (!map.has(w.term)) map.set(w.term, { term: w.term, meaning: m, verseN: v.n });
+    }
+  }
+  return Array.from(map.values());
+}
+
+function buildVerseQuestions(verse, allMeanings, n) {
+  const seen = new Set();
+  const versePool = [];
+  for (const w of verse.words || []) {
+    if (seen.has(w.term)) continue;
+    const m = parseGloss(w.gloss).meaning;
+    if (!m || m.length < 2) continue;
+    versePool.push({ term: w.term, meaning: m, verseN: verse.n });
+    seen.add(w.term);
+  }
+  if (versePool.length === 0) return [];
+  const meaningPool = Array.from(new Set(allMeanings.map(w => w.meaning)));
+  const picked = shuffle(versePool).slice(0, Math.min(n, versePool.length));
+  return picked.map(q => {
+    const distractors = shuffle(meaningPool.filter(m => m !== q.meaning)).slice(0, 3);
+    const options = shuffle([q.meaning, ...distractors]);
+    return {
+      term: q.term,
+      verseN: q.verseN,
+      options,
+      answerIdx: options.indexOf(q.meaning),
+      userIdx: null,
+      answered: false,
+    };
+  });
 }
 
 function parseHash() {
@@ -218,6 +272,135 @@ function updateQuizBadge() {
   } else if (badge) {
     badge.remove();
   }
+}
+
+/* ===== SETTINGS + LOTUS ===== */
+
+const SETTINGS_KEY = "suttalog5:settings";
+const WRONG_COUNT_KEY = "suttalog5:wrong_count";
+const DEFAULT_SETTINGS = { lotusMax: 5, quizPerVerse: 3 };
+
+function getSettings() {
+  try {
+    const raw = localStorage.getItem(SETTINGS_KEY);
+    if (raw) return { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
+  } catch {}
+  return { ...DEFAULT_SETTINGS };
+}
+function setSettingValue(key, value) {
+  const s = getSettings();
+  s[key] = value;
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+}
+
+function getWrongCount() {
+  return parseInt(localStorage.getItem(WRONG_COUNT_KEY) || "0", 10);
+}
+function incrementWrongCount() {
+  const cur = getWrongCount() + 1;
+  localStorage.setItem(WRONG_COUNT_KEY, String(cur));
+  updateLotusRow();
+  return cur;
+}
+function resetWrongCount() {
+  localStorage.setItem(WRONG_COUNT_KEY, "0");
+  updateLotusRow();
+}
+
+function updateLotusRow() {
+  const row = document.getElementById("lotus-row");
+  if (!row) return;
+  row.innerHTML = "";
+  const s = getSettings();
+  const wrong = Math.min(getWrongCount(), s.lotusMax);
+  for (let i = 0; i < s.lotusMax; i++) {
+    const span = el("span", "lotus" + (i < wrong ? " filled" : ""));
+    span.textContent = i < wrong ? "🪷" : "·";
+    row.appendChild(span);
+  }
+}
+
+function closeSettings() {
+  const o = document.getElementById("settings-overlay");
+  if (o) o.remove();
+}
+
+function openSettings() {
+  closeSettings();
+  closeMemoSheet();
+  closeDictionary();
+  closeQuiz();
+
+  const overlay = el("div", "dict-overlay");
+  overlay.id = "settings-overlay";
+  const sheet = el("div", "dict-sheet settings-sheet");
+
+  const close = el("button", "dict-close", "✕");
+  close.addEventListener("click", closeSettings);
+  sheet.appendChild(close);
+
+  sheet.appendChild(el("div", "dict-term", "환경설정"));
+
+  const s = getSettings();
+
+  sheet.appendChild(el("div", "dict-section-label", "도전 횟수 (🪷 연꽃 개수)"));
+  const lg = el("div", "settings-radio");
+  for (const n of [3, 5, 7, 10]) {
+    const b = el("button", "settings-radio-btn" + (s.lotusMax === n ? " active" : ""), `${n}개`);
+    b.addEventListener("click", () => {
+      setSettingValue("lotusMax", n);
+      updateLotusRow();
+      openSettings();
+    });
+    lg.appendChild(b);
+  }
+  sheet.appendChild(lg);
+
+  sheet.appendChild(el("div", "dict-section-label", "게송당 문제 수"));
+  const qg = el("div", "settings-radio");
+  for (const n of [0, 1, 3, 5]) {
+    const b = el("button", "settings-radio-btn" + (s.quizPerVerse === n ? " active" : ""),
+      n === 0 ? "없음" : `${n}문`);
+    b.addEventListener("click", () => {
+      setSettingValue("quizPerVerse", n);
+      const oldId = currentPageId();
+      state.pages = buildPages(state.sutta);
+      if (!navigateToPageId(oldId)) {
+        state.pageIdx = Math.min(state.pageIdx, state.pages.length - 1);
+        render();
+      }
+      openSettings();
+    });
+    qg.appendChild(b);
+  }
+  sheet.appendChild(qg);
+
+  sheet.appendChild(el("div", "dict-section-label", "초기화"));
+  const actions = el("div", "settings-actions");
+
+  const rw = el("button", "btn-secondary", `🪷 연꽃 카운트 초기화 (현재 ${getWrongCount()})`);
+  rw.addEventListener("click", () => {
+    if (!confirm("연꽃 카운트를 0으로 되돌릴까요?")) return;
+    resetWrongCount();
+    openSettings();
+  });
+  actions.appendChild(rw);
+
+  const rr = el("button", "btn-secondary", `🗑 복습 단어 목록 비우기 (현재 ${loadWrongTerms().size})`);
+  rr.addEventListener("click", () => {
+    if (!confirm("복습 단어 목록을 모두 비울까요?")) return;
+    saveWrongTerms(new Set());
+    openSettings();
+  });
+  actions.appendChild(rr);
+
+  sheet.appendChild(actions);
+
+  overlay.appendChild(sheet);
+  overlay.addEventListener("click", e => {
+    if (e.target === overlay) closeSettings();
+  });
+  document.body.appendChild(overlay);
 }
 
 /* ===== QUIZ ===== */
@@ -844,6 +1027,48 @@ function renderTrans(p, card) {
   card.appendChild(list);
 }
 
+function renderVerseQuiz(p, card) {
+  const v = p.verse;
+  const q = p.question;
+  appendPaliHeader(card, v);
+  card.appendChild(el("div", "section-label", `문제 ${p.quizIdx} / ${p.quizTotal}`));
+  card.appendChild(el("div", "quiz-prompt-inline", "이 단어의 뜻은?"));
+  card.appendChild(el("div", "quiz-term-inline", q.term));
+
+  const opts = el("div", "quiz-options-inline");
+  q.options.forEach((opt, i) => {
+    const btn = el("button", "quiz-option-inline", opt);
+    if (q.answered) {
+      if (i === q.answerIdx) btn.classList.add("correct");
+      else if (i === q.userIdx) btn.classList.add("wrong");
+      btn.disabled = true;
+    }
+    btn.addEventListener("click", () => {
+      if (q.answered) return;
+      q.answered = true;
+      q.userIdx = i;
+      if (i === q.answerIdx) {
+        if (loadWrongTerms().has(q.term)) removeWrongTerm(q.term);
+      } else {
+        incrementWrongCount();
+        addWrongTerm(q.term);
+      }
+      render();
+    });
+    opts.appendChild(btn);
+  });
+  card.appendChild(opts);
+
+  if (q.answered) {
+    const ok = q.userIdx === q.answerIdx;
+    const fb = el("div", "quiz-feedback " + (ok ? "correct" : "wrong"),
+      ok ? "🌟 정답!" : `정답: ${q.options[q.answerIdx]}`);
+    card.appendChild(fb);
+  } else {
+    card.appendChild(el("div", "hint", "선택지 탭"));
+  }
+}
+
 function render() {
   closeDictionary();
   const p = state.pages[state.pageIdx];
@@ -854,6 +1079,7 @@ function render() {
   else if (p.kind === "main") renderMain(p, card);
   else if (p.kind === "words") renderWords(p, card);
   else if (p.kind === "trans") renderTrans(p, card);
+  else if (p.kind === "verseQuiz") renderVerseQuiz(p, card);
   root.appendChild(card);
 
   let info = state.sutta.title.ko;
@@ -861,6 +1087,7 @@ function render() {
   else if (p.kind === "main") info = `${state.sutta.title.ko} · ${p.verse.n}게송 · 원문`;
   else if (p.kind === "words") info = `${state.sutta.title.ko} · ${p.verse.n}게송 · 단어 ${p.wordPageIdx}/${p.totalWordPages}`;
   else if (p.kind === "trans") info = `${state.sutta.title.ko} · ${p.verse.n}게송 · 독해`;
+  else if (p.kind === "verseQuiz") info = `${state.sutta.title.ko} · ${p.verse.n}게송 · 문제 ${p.quizIdx}/${p.quizTotal}`;
 
   document.getElementById("page-info").textContent = info;
   document.getElementById("page-num").textContent =
@@ -869,7 +1096,7 @@ function render() {
   document.getElementById("next-btn").disabled = state.pageIdx === state.pages.length - 1;
   syncHash();
   updateMemoFab();
-  fetchMemo(currentPageId()).then(() => updateMemoFab());
+  updateLotusRow();
 }
 
 function go(dir) {
@@ -882,7 +1109,7 @@ function go(dir) {
 function attachNav() {
   document.getElementById("prev-btn").addEventListener("click", () => go(-1));
   document.getElementById("next-btn").addEventListener("click", () => go(1));
-  document.getElementById("quiz-btn").addEventListener("click", onQuizButton);
+  document.getElementById("settings-btn").addEventListener("click", openSettings);
   document.getElementById("memo-fab").addEventListener("click", openMemoSheet);
   document.getElementById("menu-btn").addEventListener("click", openMemoList);
 
@@ -892,7 +1119,7 @@ function attachNav() {
     touchStartY = e.changedTouches[0].clientY;
   }, { passive: true });
   document.addEventListener("touchend", e => {
-    if (document.getElementById("dict-overlay") || document.getElementById("quiz-overlay") || document.getElementById("memo-overlay")) return;
+    if (document.getElementById("dict-overlay") || document.getElementById("quiz-overlay") || document.getElementById("memo-overlay") || document.getElementById("settings-overlay")) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
@@ -905,6 +1132,7 @@ function attachNav() {
       closeDictionary();
       closeQuiz();
       closeMemoSheet();
+      closeSettings();
       return;
     }
     if (document.getElementById("quiz-overlay")) return;
