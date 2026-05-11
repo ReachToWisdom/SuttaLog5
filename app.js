@@ -1043,10 +1043,53 @@ function renderQuizResult(sheet) {
 
 function renderCover(card) {
   const t = state.sutta.title;
-  card.appendChild(el("div", "cover-ko", t.ko || ""));
-  card.appendChild(el("div", "cover-pali", t.pali || ""));
-  if (t.ref) card.appendChild(el("div", "cover-ref", t.ref));
-  card.appendChild(el("div", "hint", "→ 다음 페이지"));
+
+  const hero = el("div", "cover-hero");
+  hero.appendChild(el("div", "cover-emoji", "🪷"));
+  hero.appendChild(el("div", "cover-ko", t.ko || ""));
+  if (t.pali) hero.appendChild(el("div", "cover-pali", t.pali));
+  if (t.ref) hero.appendChild(el("div", "cover-ref", t.ref));
+  card.appendChild(hero);
+
+  const actions = el("div", "cover-actions");
+  const lastId = localStorage.getItem(LAST_PAGE_KEY);
+  if (lastId && lastId !== "cover") {
+    const resumeBtn = el("button", "cover-btn cover-btn-primary");
+    resumeBtn.appendChild(el("span", "cover-btn-main", "📖 이어 학습하기"));
+    resumeBtn.appendChild(el("span", "cover-btn-sub", lastId));
+    resumeBtn.addEventListener("click", () => navigateToPageId(lastId));
+    actions.appendChild(resumeBtn);
+  }
+  const tocBtn = el("button", "cover-btn", "");
+  tocBtn.appendChild(el("span", "cover-btn-main", "📚 목차에서 선택"));
+  tocBtn.addEventListener("click", openTOC);
+  actions.appendChild(tocBtn);
+
+  const startBtn = el("button", "cover-btn", "");
+  startBtn.appendChild(el("span", "cover-btn-main", "▶ 처음부터 학습"));
+  startBtn.addEventListener("click", () => {
+    if (state.pages.length > 1) { state.pageIdx = 1; render(); }
+  });
+  actions.appendChild(startBtn);
+  card.appendChild(actions);
+
+  const stats = el("div", "cover-stats");
+  const exposure = loadExposure();
+  const termCount = Object.keys(exposure.terms).length;
+  const studyDays = Object.keys(loadStudyDays()).length;
+  const wrongCount = loadWrongTerms().size;
+  stats.appendChild(_coverStat("🌱", termCount, "학습 단어"));
+  stats.appendChild(_coverStat("📅", studyDays, "학습일"));
+  stats.appendChild(_coverStat("🔁", wrongCount, "복습 단어"));
+  card.appendChild(stats);
+}
+
+function _coverStat(icon, value, label) {
+  const s = el("div", "cover-stat");
+  s.appendChild(el("div", "cover-stat-icon", icon));
+  s.appendChild(el("div", "cover-stat-value", String(value)));
+  s.appendChild(el("div", "cover-stat-label", label));
+  return s;
 }
 
 function appendPaliHeader(card, v) {
