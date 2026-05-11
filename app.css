@@ -568,3 +568,102 @@ body {
   padding: 0.8rem;
   font-size: 0.85em;
 }
+
+/* ===== TEXT SELECTION ===== */
+body {
+  user-select: text;
+  -webkit-user-select: text;
+}
+button, .badge, .verse-header-num, .word-grammar-chip,
+.quiz-badge, .memo-fab, .quiz-option {
+  user-select: none;
+  -webkit-user-select: none;
+}
+.pali-main, .pali-line, .pali-tok, .verse-header-pali,
+.tr-body, .word-meaning, .word-extras, .dict-term, .dict-meaning,
+.dict-extras, .dict-grammar, .memo-item-preview, .cover-pali,
+.cover-ref, .word-term, .quiz-term {
+  user-select: text;
+  -webkit-user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* ===== MEMO LIST ===== */
+.memo-list-sheet { gap: 0.4rem; }
+.memo-count {
+  font-size: 0.82em;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.memo-empty {
+  text-align: center;
+  color: var(--muted);
+  white-space: pre-line;
+  padding: 2rem 1rem;
+  line-height: 1.7;
+}
+.memo-list {
+  display: flex; flex-direction: column;
+  gap: 0.5rem;
+  max-height: 55vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.memo-item {
+  background: #fbfaf6;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+}
+.memo-item-head {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+.memo-item-id {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.88em;
+}
+.memo-item-go {
+  background: none; border: none;
+  color: var(--accent);
+  font-size: 0.82em;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  font-weight: 600;
+}
+.memo-item-preview {
+  font-size: 0.92em;
+  color: var(--text);
+  white-space: pre-line;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.memo-item-date {
+  font-size: 0.74em;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+.memo-item-actions {
+  display: flex; gap: 0.3rem;
+  margin-top: 0.5rem;
+  border-top: 1px dashed var(--line);
+  padding-top: 0.4rem;
+}
+.btn-text-small {
+  background: none; border: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.82em;
+  cursor: pointer;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.btn-text-small.btn-danger { color: #c44a4a; }
+.btn-text-small:active { background: var(--accent-soft); }
+.memo-list-sheet .btn-secondary { margin-top: 1rem; }

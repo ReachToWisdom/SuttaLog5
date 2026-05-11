@@ -444,12 +444,13 @@ function renderQuizResult(sheet) {
 }
 
 
-/* ===== MEMO (GitHub-backed) ===== */
+/* ===== MEMO (local-only, no token) ===== */
 
-const REPO = "ReachToWisdom/SuttaLog5";
-const PAT_KEY = "suttalog5:gh_pat";
-const MEMO_CACHE_PREFIX = "suttalog5:memo:";
+const MEMO_PREFIX = "suttalog5:memo:";
 const MEMO_INDEX_KEY = "suttalog5:memo_index";
+
+// Clean up old PAT-era key
+try { localStorage.removeItem("suttalog5:gh_pat"); } catch {}
 
 function loadMemoIndex() {
   try {
@@ -458,34 +459,14 @@ function loadMemoIndex() {
     return new Set(JSON.parse(raw));
   } catch { return new Set(); }
 }
-
 function saveMemoIndex(set) {
   localStorage.setItem(MEMO_INDEX_KEY, JSON.stringify([...set]));
 }
-
-function pageHasMemo(pageId) {
-  return loadMemoIndex().has(pageId);
-}
-
+function pageHasMemo(pageId) { return loadMemoIndex().has(pageId); }
 function markPageMemo(pageId, has) {
   const s = loadMemoIndex();
-  if (has) s.add(pageId);
-  else s.delete(pageId);
+  if (has) s.add(pageId); else s.delete(pageId);
   saveMemoIndex(s);
-}
-
-function getPat() { return localStorage.getItem(PAT_KEY); }
-function setPat(t) { if (t) localStorage.setItem(PAT_KEY, t); else localStorage.removeItem(PAT_KEY); }
-
-function promptForPat() {
-  const cur = getPat() || "";
-  const msg = "GitHub Personal Access Token을 입력하세요.\n\n발급: https://github.com/settings/tokens\n권한: repo (또는 fine-grained: SuttaLog5 contents write)";
-  const t = prompt(msg, cur);
-  if (t && t.trim()) {
-    setPat(t.trim());
-    return true;
-  }
-  return false;
 }
 
 function currentPageId() {
@@ -500,10 +481,7 @@ function currentPageId() {
 function pageSnapshot() {
   const p = state.pages[state.pageIdx];
   const snap = { kind: p.kind, sutta_id: state.sutta.id };
-  if (p.verse) {
-    snap.verseN = p.verse.n;
-    snap.pali = p.verse.pali;
-  }
+  if (p.verse) { snap.verseN = p.verse.n; snap.pali = p.verse.pali; }
   if (p.kind === "words") {
     snap.wordPageIdx = p.wordPageIdx;
     snap.terms = (p.words || []).map(w => w.term);
@@ -511,49 +489,13 @@ function pageSnapshot() {
   return snap;
 }
 
-function memoUrl(pageId) {
-  return `https://api.github.com/repos/${REPO}/contents/memos/${pageId}.json`;
+function getMemo(pageId) {
+  const raw = localStorage.getItem(MEMO_PREFIX + pageId);
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch { return null; }
 }
 
-function b64encode(str) {
-  return btoa(unescape(encodeURIComponent(str)));
-}
-function b64decode(b64) {
-  return decodeURIComponent(escape(atob(b64)));
-}
-
-async function fetchMemo(pageId) {
-  const cached = localStorage.getItem(MEMO_CACHE_PREFIX + pageId);
-  const pat = getPat();
-  if (!pat) return cached ? JSON.parse(cached) : null;
-  try {
-    const resp = await fetch(memoUrl(pageId), {
-      headers: { Authorization: `token ${pat}` },
-      cache: "no-store",
-    });
-    if (resp.status === 404) {
-      localStorage.removeItem(MEMO_CACHE_PREFIX + pageId);
-      markPageMemo(pageId, false);
-      return null;
-    }
-    if (!resp.ok) return cached ? JSON.parse(cached) : null;
-    const data = await resp.json();
-    const content = b64decode(data.content.replace(/\s/g, ""));
-    const memo = JSON.parse(content);
-    memo._sha = data.sha;
-    localStorage.setItem(MEMO_CACHE_PREFIX + pageId, JSON.stringify(memo));
-    markPageMemo(pageId, !!memo.memo);
-    return memo;
-  } catch (e) {
-    return cached ? JSON.parse(cached) : null;
-  }
-}
-
-async function saveMemoApi(pageId, text) {
-  if (!getPat() && !promptForPat()) return false;
-  const pat = getPat();
-  const cached = localStorage.getItem(MEMO_CACHE_PREFIX + pageId);
-  const existing = cached ? JSON.parse(cached) : await fetchMemo(pageId);
+function saveMemo(pageId, text) {
   const memo = {
     page_id: pageId,
     page_snapshot: pageSnapshot(),
@@ -561,65 +503,33 @@ async function saveMemoApi(pageId, text) {
     status: "active",
     updated_at: new Date().toISOString(),
   };
-  const body = {
-    message: `memo(${pageId}): ${text.slice(0, 50).replace(/\n/g, " ")}`,
-    content: b64encode(JSON.stringify(memo, null, 2)),
-  };
-  if (existing && existing._sha) body.sha = existing._sha;
-  try {
-    const resp = await fetch(memoUrl(pageId), {
-      method: "PUT",
-      headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (!resp.ok) {
-      const t = await resp.text();
-      alert(`저장 실패 (${resp.status}): ${t.slice(0, 200)}`);
-      return false;
-    }
-    const data = await resp.json();
-    memo._sha = data.content.sha;
-    localStorage.setItem(MEMO_CACHE_PREFIX + pageId, JSON.stringify(memo));
-    markPageMemo(pageId, !!text);
-    return true;
-  } catch (e) {
-    alert(`네트워크 에러: ${e.message}`);
-    return false;
-  }
+  localStorage.setItem(MEMO_PREFIX + pageId, JSON.stringify(memo));
+  markPageMemo(pageId, !!text);
+  return memo;
 }
 
-async function deleteMemoApi(pageId) {
-  if (!getPat() && !promptForPat()) return false;
-  const pat = getPat();
-  const cached = localStorage.getItem(MEMO_CACHE_PREFIX + pageId);
-  let sha = cached ? JSON.parse(cached)._sha : null;
-  if (!sha) {
-    const fetched = await fetchMemo(pageId);
-    sha = fetched ? fetched._sha : null;
+function deleteMemo(pageId) {
+  localStorage.removeItem(MEMO_PREFIX + pageId);
+  markPageMemo(pageId, false);
+}
+
+function listAllMemos() {
+  const index = loadMemoIndex();
+  const result = [];
+  for (const pageId of index) {
+    const m = getMemo(pageId);
+    if (m && m.memo) result.push(m);
   }
-  if (!sha) {
-    localStorage.removeItem(MEMO_CACHE_PREFIX + pageId);
-    markPageMemo(pageId, false);
-    return true;
-  }
-  try {
-    const resp = await fetch(memoUrl(pageId), {
-      method: "DELETE",
-      headers: { Authorization: `token ${pat}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ message: `memo(${pageId}): delete`, sha }),
-    });
-    if (!resp.ok && resp.status !== 404) {
-      const t = await resp.text();
-      alert(`삭제 실패 (${resp.status}): ${t.slice(0, 200)}`);
-      return false;
-    }
-    localStorage.removeItem(MEMO_CACHE_PREFIX + pageId);
-    markPageMemo(pageId, false);
-    return true;
-  } catch (e) {
-    alert(`네트워크 에러: ${e.message}`);
-    return false;
-  }
+  return result.sort((a, b) => (b.updated_at || "").localeCompare(a.updated_at || ""));
+}
+
+function describeCurrentPage() {
+  const p = state.pages[state.pageIdx];
+  if (!p) return "";
+  if (p.kind === "cover") return "표지";
+  if (p.kind === "words") return `${p.verse.n}게송 · 단어 ${p.wordPageIdx}/${p.totalWordPages}`;
+  if (p.kind === "trans") return `${p.verse.n}게송 · 독해`;
+  return "";
 }
 
 function closeMemoSheet() {
@@ -627,7 +537,7 @@ function closeMemoSheet() {
   if (o) o.remove();
 }
 
-async function openMemoSheet() {
+function openMemoSheet() {
   closeMemoSheet();
   const pageId = currentPageId();
 
@@ -642,14 +552,10 @@ async function openMemoSheet() {
   sheet.appendChild(el("div", "dict-term", `메모 · ${pageId}`));
   sheet.appendChild(el("div", "memo-page-info", describeCurrentPage()));
 
-  const loading = el("div", "memo-loading", "로딩…");
-  sheet.appendChild(loading);
-
-  const memo = await fetchMemo(pageId);
-  loading.remove();
+  const memo = getMemo(pageId);
 
   const textarea = el("textarea", "memo-textarea");
-  textarea.placeholder = "이 페이지 메모 — 오타 수정 제안, 해석 의견, 인용 등.\nClaude에게 \"메모 확인해서 수정해줘\" 하면 일괄 반영.";
+  textarea.placeholder = "이 페이지 메모 — 오타, 의견, 인용 등.\n수정 후 [저장] 클릭.";
   textarea.value = memo?.memo || "";
   sheet.appendChild(textarea);
 
@@ -659,42 +565,27 @@ async function openMemoSheet() {
   }
 
   const actions = el("div", "memo-actions");
-  const saveBtn = el("button", "btn-primary", "저장");
-  saveBtn.addEventListener("click", async () => {
-    if (!textarea.value.trim()) {
-      alert("메모 내용을 입력하세요.");
-      return;
-    }
-    saveBtn.disabled = true;
-    saveBtn.textContent = "저장 중…";
-    const ok = await saveMemoApi(pageId, textarea.value);
-    if (ok) {
-      updateMemoFab();
-      closeMemoSheet();
-    } else {
-      saveBtn.disabled = false;
-      saveBtn.textContent = "저장";
-    }
+  const saveBtn = el("button", "btn-primary", memo ? "수정 저장" : "저장");
+  saveBtn.addEventListener("click", () => {
+    const text = textarea.value.trim();
+    if (!text) { alert("메모 내용을 입력하세요."); return; }
+    saveMemo(pageId, text);
+    updateMemoFab();
+    closeMemoSheet();
   });
   actions.appendChild(saveBtn);
 
   if (memo?.memo) {
     const delBtn = el("button", "btn-text", "삭제");
     delBtn.style.color = "#c44a4a";
-    delBtn.addEventListener("click", async () => {
+    delBtn.addEventListener("click", () => {
       if (!confirm("이 메모를 삭제할까요?")) return;
-      delBtn.disabled = true;
-      const ok = await deleteMemoApi(pageId);
-      if (ok) {
-        updateMemoFab();
-        closeMemoSheet();
-      } else {
-        delBtn.disabled = false;
-      }
+      deleteMemo(pageId);
+      updateMemoFab();
+      closeMemoSheet();
     });
     actions.appendChild(delBtn);
   }
-
   sheet.appendChild(actions);
 
   overlay.appendChild(sheet);
@@ -705,20 +596,116 @@ async function openMemoSheet() {
   setTimeout(() => textarea.focus(), 50);
 }
 
-function describeCurrentPage() {
-  const p = state.pages[state.pageIdx];
-  if (!p) return "";
-  if (p.kind === "cover") return "표지";
-  if (p.kind === "words") return `${p.verse.n}게송 · 단어 ${p.wordPageIdx}/${p.totalWordPages}`;
-  if (p.kind === "trans") return `${p.verse.n}게송 · 독해`;
-  return "";
-}
-
 function updateMemoFab() {
   const fab = document.getElementById("memo-fab");
   if (!fab) return;
   if (pageHasMemo(currentPageId())) fab.classList.add("has-memo");
   else fab.classList.remove("has-memo");
+}
+
+function navigateToPageId(pageId) {
+  for (let i = 0; i < state.pages.length; i++) {
+    const p = state.pages[i];
+    let id;
+    if (p.kind === "cover") id = "cover";
+    else if (p.kind === "words") id = `v${p.verse.n}-w${p.wordPageIdx}`;
+    else if (p.kind === "trans") id = `v${p.verse.n}-trans`;
+    if (id === pageId) {
+      state.pageIdx = i;
+      render();
+      return true;
+    }
+  }
+  return false;
+}
+
+function downloadMemosJson() {
+  const memos = listAllMemos();
+  if (memos.length === 0) { alert("내보낼 메모가 없습니다."); return; }
+  const data = JSON.stringify({
+    exported_at: new Date().toISOString(),
+    sutta_id: state.sutta.id,
+    sutta_title: state.sutta.title,
+    memos,
+  }, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `suttalog5-memos-${state.sutta.id}-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 100);
+}
+
+function openMemoList() {
+  closeMemoSheet();
+  closeDictionary();
+  closeQuiz();
+
+  const overlay = el("div", "dict-overlay");
+  overlay.id = "memo-overlay";
+  const sheet = el("div", "dict-sheet memo-list-sheet");
+
+  const close = el("button", "dict-close", "✕");
+  close.addEventListener("click", closeMemoSheet);
+  sheet.appendChild(close);
+
+  sheet.appendChild(el("div", "dict-term", "메모 목록"));
+
+  const memos = listAllMemos();
+  if (memos.length === 0) {
+    sheet.appendChild(el("div", "memo-empty",
+      "아직 메모가 없습니다.\n페이지에서 ✏️ 버튼으로 추가하세요."));
+  } else {
+    sheet.appendChild(el("div", "memo-count", `${memos.length}개의 메모`));
+    const list = el("div", "memo-list");
+    for (const memo of memos) {
+      const item = el("div", "memo-item");
+      const headRow = el("div", "memo-item-head");
+      headRow.appendChild(el("span", "memo-item-id", memo.page_id));
+      const goBtn = el("button", "memo-item-go", "→ 이동");
+      goBtn.addEventListener("click", () => {
+        if (navigateToPageId(memo.page_id)) closeMemoSheet();
+      });
+      headRow.appendChild(goBtn);
+      item.appendChild(headRow);
+      item.appendChild(el("div", "memo-item-preview", memo.memo));
+      if (memo.updated_at) {
+        item.appendChild(el("div", "memo-item-date",
+          new Date(memo.updated_at).toLocaleString()));
+      }
+      const actions = el("div", "memo-item-actions");
+      const editBtn = el("button", "btn-text-small", "✎ 수정");
+      editBtn.addEventListener("click", () => {
+        if (navigateToPageId(memo.page_id)) {
+          setTimeout(openMemoSheet, 100);
+        }
+      });
+      actions.appendChild(editBtn);
+      const delBtn = el("button", "btn-text-small btn-danger", "🗑 삭제");
+      delBtn.addEventListener("click", () => {
+        if (!confirm(`"${memo.page_id}" 메모를 삭제할까요?`)) return;
+        deleteMemo(memo.page_id);
+        openMemoList();
+      });
+      actions.appendChild(delBtn);
+      item.appendChild(actions);
+      list.appendChild(item);
+    }
+    sheet.appendChild(list);
+
+    const exportBtn = el("button", "btn-secondary", "📥 전체 메모 JSON 다운로드");
+    exportBtn.addEventListener("click", downloadMemosJson);
+    sheet.appendChild(exportBtn);
+  }
+
+  overlay.appendChild(sheet);
+  overlay.addEventListener("click", e => {
+    if (e.target === overlay) closeMemoSheet();
+  });
+  document.body.appendChild(overlay);
 }
 
 /* ===== RENDER (학습 모드) ===== */
@@ -828,6 +815,7 @@ function attachNav() {
   document.getElementById("next-btn").addEventListener("click", () => go(1));
   document.getElementById("quiz-btn").addEventListener("click", onQuizButton);
   document.getElementById("memo-fab").addEventListener("click", openMemoSheet);
+  document.getElementById("menu-btn").addEventListener("click", openMemoList);
 
   let touchStartX = 0, touchStartY = 0;
   document.addEventListener("touchstart", e => {
