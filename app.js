@@ -1231,6 +1231,35 @@ function _appendMemoBox(card, text, label, ts) {
   card.appendChild(box);
 }
 
+function appendCardNav(card) {
+  const p = state.pages[state.pageIdx];
+  if (!p || p.kind === "cover") return;
+
+  const nav = el("div", "card-nav");
+  const prev = el("button", "card-nav-btn card-nav-prev");
+  prev.textContent = "‹ 이전";
+  if (state.pageIdx === 0) prev.disabled = true;
+  else prev.addEventListener("click", () => go(-1));
+  nav.appendChild(prev);
+
+  const next = el("button", "card-nav-btn card-nav-next");
+  if (state.pageIdx >= state.pages.length - 1) {
+    next.textContent = "끝 ✓";
+    next.disabled = true;
+  } else {
+    const nextP = state.pages[state.pageIdx + 1];
+    let label = "다음 →";
+    if (nextP.kind === "cover") label = "표지로 →";
+    else if (nextP.kind === "words") label = `${nextP.verse.n}게송 단어 ${nextP.wordPageIdx} →`;
+    else if (nextP.kind === "trans") label = `${nextP.verse.n}게송 독해 →`;
+    else if (nextP.kind === "verseQuiz") label = `${nextP.verse.n}게송 문제 ${nextP.quizIdx} →`;
+    next.textContent = label;
+    next.addEventListener("click", () => go(1));
+  }
+  nav.appendChild(next);
+  card.appendChild(nav);
+}
+
 function render() {
   closeDictionary();
   const p = state.pages[state.pageIdx];
@@ -1241,6 +1270,7 @@ function render() {
   else if (p.kind === "words") renderWords(p, card);
   else if (p.kind === "trans") renderTrans(p, card);
   else if (p.kind === "verseQuiz") renderVerseQuiz(p, card);
+  appendCardNav(card);
   root.appendChild(card);
   appendMemoPreview(card);
 
@@ -1252,8 +1282,8 @@ function render() {
 
   document.getElementById("page-info").textContent = info;
   document.getElementById("page-num").textContent = `${state.pageIdx + 1} / ${state.pages.length}`;
-  document.getElementById("prev-btn").disabled = state.pageIdx === 0;
-  document.getElementById("next-btn").disabled = state.pageIdx === state.pages.length - 1;
+  const pb = document.getElementById("prev-btn"); if (pb) pb.disabled = state.pageIdx === 0;
+  const nb = document.getElementById("next-btn"); if (nb) nb.disabled = state.pageIdx === state.pages.length - 1;
   syncHash();
   updateMemoFab();
   updateLotusRow();
@@ -1269,8 +1299,8 @@ function go(dir) {
 }
 
 function attachNav() {
-  document.getElementById("prev-btn").addEventListener("click", () => go(-1));
-  document.getElementById("next-btn").addEventListener("click", () => go(1));
+  const _pb = document.getElementById("prev-btn"); if (_pb) _pb.addEventListener("click", () => go(-1));
+  const _nb = document.getElementById("next-btn"); if (_nb) _nb.addEventListener("click", () => go(1));
   document.getElementById("memo-fab").addEventListener("click", openMemoSheet);
 
   document.querySelectorAll("#bottom-tabs button").forEach(btn => {

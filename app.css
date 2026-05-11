@@ -1389,3 +1389,40 @@ button, .badge, .verse-header-num, .word-grammar-chip,
   letter-spacing: 0.02em;
   font-weight: 500;
 }
+
+/* === CARD-NAV (inline prev/next at bottom of card) === */
+.card-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--line);
+  flex-shrink: 0;
+}
+.card-nav-btn {
+  padding: 0.75rem 0.6rem;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  transition: transform 0.1s;
+}
+.card-nav-btn:active { transform: scale(0.97); }
+.card-nav-btn:disabled { opacity: 0.35; cursor: default; }
+.card-nav-prev { flex: 1; }
+.card-nav-next {
+  flex: 2;
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  box-shadow: 0 3px 10px rgba(90, 62, 140, 0.22);
+}
+.card-nav-next:disabled {
+  background: var(--surface);
+  color: var(--muted);
+  box-shadow: none;
+}
