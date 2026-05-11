@@ -1,0 +1,26 @@
+# OS / Editor
+.DS_Store
+*.swp
+*.swo
+
+# Prism (로컬 SSOT — 배포 불필요)
+.prism/
+.mcp.json
+
+# AI agent rule sync files (글로벌 규칙 자동 동기화 — repo에 안 넣음)
+.continuerules
+.cursorrules
+AGENTS.md
+GEMINI.md
+
+# Python
+__pycache__/
+*.pyc
+
+# 원본 hwpx (저작권 우려 — 배포는 추출된 JSON만)
+DOCS/
+
+# 작업 메모 (로컬 전용)
+HANDOFF.md
+BRAINSTORM.md
+samples/

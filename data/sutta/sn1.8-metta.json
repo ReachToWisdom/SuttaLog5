@@ -1,0 +1,1231 @@
+{
+  "id": "sn1.8",
+  "title": {
+    "ko": "자애경",
+    "pali": "mettasuttaṁ",
+    "ref": "Sn1:8"
+  },
+  "background": "(한) Stn.p.25 : Prj. I. 232-252에 따르면, 세존께서는 우안거가 다가왔을 때에 싸밧티 시에 계셨다. 수행승들에게 탐욕스러운 자에게는 부정(不淨)에 대한 명상수행(asubhakammaṭṭhāna)과 분노하는 자에게는 자애 등에 대한 명상(mettādikammaṭṭhāna)과 어리석은 자에게는 죽음에 대한 새김(maraṇasati)을, 사유(vitakka)하는 자에게는 호흡새김(ānāpānasati)이나 땅 등의 두루채움의 수행(kasiṇa)을, 믿음 있는 자에게는 염불수행(buddhānusatikammaṭṭhāna)을, 이해(buddhi)가 있는 자에게는 세계에 대한 분석적 관찰(dhātuvavatthāna)의 명상을 가르쳤다. 오백 명의 수행승들이 이러한 명상수행을 배워서 히말라야 산록의 바위가 있고 청량한 녹음이 짙고 진주 그물과 같은 모래가 있고 시원한 물이 있는 지역을 찾았다. 거기서 그들에게 우기에 그곳에 머물러 주기를 요청하고 500채의 정진을 위한 초암을 지어 제공하고는 모든 생필품을 제공했다. 그들은 탁발하며 수행정진했는데, 그런데 수행정진하는 수행승들의 위광 때문에 자신의 위광을 손실한 나무의 하늘사람들이 ‘언젠가 존자들은 갈 것이다.’라고 궁전에서 내려와 아이들을 데리고 이곳저곳을 거닐다가 삼개월간은 너무 길다고 생각하여 수행승들을 방해하기 위해 야차의 모습을 보여주고 공포의 소리를 들려주었다. 그러자 수행승들은 심장이 뛰고 안색이 창백하여 새김을 잃었는데, 거기에 악한 냄새를 피워 두통을 일으키게 만들었다. 그래서 수행승들은 그곳에서의 안거를 포기하고 싸밧티 시의 세존을 찾아뵈었다. 그러자 세존은 ‘안거 중에 유행해서는 안 된다.’는 계율을 제정하고 이 경을 ‘수호를 위하여, 명상을 위하여(parittatthāya kammaṭṭhānatthāya)’ 수행승들에게 설한 것이다. 세존은 생노병사와 세계의 고통과 과거의 윤회의 고통과 미래의 윤회의 고통과 현재의 음식을 구하는 고통을 생각하여 자신을 수호하고, 자애의 마음을 일으키고 부정관을 닦고 죽음에 대한 새김을 닦을 것을 권한다. 이 경은 초기경전 가운데 가장 유명한 것으로 수호경(parittā)에 포함되고 남방 예불문에는 항상 이 경전이 등장한다. 이 경의 시들은 고층의 아리야(Āryā)의 운율을 갖고 있다. 그러나 각 시행에서는 슬로까(Sloka) 운율을 취하기도 한다.",
+  "verses": [
+    {
+      "n": 1,
+      "pali": [
+        "karaṇīyamatthakusalena, yantasantaṁ padaṁ abhisamecca.",
+        "sakko ujū ca suhujū ca, suvaco cassa mudu anatimānī."
+      ],
+      "translations": {
+        "초기불전연구원": "도닦음에 능숙한 자, 고요한 경지를 체험하면서 이처럼 행할지라.\n유능하고 정직하고 진솔하며 고운 말에 온화하고 겸손하네.",
+        "한국빠알리성전협회": "[세존] “널리 이로운 일에 능숙하여서 평정의 경지를 성취하고자 하는 님은 유능하고 정직하고 고결하고 상냥하고 온유하고, 교만하지 말지어다.”",
+        "아짜리야 붓다락키따 스님": "완전한 평정 상태를 언뜻 맛보고서 더욱 더 향상을 이루고자 애쓰는 사람은 유능하고, 정직하고, 고결하고, 말이 점잖으며, 온유하고, 거만하지 않아야 한다.",
+        "냐나몰리 스님": "선행에 익숙해진 사람이 평안의 경지에 이르기 위해 해야 할 바는 이러하다. 유능하고 곧고 의연하며 상냥하고 점잖고 겸손하다.",
+        "담마간다 스님": "행해야 한다네, 이익에 능숙하여 적정의 경지를 이루고자 한다면\n유능하고 또한 정직하고 고결하며 훈계 쉽고 부드럽고 겸손해야 한다네."
+      },
+      "translation_sources": {
+        "한국빠알리성전협회": "karaṇīyamatthakusalena, yantasantaṁ padaṁ abhisamecca : Prj. I. 236에 따르면, abhisamecca는 절대사로 취급되고 있으나, 의미상 부정사 abhisametave와 동일한 형식이다. 따라서 종래의 번역인 ‘도달하고 나서’나 ‘이해하고 나서’가 아니라 ‘도달하기 위하여’ 또는 ‘이해하기 위하여’라고 번역할 수 있다. 또한 Prj. I. 236에서 abhisamecca를 ‘이해하고’라고 규정하고 ‘평정의 경지인 열반을 이해하고 나서’라고 해석하고, 그다음에 ‘해야 할 일’은 ‘계정혜의 세 가지 배움(三學)’을 실천하고 ‘계행의 결핍, 견해의 결핍, 생활의 결핍’에서 벗어나야 한다고 보고 있다. Prj. I. 238에서는 ‘세속적인 지혜로서 열반의 경지가 평정의 경지인 것을 이해하고’라고 해석하고 있다. God 16의 ‘평정의 경지를 성취하고 나서(having attained the peaceful state)’란 번역은 의미상 오류일 가능성이 있다. 유감스럽게도 Nst. 33에서 ‘평안의 경지에 도달하여([일본어 역]...)’도 이 번역을 따르고 있고, 이 번역을 중역한 국내의 모든 번역이 이것을 따르고 있다. 필자는 그것을 부정사로서 해석하여 Jst. 146에서처럼, ‘평안의 경지에 도달하기 위하여’라는 의미를 취해 다소간 의역을 했다.",
+        "아짜리야 붓다락키따 스님": "고요한소리 법륜 시리즈 8 <자비관>, 강대자행 옮김.",
+        "냐나몰리 스님": "고요한소리 보리수잎 시리즈 6 <불교의 명상> 부록, 정승석 옮김.",
+        "담마간다 스님": "<자애>, 담마간다 스님 편역, 불방일 출판사."
+      },
+      "translation_notes": {},
+      "words": [
+        {
+          "term": "metta",
+          "gloss": "자애, 우정",
+          "extras": [
+            "“호의를 가지기(majjati) 때문에 자애(mettā)이다. 애정을 가진다는 뜻이다. 친구에 대한 태도이기 때문에(mitte bhavā), 혹은 이것은 친구에게 일어나기 때문에(mittassa pavatti) 때문에 자애(mettā)이다.” - <청정도론> 中, 초기불전연구원"
+          ]
+        },
+        {
+          "term": "suttaṃ",
+          "gloss": "(중성 단수 주격) 경(經)"
+        },
+        {
+          "term": "karaṇīyaṃ",
+          "gloss": "(karoti의 미래수동분사/ 중성 단수 주격) 행해져야 할 것이",
+          "extras": [
+            "[주석: 행해야 할 것(kātabbaṃ), 행할 가치가 있는 것(karaṇārahaṃ).]"
+          ]
+        },
+        {
+          "term": "attha",
+          "gloss": "의미, 이익, 목표",
+          "extras": [
+            "[주석: atthoti paṭipadā, yaṃ vā kiñci attano hitaṃ, taṃ sabbaṃ araṇīyato atthoti vuccati."
+          ]
+        },
+        {
+          "term": "kusalena",
+          "gloss": "(남성 단수 도구격) 능숙함에 의해, 능숙하여, 능숙한 자에 의해"
+        },
+        {
+          "term": "atthakusalena",
+          "gloss": "(attha + kusalena) 이익에 능숙한 자에 의해, 이익에 능숙하여 [주석: atthe kusalena]"
+        },
+        {
+          "term": "yaṃ",
+          "gloss": "(관계대명사/ 중성 단수 주격) 어떤 ~은, 어떤 [행해야 할] 것이",
+          "extras": [
+            "[주석: yanti aniyamitapaccattaṃ"
+          ]
+        },
+        {
+          "term": "taṃ",
+          "gloss": "(지시대명사/ 중성 단수 주격/목적격) 그것은, 그 ~를",
+          "extras": [
+            "[주석: tanti niyamitaupayogaṃ. ubhayampi vā yaṃ tanti paccattavacanaṃ."
+          ]
+        },
+        {
+          "term": "santaṃ",
+          "gloss": "(sammati의 과거분사/ 중성 단수 목적격) 고요한, 평안한, 평온한"
+        },
+        {
+          "term": "padaṃ",
+          "gloss": "(중성 단수 목적격) 경지를",
+          "extras": [
+            "santaṃ padaṃ : (중성 단수 목적격) 고요한 경지를, 평안한 경지를",
+            "[주석: tattha lakkhaṇato santaṃ, pattabbato padaṃ, nibbānassetaṃ adhivacanaṃ."
+          ]
+        },
+        {
+          "term": "abhisamecca",
+          "gloss": "(abhisameti의 절대분사) 체험하고서, 깨닫고서, 완전히 이해하고서",
+          "extras": [
+            "[주석: abhisameccāti abhisamāgantvā(이해하고서, 도달하고서)]",
+            "# 주석서에서는 abhisamecca를 절대분사 형태로 보지만, 의미로는 열반을 아직 성취하지 않은 상태로 보고 있다. 이를 위해 두 가지 설명을 제시한다.",
+            "1) 세간적인 지혜 정도로 ‘열반을 [고요한 상태라고] 이해하고서’로 해석하는 경우",
+            "“santaṃ padaṃ abhisameccāti anussavādivasena lokiyapaññāya nibbānapadaṃ “santan”ti ñatvā taṃ adhigantukāmena”"
+          ]
+        },
+        {
+          "term": "sakko",
+          "gloss": "(sakkoti의 과거분사/ 남성 단수 주격) 유능한",
+          "extras": [
+            "# 8정도라는 이익(attha)에 능숙함(kusalena) => 유능한(sakko)",
+            "“‘모든 고통을 사라지게 하려면 계도 실천할 수 있어야 한다. 삼매와 통찰지도 실천할 수 있어야 한다. 몸과 목숨을 고려하지 않고 실천할 수 있어야 한다’는 뜻입니다.” - <자애> 中, 담마간다 스님 편역"
+          ]
+        },
+        {
+          "term": "ujū",
+          "gloss": "(남성 단수 주격) 곧은, [행위와 말이] 정직한"
+        },
+        {
+          "term": "ca",
+          "gloss": "(불변화사) ~와, 그리고 ~도, 또한"
+        },
+        {
+          "term": "suhujū",
+          "gloss": "매우 곧은, [마음까지] 매우 정직한",
+          "extras": [
+            "[주석: suṭṭhu(아주 분명하게, 극도로) ujūti suhuju]",
+            "“매우 곧아야 합니다. ‘우주’는 행위와 말이 정직하다는 의미입니다. ‘수후주’는 마음까지 곧다는 뜻이라고 볼 수 있습니다. 따라서 ‘매우 곧아야 한다’라는 의미로 해석할 수 있습니다. 이렇게 몸·말·마음까지 정직하고 곧은 이가 되어야 합니다.” - <난다말라비왐사 큰스님 가르침> 中, 식카와띠 위뿔라냐니 옮김",
+            "“‘uju ca assa정직해야 한다. suhuju ca assa고결해야 한다; 매우 정직해야 한다’입니다. 처음 출가했을 때나 처음 수행을 시작했을 때는 믿음의 힘이 좋아서 정직합니다. 하지만 시간이 지나면서 믿음과 노력의 힘이 줄어들어 관련된 의무를 소홀히 하게 되면 ‘고결하다suhuju’라는 매우 정직한 성품이 생겨나지 않습니다. 평생, 끝까지 소홀히 하지 않고 실천해 나가야 고결하다고 할 수 있습니다.",
+            "다르게 설명하자면 자신에게 없는 덕목을 있는 것처럼 꾸며 보이는 허풍sāṭheyya이 없으면 ‘정직하다uju’라고 말하고, 자신에게 있는 허물을 감추어 없는 것처럼 꾸미고 속이는 속임māyā이 없으면 ‘고결하다suhuju’라고 말합니다. 혹은 몸과 말로 교활함이 없으면 ‘정직하다’라고 말하고, 마음으로 교활함이 없으면 ‘고결하다’라고 말합니다.",
+            "마지막 설명 방법으로 설명하면 없는 덕목을 드러내지 않으면 ‘정직하다’라고 말하고, 없는 덕목을 연유로 존경해서 보시하는 이득을 받아들이지 않으면 ‘고결하다’라고 말합니다.(SnA.i.180)",
+            "혹은 높은 계adhisīla와 높은 마음adhicitta을 통해 정직이 생겨나고 높은 통찰지adhipaññā를 통해 고결함이 생겨난다고도 설명합니다. 이 내용에 따르면 열심히 노력해 아라한도로 번뇌가 완전히 제거돼야 정직과 고결함이 완벽하게 생겨난다고 알 수 있습니다.” - <자애> 中, 담마간다 스님 편역"
+          ]
+        },
+        {
+          "term": "suvaco",
+          "gloss": "충고를 잘 받아들이는, 타이르기 쉬운, 가르치기 쉬운, 유순한, 순종적인",
+          "extras": [
+            "[주석: sukhaṃ vaco asminti suvaco (<자애경> 주석)"
+          ]
+        },
+        {
+          "term": "assa",
+          "gloss": "(atthi의 3인칭 원망형) ~이어야 한다, ~있을 것이다, ~일 수 있다",
+          "extras": [
+            "[주석: assāti bhaveyya]"
+          ]
+        },
+        {
+          "term": "cassa",
+          "gloss": "(ca + assa) 그리고 ~이어야 한다"
+        },
+        {
+          "term": "mudu",
+          "gloss": "(남성 단수 주격) 부드러운",
+          "extras": [
+            "[주석: mudūti gahaṭṭhehi dūtagamanapahiṇagamanādīsu niyujjamāno tattha mudubhāvaṃ akatvā thaddho hutvā vattapaṭipattiyaṃ sakalabrahmacariye ca mudu assa suparikammakatasuvaṇṇaṃ viya tattha tattha viniyogakkhamo. atha vā mudūti abhākuṭiko uttānamukho sukhasambhāso paṭisanthāravutti sutitthaṃ viya sukhāvagāho assa. (<숫따니빠따> 주석)"
+          ]
+        },
+        {
+          "term": "anatimānī",
+          "gloss": "(atimānī의 부정형/ 남성 단수 주격) 거만하지 않은, 교만하지 않은",
+          "extras": [
+            "# atimāna + in = 거만을 가진"
+          ]
+        }
+      ],
+      "extra": [
+        "(번역) 이익이란 도닦음(계·정·혜, 8정도)이다. 또는 자신에게 이로움이 되는 무엇이든, 그 모두를 ‘추구해야 한다’는 뜻에서 이익이라고 부른다.]",
+        "(번역) yaṃ은 관계대명사 주격이다.]",
+        "[주석: yantaṃ karaṇīyanti = 어떤 그 해야 할 일]",
+        "(번역) taṃ은 지시대명사 목적격이다 또는 yaṃ과 taṃ 둘 다 주격이다.]",
+        "(번역) 그 특징 때문에 ‘고요한’이라고 한다. 성취해야 하기에 ‘경지’라고 한다. 이것은(etaṃ) 열반의(nibbānassa) 명칭(adhivacanaṃ)이다.]",
+        "(번역) ‘고요한 경지를 이해하고서’라는 이것은 구전 등의 세간적 지혜에 의해, 열반이라는 경지를 ‘고요하다’라고 알고서 그것을 성취하고자 원하는 사람에 의해서[라는 뜻이다.]",
+        "2) 의미가 생략된 미완성 문장으로 해석하는 경우 (열반을 깨닫고서 [머물기를 바라는 사람이])",
+        "santaṃ nibbānapadaṃ paṭivedhavasena abhisamecca viharitukāmena yaṃ karaṇīyanti. ettha ca yanti imassa gāthāpadassa ādito vuttameva karaṇīyanti adhikārato anuvattati, taṃ santaṃ padaṃ abhisameccāti. ayaṃ pana yasmā sāvasesapāṭho attho, tasmā viharitukāmenāti vuttanti veditabbaṃ.",
+        "(번역) ‘고요한 열반의 경지를 꿰뚫어 체험하고서 머물기를 바라는 사람이 해야 하는 어떤 것이 있다’[라는 뜻이다]. 그리고 여기서 ‘yaṃ(어떤 것)’은 이 게송의 시작부터 언급된 karaṇīyaṃ(해야 할 일)이 맥락에 따라 계속 적용된다. ‘taṃ santaṃ padaṃ abhisameccā’(그 고요한 경지를 이해하고서)라는 부분은 의미가 완성되지 않은 문장이기 때문에, ‘머물기를 바라는 [사람]에 의해’라고 설해졌다고 [생략된 의미를] 이해해야 한다.",
+        "- 참고: <초보수행자의 필수적 실천조항에 대한 연구>, 이병재",
+        "# 전재성 박사님 의견 : (abhisamecca = 부정사 abhisametave) 체험하기 위해, 깨닫기 위해, 완전히 이해하기 위해",
+        "(번역) 1. 여기에서[=그에게] 말이 기분좋게 있다. => 이 사람이[=그가] 충고를 기분좋게 받아들인다.",
+        "2. 여기에서[=그에게] 말이 쉽게 있다. => 이 사람에게[=그에게] 충고를 하기가 쉽다.",
+        "(빅쿠 보디 스님 번역) Amenable to advice(충고를 잘 받아들이는): one for whom a word of advice is pleasant.",
+        "subbaco ca assa. yo hi puggalo “idaṃ na kātabban”ti vutto “kiṃ te diṭṭhaṃ, kiṃ te sutaṃ, ko me hutvā vadasi, kiṃ upajjhāyo ācariyo sandiṭṭho sambhatto vā”ti vadati. (...) yo pana ovadiyamāno “sādhu, bhante, suṭṭhu vuttaṃ, attano vajjaṃ nāma duddasaṃ hoti, punapi maṃ evarūpaṃ disvā vadeyyātha anukampaṃ upādāya, cirassaṃ me tumhākaṃ santikā ovādo laddho”ti vadati, yathānusiṭṭhañca paṭipajjati, so visesādhigamassa avidūre hoti. tasmā evaṃ parassa vacanaṃ sampaṭicchitvā karonto subbaco ca assa. (<자애경> 주석)",
+        "(번역) ‘충고를 잘 받아들여야 한다’. [예를 들어] 어떤 사람이 “이것은 하지 말라”라는 말을 들었을 때, “그대가 무엇을 보았는가? 그대가 무엇을 들었는가? [그대가] 나에게 누구이기에 [그렇게] 말하는가, [그대가] 무슨 [나의] 계사인가 스승인가 친구인가 도반인가?”라고 말한다. (...) 그러나 어떤 사람은 훈계받았을 때, “훌륭합니다, 존자시여. 좋은 말씀이십니다. 자신의 허물은 보기 어렵다고 합니다. 제가 또 다시 이런 행동을 하는 모습을 보시면, 연민의 마음으로 말씀해주십시오. 오랫동안 제가 그대들의 곁에서 훈계를 얻도록 [해주십시오]”라고 말한다. 훈계받은 대로 수행한다. [얻어야 할] 특별한 성취에서 멀어지지 않는다. 그러므로 다른 이의 말을 잘 받아들여 행하는 ‘유순한’(subbaco) 사람이어야 한다.",
+        "(빅쿠 보디 스님 번역) he should be amenable to advice. For if, when told, “This should not be done,” a person says, “What have you seen? What have you heard? Who are you to speak to me? Are you my preceptor, my teacher, my friend, my companion?” (...) But if, when admonished, one says, “Good, Bhante, that was well stated. One’s own faults are hard to see. If you see me doing such a deed again, you should speak to me out of compassion. It has been a long time since I have been admonished by you,” and then acts in accordance with the instructions, that person is not far from achieving distinction. Therefore, one should also be amenable to advice, accepting the advice of others and acting upon it.]",
+        "[주석: suvaco hotī'ti sukhena vattabbo hoti, sukhena anusāsitabbo.",
+        "(번역) ‘유순하다’란 쉽게 말할 수 있고 쉽게 타이를 수 있다는 뜻이다.",
+        "(<합송경>(D33) 주석)]",
+        "[주석: suvacoti subbaco(순응하는, 잘 따르는). (<뻬따왓투 주석서)]",
+        "# Khanti ca sovacassatā, Samanānañ ca dassanaṁ",
+        "“인내와 겸양으로 수행자를 찾아뵘” (<망갈라숫따> 中)",
+        "[주석: padakkhiṇaggāhitāya sukhaṃ vaco asminti suvaco, suvacassa kammaṃ sovacassaṃ, sovacassassa bhāvo sovacassatā.",
+        "(번역) 존경심을 지니고 충고를 기분좋게 받아들인다고 해서 ‘유순한’이다. 유순한 행위이기에 ‘겸양함’이다. 겸양한 상태이기에 ‘겸양’이다.]",
+        "“수와쪼 : 충고해줄 때, 아이디어를 제시할 때, 타이르기 쉬운 이가 되어야 합니다. 고집 세지 않아야 합니다.” - <난다말라비왐사 큰스님 가르침> 中",
+        "“‘suvaco ca assa훈계하기 쉬워야 한다’입니다. 훈계하기 어려운 이는 ‘훈계해 주는 이 사람은 나의 이익과 번영을 바라고 훈계한다’라는 사실을 이해하지 못합니다. 완고한thaddha 마음을 가져서 ‘고집쟁이dubbaca’라고도 불립니다. 다른 이가 좋은 의도로 말해도 들으려 하지 않고 고집을 부립니다. ”누가 보았는가? 누구에게서 들었는가?“라며 받아들이지 않고 반대되는 말을 합니다. ‘내 앞에서 스승 노릇을 하다니’라며 기분 나빠하기도 합니다. 심지어 스승들이 훈계해도 입을 꾹 닫고 받아들이지 않습니다. 훈계를 받아들이지 않기 때문에 잘못을 시정하지 않고 이전에 하던 그대로 적당하지 않은 행위를 계속 행하고 말합니다. 이러한 이들은 자애를 보내기 어려운 것은 말할 필요도 없고 다른 실천을 닦는 것도 매우 어렵습니다. 그래서 도와 과, 열반이라는 특별한 법을 얻는 것과는 거리가 멀다고 주석서에서 설명했습니다.(SnA.i.180)” - <자애> 中, 담마간다 스님 편역",
+        "(번역) ‘부드럽다’란 재가자들이 [부탁하는] 전령이나 심부름 일을 잘 받아들이는 [그러한 종류의] 부드러운 상태를 행하지 않고서 딱딱하게 되어서 [출가자의] 의무와 도닦음이라는 모든 청정범행을 행하기에 부드러워야 한다[는 뜻이다]. 잘 제련된 황금처럼 이곳 저곳에 [출가자로서] 수행하기에 적합한 상태가 된다[는 뜻이다.] 또는 ‘부드럽다’란 얼굴을 찌푸리지 않고 밝은 표정과 편안한 말로 [다른 사람을] 친절하게 맞이하는 행위다. 마치 또는 잘 마련된 항구에 [배들이] 쉽게 들어감과 같다[좋은 목욕터에 [사람들이] 행복하게 들어감과 같다].",
+        "# ogāhati : plunges or enters into, absorbs in",
+        "mudūti vattapaṭipattiyaṃ sakale ca brahmacariye mudū, suparikammakatasuvaṇṇaṃ viya viniyogakkhamā. mudūti vā abhākuṭikā uttānamukhā pupphitamukhena paṭisanthāravuttino, sutitthaṃ viya sukhāvahāti vuttaṃ hoti. (<테라가타>, <테리가타> 주석)",
+        "# āvahati : brings; carries along; carries down; transfers",
+        "“하지만 신도들의 존경을 받기 위해 일부러 그들이 바라는 대로 말하거나, 일을 대신해주거나, 선물을 주는 것과 같은 부드러운 행위를 해서는 안 됩니다. 율장과 어긋나지 않는 영역에서 부드럽게 대하고 말해야 합니다. (...) 또한 몸과 말이 부드러운 이는 얼굴을 찡그리지 않고 밝은 표정과 듣기에 편안한 말로 다른 이를 대합니다. 마치 잘 마련된 항구에 배들이 안전하고 쉽게 정박할 수 있는 것처럼 다른 사람들이 편안하게 기댈 수 있습니다. 이렇게 부드러운 이는 이미 자애의 성품이 깃들어 있기 때문에 자애수행을 쉽게 실천할 수 있습니다.” - <자애> 中, 담마간다 스님 편역"
+      ]
+    },
+    {
+      "n": 2,
+      "pali": [
+        "santussako ca subharo ca, appakicco ca sallahukavutti.",
+        "santindriyo ca nipako ca, appagabbho kulesvananugiddho."
+      ],
+      "translations": {},
+      "translation_sources": {},
+      "translation_notes": {},
+      "words": [
+        {
+          "term": "santussako",
+          "gloss": "(남성 단수 주격) 만족하는, 만족할 줄 아는"
+        },
+        {
+          "term": "subharo",
+          "gloss": "(남성 단수 주격) 부양하기 쉬운, 돌보기 쉬운, 구하는 게 적은",
+          "extras": [
+            "“‘subharo ca assa공양하기 쉬워야 한다’입니다. 청신사나 청신녀들이 뒷바라지하기 쉬워야 한다는 뜻입니다. 신도들이 자신들의 능력에 따라 공양음식이나 가사 등을 보시하며 뒷받침할 때 자신이 좋아하는 것이 아니더라도, 그리 좋지 않은 것이더라도 불평하지 않고 수용해야 합니다. 어떠한 필수품으로든 지낼 수 있어야 합니다.” - <자애> 中, 담마간다 스님 편역"
+          ]
+        },
+        {
+          "term": "appa",
+          "gloss": "거의 없는"
+        },
+        {
+          "term": "kicca",
+          "gloss": "일, 의무, 역할"
+        },
+        {
+          "term": "appakicco",
+          "gloss": "(남성 단수 주격) 일이 적은, 분주하지 않음",
+          "extras": [
+            "“주석서에서는 ‘일하는 것을 즐기거나 말하는 것을 즐기거나 동료와 어울리는 것을 즐기는 등 일이 많으면 안 된다. 하지만 자신의 정사와 관련해서 꼭 해야 하는 일, 사미를 돌보는 일 등 이러한 일까지 하지 말아야 한다는 뜻은 아니다. 자신과 관련된 일, 즉 삭발하기, 손발톱 자르기, 가사와 발우와 관련된 일 등은 행한 다음에 사문의 법을 행해야 한다는 뜻이다’라고 설명했습니다.(SnA.i.182)” - <자애> 中, 담마간다 스님 편역"
+          ]
+        },
+        {
+          "term": "sallahuka",
+          "gloss": "가벼운"
+        },
+        {
+          "term": "vutti",
+          "gloss": "생계, 삶의 방식, 행위"
+        },
+        {
+          "term": "sallahukavutti",
+          "gloss": "(남성 단수 주격) 가볍게 생계를 유지하는",
+          "extras": [
+            "“여기서 ‘간소하다’는 것은 없어서는 안 될 가사와 발우 등 비구 필수품 여덟 가지만으로 생활하는 것을 말합니다. 사용하는 필수품이 많으면 그것들을 보호하느라 번거롭습니다. 다른 곳으로 이동할 때도 챙겨 가느라 번거롭습니다. 비구 필수품 여덟 가지란 가사 세 벌, 발우, 허리끈, 바늘, 칼, 물거르개입니다.” - <자애> 中, 담마간다 스님"
+          ]
+        },
+        {
+          "term": "santa",
+          "gloss": "고요한, 평온한"
+        },
+        {
+          "term": "indriya",
+          "gloss": "기능, 근(根), 감각기능, 감관"
+        },
+        {
+          "term": "santindriyo",
+          "gloss": "(남성 단수 주격) 감관이 고요한, 몸과 마음이 고요한"
+        },
+        {
+          "term": "nipako",
+          "gloss": "(남성 단수 주격) 현명한, 지혜로운, 지혜가 성숙한",
+          "extras": [
+            "[주석: nipakoti viññū vibhāvī paññavā, sīlānurakkhaṇapaññāya cīvarādivicāraṇapaññāya āvāsādisattasappāyaparijānanapaññāya ca samannāgatoti adhippāyo."
+          ]
+        },
+        {
+          "term": "pagabbha",
+          "gloss": "무례한, 불손한, 거친, 대담한, 무모한, 조심스럽지 못한"
+        },
+        {
+          "term": "appagabbho",
+          "gloss": "(남성 단수 주격) 무례하지 않은, 무모하지 않은, 조심스러운, 신중한, 공손한",
+          "extras": [
+            "kulesu (kula의 중성 복수 처격) 가정들에서, 재가신도들의 집에서, 후원자들의 집에서"
+          ]
+        },
+        {
+          "term": "anugiddha",
+          "gloss": "탐욕스러운"
+        },
+        {
+          "term": "ananugiddho",
+          "gloss": "(anugiddha의 부정형) 탐욕스럽지 않은, 집착하지 않는"
+        },
+        {
+          "term": "kulesvananugiddho",
+          "gloss": "(kulesu + ananugiddha) 재가신도들의 집에서 탐욕스럽지 않은, 재가신도들에 집착하지 않는"
+        }
+      ],
+      "extra": [
+        "(초) 만족하고 공양하기 쉽고 일 없고 검소하며",
+        "감관은 고요하여 슬기롭고 거만 떨지 않고 신도 집에 집착하지 않네.",
+        "(한) 만족할 줄 알아서 공양하기 쉬워야 하며, 분주하지 않고 생활이 간소하며, 몸과 마음 고요하고 슬기로우니, 가정에서 무모하거나 집착하지 말지어다.",
+        "(한) santindriyo : 원래 감관(根)이 고요한 것을 말하는데, Prj. I. 242에 따르면, 탐욕 등에 의해서 감각능력이 흥분되지 않는 것을 말한다.",
+        "(한) appagabbho : Prj. I. 242-243에 따르면, ‘무모하지 말 것(appagabbho)’은 신체적, 언어적, 정신적인 무모함(kāya-, vacī, mano-pāgabbhiya)이 없는 신중한 행동을 말한다.",
+        "(한) anugiddho : Prj. I. 243에 따르면, 재가자와 교제하면서 탐욕을 일으켜 생필품을 요구한다던가 속가와 교제하면서 같이 슬퍼하거나 기뻐하는 등 바람직하지 못한 관계를 갖는 것을 말한다.",
+        "(아) 만족할 줄 알아서, 남들이 공양하기 쉬워야 하며 분주하지 않고, 생활이 간소하며, 감관은 고요하고, 사려 깊을지니, 속인들에겐 뻔뻔스러워서도 알랑대서도 안되리.",
+        "(냐) 또 만족할 줄 알아 구하는 바가 적으며 잡일을 만들지 않고 홀가분하게 산다.",
+        "감관을 고요히 하여 빈틈없고, 잘 절제하며 속인들과 접하면서 탐심을 내지 않는다.",
+        "(담) 만족할 줄 알고 공양하기 쉬우며 분주하지 않고 생활이 간소하며",
+        "감관은 고요하고 슬기로우며 불손해도 안 되고 탐착해도 안 된다네.",
+        "(번역) ‘현명한’이란 ‘아는 자’, ‘판단력이 있는 자’, ‘지혜로운 자’[라는 뜻이다]. 계를 보호하는 지혜, 가사 등을 구할 수 있는 지혜, 거처 등의 일곱 가지 적절함을 아는 지혜를 갖춘 사람을 뜻한다.]",
+        "“<위숫디막가>에서는 ‘nipako’를 ‘이끄는 통찰지pārihārikapaññā’라고 설명했습니다. (Vis.i.3) ‘이끄는 통찰지pārihārikapaññā’란 크고 작은 여러 일이 성취되도록 이끌고 주도하는 지혜입니다. 바른 앎[삼빠잔냐] 네 가지 중에서 이익이 있고 없는 것을 숙고하는 ‘이익 바른 앎sātthaka sampajañña’, 적당하고 적당하지 않은 것을 아는 ‘적당함 바른 앎sappāya sampajañña’이라는 앎과 지혜를 말합니다. 이끄는 통찰지는 세간과 출세간 두 가지 모두에서 매우 유용한 통찰지입니다. 그러한 숙고의 지혜, 통찰지를 갖춰야 한다는 뜻이기도 합니다.",
+        "<자애경> 주석서에서는 계를 보호하는 통찰지, 가사 등을 준비하고 마련하는 통찰지, 일곱 가지 적당한 것을 아는 통찰지라고 설명했습니다.(SnA.i.182) 이러한 것들도 ‘이끄는 통찰지’라고 부르는 숙고의 지혜입니다. (...) 일곱 가지 적당한 것: 1) 적당한 처소, 2) 적당한 탁발마을, 3) 적당한 말, 4) 적당한 스승과 도반, 5) 적당한 음식, 6) 적당한 기후, 7) 적당한 자세입니다. 자신에게 적당한 처소 등을 숙고하고 결정할 수 있는 지혜와 통찰지를 갖춰야 합니다.” - <자애> 中, 담마간다 스님 편역"
+      ]
+    },
+    {
+      "n": 3,
+      "pali": [
+        "na ca khuddamācare kiñci, yena viññū pare upavadeyyuṁ.",
+        "sukhinova khemino hontu, sabbasattā bhavantu sukhitattā."
+      ],
+      "translations": {},
+      "translation_sources": {},
+      "translation_notes": {},
+      "words": [
+        {
+          "term": "na",
+          "gloss": "(불변화사) ~이 아니다"
+        },
+        {
+          "term": "khuddaṃ",
+          "gloss": "(중성 단수 목적격) 작은 것을, 사소한 것을"
+        },
+        {
+          "term": "ācare",
+          "gloss": "(ācarati의 3인칭 단수 원망형) 행동해야 한다, 행동할 것이다, 행동할 수 있다"
+        },
+        {
+          "term": "khuddamācare",
+          "gloss": "(khuddaṃ + ācare) 사소한 것을 행동해야 한다 (na와 함께 => 사소한 것을 행동하지 말아야 한다.)"
+        },
+        {
+          "term": "ka",
+          "gloss": "(의문대명사) 무엇, 누구"
+        },
+        {
+          "term": "ci",
+          "gloss": "(불변화사) 어떤"
+        },
+        {
+          "term": "kaci",
+          "gloss": "어떤 무엇, 어떤 누구"
+        },
+        {
+          "term": "kiñci",
+          "gloss": "(불변화사/ kaci의 중성 단수 목적격) 어떠한 것, 그 무엇도"
+        },
+        {
+          "term": "yena",
+          "gloss": "(관계대명사/ 중성 단수 도구격) 어떤 ~에 의해"
+        },
+        {
+          "term": "viññū",
+          "gloss": "(남성 복수 주격) 현자들"
+        },
+        {
+          "term": "pare",
+          "gloss": "(남성 복수 주격) 다른",
+          "extras": [
+            "upavadeyyuṁ : (upavadati의 3인칭 복수 원망형) 비난할 수 있다, 비난할 것이다, 비난해야 한다"
+          ]
+        },
+        {
+          "term": "sukhino",
+          "gloss": "(sukhī의 남성 복수 주격) 안락한 사람, 행복한 사람, 편안한 사람"
+        },
+        {
+          "term": "vā",
+          "gloss": "(불변화사) 또는, 또한"
+        },
+        {
+          "term": "sukhinova",
+          "gloss": "행복하고 또는, 행복하고 또한"
+        },
+        {
+          "term": "khemino",
+          "gloss": "(khemī의 남성 복수 주격) 평화로운 사람, 평온한 사람, 안전한 사람"
+        },
+        {
+          "term": "hontu",
+          "gloss": "(3인칭 복수 명령형/ 기원의 의미) ~되기를!"
+        },
+        {
+          "term": "sabba",
+          "gloss": "모든"
+        },
+        {
+          "term": "satta",
+          "gloss": "중생"
+        },
+        {
+          "term": "sabbasattā",
+          "gloss": "(남성 복수 주격) 모든 중생들"
+        },
+        {
+          "term": "bhavantu",
+          "gloss": "(3인칭 복수 명령형/ 기원의 의미) ~되기를!"
+        },
+        {
+          "term": "sukhita",
+          "gloss": "(sukheti의 과거분사) 행복한, 즐거운"
+        },
+        {
+          "term": "atta",
+          "gloss": "자아, 자기 자신"
+        },
+        {
+          "term": "sukhitattā",
+          "gloss": "(sukhita + atta/ 남성 복수 주격) 스스로 행복한, 스스로 기쁜",
+          "extras": [
+            "[주석: sukhitattāti sukhitacittā. ettha ca kāyikena sukhena sukhino, mānasena sukhitattā"
+          ]
+        }
+      ],
+      "extra": [
+        "(초) 현자가 나무랄 일은 그 어떤 것도 하지 않으니",
+        "원컨대 모든 중생 즐겁고 안녕하여 부디 행복할지라.",
+        "(한) 다른 양식 있는 님들의 비난을 살만한 어떠한 사소한 행동이라도 삼가 하오니, 안락하고 평화로워서, 모든 님들은 행복해지이다.",
+        "(아) 또한 현자의 질책을 살 어떤 행동도 삼가야 할지라. (그런 다음에 이와 같은 생각을 기를지니) 모두가 탈없이 잘 지내기를, 모든 중생이 행복하기를!",
+        "(냐) 또 다른 현자들이 마뜩찮아 할 일은 아무리 사소한 일이라도 하지 않는다.",
+        "(또한 그는 생각한다) 안전하고 행복한 가운데 모든 중생이 행복한 마음이 되기를",
+        "(담) 지혜로운 이가 나무랄 일은 어떠한 사소한 것, 행하면 안 된다네.",
+        "행복하고 또한 안락하기를. 모든 중생이 행복하기를.",
+        "(번역) ‘스스로 행복한’이란 ‘마음이 행복한’[이라는 뜻이다.] 또한 여기서 몸이 즐겁기에 ‘안락한’(sukhino)이며, 마음이 행복하기에 ‘스스로 행복한’(sukhitattā)이다.]"
+      ]
+    },
+    {
+      "n": 4,
+      "pali": [
+        "ye keci pāṇabhūtatthi, tasā vā thāvarā vanavasesā.",
+        "dīghā vā yeva mahantā, majjhimā rassakā aṇukathūlā."
+      ],
+      "translations": {},
+      "translation_sources": {},
+      "translation_notes": {},
+      "words": [
+        {
+          "term": "ye",
+          "gloss": "(관계대명사/ 남성 복수 주격) 어떠한 ~것들은"
+        },
+        {
+          "term": "keci",
+          "gloss": "(kaci의 남성 복수 주격) 누구라도"
+        },
+        {
+          "term": "pāṇa",
+          "gloss": "생명, 숨, 숨쉬는 생명",
+          "extras": [
+            "[주석: pāṇoti cettha vohārato satto, paramatthato jīvitindriyaṃ."
+          ]
+        },
+        {
+          "term": "bhūta",
+          "gloss": "(bhavati의 과거분사) 존재, 존재하는 것",
+          "extras": [
+            "“‘존재(bhūta)’라는 단어는 1) 오온(pañvakkhandha) 2) 비인간(amanussa, 유령이나 약카 등의 존재) 3) 요소(dhātu, 18계 가운데 네 가지 근본물질[四大, mahā-bhuta]) 4) 존재함(vijjamāna) 5) 번뇌 다함(khṇāsava) 6) 중생(satta) 7) 나무 등의 존재(rukkhādi) 등에서 나타나고 있다. ... 여기서는 중생(satta)을 뜻하는 것으로 쓰였다.”(MA.i.31~32) - M1. 뿌리에 대한 법문 경 中, 초불연 각주"
+          ]
+        },
+        {
+          "term": "atthi",
+          "gloss": "(3인칭 복수 현재) ~있다, ~이다"
+        },
+        {
+          "term": "pāṇabhūtatthi",
+          "gloss": "(pāṇa + bhūtā + atthi) [어떠한] 살아있는 존재이든, [어떠한] 생명과 [어떠한] 존재이든",
+          "extras": [
+            "[주석] pāṇā eva bhūtā pāṇabhūtā. atha vā pāṇantīti pāṇā. etena assāsapassāsapaṭibaddhe pañcavokārasatte(5온으로 이루어진 중생) gaṇhāti. bhavantīti bhūtā. etena ekavokāracatuvokārasatte gaṇhāti. atthīti santi."
+          ]
+        },
+        {
+          "term": "tasā",
+          "gloss": "(남성 복수 주격) 움직이는, 두려움을 지닌, 갈애를 지닌, 연약한, 아라한이 아닌 존재들[= 범부와 유학 성인들]",
+          "extras": [
+            "[주석: tasā, sataṇhānaṃ sabhayānañcetaṃ adhivacanaṃ"
+          ]
+        },
+        {
+          "term": "thāvarā",
+          "gloss": "(남성 복수 주격) 움직이지 않는, 두려움을 지니지 않은, 갈애를 지니지 않은, 강인한, 아라한",
+          "extras": [
+            "[주석: thāvarā, pahīnataṇhābhayānaṃ arahataṃ etaṃ adhivacanaṃ."
+          ]
+        },
+        {
+          "term": "avasesa",
+          "gloss": "남은"
+        },
+        {
+          "term": "anavasesā",
+          "gloss": "(남성 복수 주격) 남지 않은, 모든"
+        },
+        {
+          "term": "vanavasesā",
+          "gloss": "(vā + anavasesā/ 불변화사 + 남성 복수 주격) ~거나 남김없이, ~거나 모든"
+        },
+        {
+          "term": "dīghā",
+          "gloss": "(남성 복수 주격) 긴, 길이가 긴",
+          "extras": [
+            "[주석] dīghāti dīghattabhāvā nāgamacchagodhādayo. anekabyāmasatappamāṇāpi hi mahāsamudde nāgānaṃ attabhāvā anekayojanappamāṇāpi macchagodhādīnaṃ attabhāvā honti."
+          ]
+        },
+        {
+          "term": "ye",
+          "gloss": "(관계대명사/ 남성 복수 주격) 어떠한 ~것들은"
+        },
+        {
+          "term": "yeva",
+          "gloss": "(ye + vā) 또한 ~한 것들"
+        },
+        {
+          "term": "mahantā",
+          "gloss": "(남성 복수 주격) 큰, 크기가 큰",
+          "extras": [
+            "[주석] mahantāti mahantattabhāvā jale macchakacchapādayo, thale hatthināgādayo, amanussesu dānavādayo. āha ca — “rāhuggaṃ attabhāvīnan”ti (a. ni. 4.15). tassa hi attabhāvo ubbedhena cattāri yojanasahassāni aṭṭha ca yojanasatāni, bāhū dvādasayojanasataparimāṇā, paññāsayojanaṃ bhamukantaraṃ, tathā aṅgulantarikā, hatthatalāni dve yojanasatānīti."
+          ]
+        },
+        {
+          "term": "majjhimā",
+          "gloss": "(남성 복수 주격) 중간인, 크기가 중간인",
+          "extras": [
+            "[주석] majjhimāti assagoṇamahiṃsasūkarādīnaṃ attabhāvā."
+          ]
+        },
+        {
+          "term": "rassakā",
+          "gloss": "(남성 복수 주격) 짧은, 길이가 짧은",
+          "extras": [
+            "[주석] rassakāti tāsu tāsu jātīsu vāmanādayo dīghamajjhimehi omakappamāṇā sattā."
+          ]
+        },
+        {
+          "term": "aṇukā",
+          "gloss": "(남성 복수 주격) 미세한, 작은",
+          "extras": [
+            "[주석] aṇukāti maṃsacakkhussa agocarā, dibbacakkhuvisayā udakādīsu nibbattā sukhumattabhāvā sattā, ūkādayo vā. apica ye tāsu tāsu jātīsu mahantamajjhimehi thūlamajjhimehi ca omakappamāṇā sattā, te aṇukāti veditabbā."
+          ]
+        },
+        {
+          "term": "thūlā",
+          "gloss": "(남성 복수 주격) 거친, 두툼한, 비대한",
+          "extras": [
+            "[주석] thūlāti parimaṇḍalattabhāvā macchakummasippikasambukādayo sattā."
+          ]
+        },
+        {
+          "term": "aṇukathūlā",
+          "gloss": "(남성 복수 주격) 미세하거나 거친 [존재들], 미세하거나 두툼한 [존재들]"
+        }
+      ],
+      "extra": [
+        "(초) 약하거나 강하거나 길거나 크거나 중간치이거나",
+        "짧거나 작거나 통통하거나 살아있는 생명이라면 모두 다",
+        "(한) 살아 있는 생명이면 어떤 것이나, 동물이거나 식물이거나 남김없이, 길다랗거나 커다란 것이나, 중간 것이나 짧은 것이나, 미세하거나 거친 것이나",
+        "(한) tasā vā thāvarā vā : 역자는 ‘움직이는 것이나 움직이지 않는 것이나’라는 의미로 ‘동물이건 식물이건’이라고 번역했으나, Prj. I. 245에서 붓다고싸는 ‘갈애가 있는 것(sataṇhesu)’이든 ‘갈애가 없는 것(nitthaṇhesu)’이든 이라는 의미로 해석하고 있다. 심지어 갈애가 없는 것은 아라한을 의미한다고 해석하고 있다.",
+        "(아) 살아있는 생물이면 어떤 것이건 하나 예외없이, 약한 것이건 강한 것이건,",
+        "길건 크건 아니면 중간치건 또는 짧건, 미세하건 또는 거대하건,/거칠건",
+        "(냐) 살아 숨쉬는 존재라면 그 무엇이든 연약하거나 튼튼하거나를 가리지 않고",
+        "하나도 빠짐없이, 그것이 길다란 것이든 커다란 것이든, 중간치든 짤막한 것이든",
+        "작은 것이든, 큰 것이든",
+        "(담) 살아있는 생명이면 그 어떤 것이든 동요하든 혹은 확고하든 남김없이",
+        "길거나 크거나 중간이거나 짧거나 작거나 비대하거나",
+        "(번역) ‘생명’이란 여기서 ‘중생’을 뜻한다. 궁극적인 의미로는 ‘생명기능’을 뜻한다. - <범천의 그물 경>(D1) 주석]",
+        "(번역) ‘생명들’(=모든 중생)이 바로 ‘존재들’(=모든 중생)이기에 ‘살아있는 존재들’이다. 또는 숨쉰다고 해서 ‘생명(pāṇā)’이다. 이러한 이름으로 들숨날숨을 쉬는 5온으로 이루어진 중생을 취했다. 존재한다고 해서 ‘존재(bhūtā)’이다. 이러한 이름으로 1온으로 이루어진 중생(=무상유정천)과 4온으로 이루어진 중생(=무색계 중생)을 취했다. [여기서] ‘atthi’는 [복수형] ‘santi’이다.",
+        "(빅쿠 보디 스님 번역) Living beings (pāṇā) are existent beings that are living. Or else “living beings” means “those that breathe.” By this, he includes beings with five constituents that are dependent on in-and-out breathing. Beings (bhūtā) are those that have being; by this, he includes beings with one constituent and four constituents. There are: that exist.",
+        "(번역) ‘연약한’은 갈애를 지닌, 두려움을 지닌 [존재들을 부르는] 명칭이다.]",
+        "(번역) ‘강인한’은 갈애와 두려움을 제거한 아라한을 [부르는] 명칭이다.]",
+        "“여기에 유의해야 할 다른 해석 한 가지가 있습니다. 이 ‘따사’와 ’타와라’라는 단어는 불교에서만 쓰는 게 아닙니다. 붓다께서 살아계시던 그 당시의 다른 종교인들도 쓰던 단어입니다. 그들에게는 ‘따사’가 생명이 있는 존재를 말합니다. ‘타와라’는 무정물을 의미합니다.",
+        "내가 스리랑카에서 석사 코스를 밟을 때 교수님 한 분이 자애경에 관하여 수업을 해주셨습니다. 그 수업에서 그 교수님은 ‘따사’를 생명 있는 존재, ‘타와라’를 산, 숲, 나무라고 말했습니다. 무정물에게 어떻게 자애를 보냅니까? 나무에게 어떻게 자애를 보냅니까? 이런 해석은 ‘자이나교’의 교리입니다. 자이나교는 지금까지도 인도에 있습니다. 이 자이나 교단은 나무, 숲, 산, 이런 모든 것을 유정물로 봅니다. 불에도 생명이 있다. 물에도 생명이 있다. 불이 장작을 태우면 불이라는 생명 있는 존재가 장작이라는 생명체를 죽이는 것이 됩니다. 불을 끄면 불을 죽인 것이 되어서 살생업을 짓게 됩니다. 물도 마시면 안 됩니다. 물을 마시면 이것도 허물이 됩니다. 그들은 생수를 사용하면 허물을 짓는다고 봅니다. 먼지조차도 목숨이 있다고 봅니다. 이런 해석은 자이나교의 견해입니다. 이것은 불교의 견해와 맞지 않습니다.",
+        "불교의 견해에서 보자면 ‘따사 : 놀라고 두려워하는 중생들’, ‘타와라 : 번뇌를 소멸시켜 매우 고요해진 존재들’, 이렇게 번역할 수 있습니다.”",
+        "- <난다말라비왐사 큰스님 가르침> 中",
+        "(번역) ‘긴’이란 몸이 긴 존재들이다. 나가(용), [큰] 물고기, [큰] 도마뱀 등이다. 바다에 사는 나가(용)들은 몸이 수백 뱌마(수백 미터)에 달한다. 반면 [큰] 물고기나 도마뱀의 몸은 수 요자나 정도이다.",
+        "(빅쿠 보디 스님 번역) long are those with long bodies, such as nāgas, fish, and lizards. For the bodies of the nāgas in the ocean measure many hundreds of fathoms, while the bodies of fish and lizards, and so forth, measure many yojanas",
+        "* byāma: 길이의 단위. 머리에서 발까지 정도, 또는 팔 2개를 뻗은 정도. 약 1.8미터.",
+        "# attabhāvo vuccati sarīraṃ. (<청정도론> 中)",
+        "(번역) ‘자기존재’란 몸을 말한다.",
+        "(번역) ‘큰’이란 몸이 큰 존재들이다. 물속의 [큰] 물고기나 거북이 등이다. 땅의 코끼리 등이다. 비존재들 중에서 거인족 등이다. [부처님께서] 말씀하셨다. “라후가 몸 가진 이들 중 최고이다.[= 몸이 가장 크다]” 그의 몸은 키가 4000 요자나이고 [넓이가] 800 요자나이다. 팔 길이는 1200요자나이다. [두] 눈썹 사이의 거리는 50요자나이다. 손가락에서 손바닥까지의 거리는 200요자나이다.",
+        "(빅쿠 보디 스님 번역) The large are those with large bodies, such as fish and tortoises in water, and elephants and nāgas on land, and the dānava and so forth among spirits. As the Blessed One said: “Rāhu is foremost of those with bodies” (AN II 17,21); for his body is 4,000 yojanas in height and 800 yojanas [wide]; his arm span is 1,200 yojanas, his eyebrows fifty yojanas, and so his fingers, and his palms are 200 yojanas.",
+        "(번역) ‘중간’이란 말이나 황소, 버팔로, 돼지 등의 몸을 말한다.",
+        "(빅쿠 보디 스님 번역) Middling: the bodies of horses, cattle, buffalo, pigs, and so forth.",
+        "(번역) ‘짧은’이란 이런저런 생 중에 난쟁이 등, 길거나 중간치인 존재들보다 작은 중생들이다.",
+        "(빅쿠 보디 스님 번역) Short: beings that are smaller than the tall and middling, such as the dwarfs in the various classes.",
+        "(번역) ‘미세한’이란 육체적인 눈으로 보이지 않아 천안으로만 볼 수 있는 [존재들이다.] [예를 들어] 물속에 태어난 아주 작은 몸의 중생들이다. ‘이’[벌레] 등이나 이러저런 생 중에 크거나 중간치이거나 두툼하거나 중간치인 존재들보다 작은 중생들을 ‘미세한 존재’라고 알아야 한다.",
+        "(빅쿠 보디 스님 번역) Fine (small): those outside the range of the physical eyes; beings with very subtle bodies, such as those born in water, which are perceptible by the divine eye, or lice and so forth. Moreover, those beings in the various classes that are smaller in size than the large and middling and the gross and middling should be understood as fine (small).",
+        "(번역) ‘두툼한’이란 둥근 몸이다. 물고기, 거북이, 굴, 조개류 등의 중생이다.",
+        "(빅쿠 보디 스님 번역) Gross: those beings with round bodies, such as fish, turtles, and oysters and other shellfish, and so forth."
+      ]
+    },
+    {
+      "n": 5,
+      "pali": [
+        "diṭṭhā vā yeva adiṭṭhā, ye va dūre vasanti avidūre.",
+        "bhūtā va sambhavesī va, sabbasattā bhavantu sukhitattā."
+      ],
+      "translations": {},
+      "translation_sources": {},
+      "translation_notes": {},
+      "words": [
+        {
+          "term": "diṭṭhā",
+          "gloss": "(√dis의 과거분사/ 남성 복수 주격) 보여진, 볼 수 있는",
+          "extras": [
+            "[주석: diṭṭhāti ye attano cakkhussa āpāthamāgatavasena diṭṭhapubbā."
+          ]
+        },
+        {
+          "term": "vā",
+          "gloss": "(불변화사) 또는, ~이거나"
+        },
+        {
+          "term": "ye",
+          "gloss": "(관계대명사/ 남성 복수 주격) 어떠한 ~것들은"
+        },
+        {
+          "term": "yeva",
+          "gloss": "(ye + vā) 또한 ~한 것들"
+        },
+        {
+          "term": "adiṭṭhā",
+          "gloss": "(na + diṭṭhā/ 남성 복수 주격) 보이지 않는, 볼 수 없는",
+          "extras": [
+            "[주석: adiṭṭhāti ye parasamuddaparaselaparacakkavāḷādīsu ṭhitā."
+          ]
+        },
+        {
+          "term": "ye",
+          "gloss": "(관계대명사/ 남성 복수 주격) 어떠한 ~것들은"
+        },
+        {
+          "term": "va",
+          "gloss": "(= vā/ 불변화사) 또는, ~이거나"
+        },
+        {
+          "term": "dūre",
+          "gloss": "(불변화사/ 남성 단수 처격) 멀리에"
+        },
+        {
+          "term": "vasanti",
+          "gloss": "(3인칭 복수 현재) 살다"
+        },
+        {
+          "term": "avidūre",
+          "gloss": "(불변화사/ 남성 단수 처격) 가까이에, 멀지 않은 곳에"
+        },
+        {
+          "term": "bhūtā",
+          "gloss": "(bhavati의 과거분사/ 남성 복수 주격) 존재하는 것, ~한 상태가 된 것, 완료된 것, 태어난 것, 태어남을 마친 자, 완성된 존재, 아라한",
+          "extras": [
+            "[주석: bhūtāti jātā abhinibbattā. ye bhūtā eva, na puna bhavissantīti saṅkhyaṃ gacchanti, tesaṃ khīṇāsavānaṃ etaṃ adhivacanaṃ.",
+            "‘태어남을 마친 자들’이란 ‘태어난’, ‘생성된’[이라는 뜻이다.] 또한 ‘태어남을 마친 자들’(=완성된 자들)이란 “다시 태어나지 않는다”라고 하는 존재들(=아라한)이다. 번뇌를 완전히 제거한 이들을 위한 용어다."
+          ]
+        },
+        {
+          "term": "sambhava",
+          "gloss": "태어남, 근원, 생산, 태어난, 생산된"
+        },
+        {
+          "term": "esati",
+          "gloss": "찾다, 추구하다"
+        },
+        {
+          "term": "esī",
+          "gloss": "찾는 사람, 추구하는 사람"
+        },
+        {
+          "term": "sambhavesī",
+          "gloss": "(남성 복수 주격) 태어남을 구하는 자, 태어나고자 하는 자, 태어남이 남아 있는 유학(수다원~아나함)과 범부, 미완성된 존재",
+          "extras": [
+            "[주석] sambhavamesantīti sambhavesī. appahīnabhavasaṃyojanattā āyatimpi sambhavaṃ esantānaṃ sekhaputhujjanānametaṃ adhivacanaṃ. atha vā catūsu yonīsu aṇḍajajalābujā sattā yāva aṇḍakosaṃ vatthikosañca na bhindanti, tāva sambhavesī nāma, aṇḍakosaṃ vatthikosañca bhinditvā bahi nikkhantā bhūtā nāma. saṃsedajā opapātikā ca paṭhamacittakkhaṇe sambhavesī nāma, dutiyacittakkhaṇato pabhuti bhūtā nāma. yena vā iriyāpathena jāyanti, yāva tato aññaṃ na pāpuṇanti, tāva sambhavesī nāma, tato paraṃ bhūtāti."
+          ]
+        },
+        {
+          "term": "sabbasattā",
+          "gloss": "(sabba + satta/ 남성 복수 주격) 모든 중생"
+        },
+        {
+          "term": "bhavantu",
+          "gloss": "(3인칭 복수 명령형) ~하기를!"
+        },
+        {
+          "term": "sukhitattā",
+          "gloss": "(sukhita + atta/ 남성 복수 주격) 스스로 행복한, 스스로 기쁜"
+        }
+      ],
+      "extra": [
+        "(초) 보이거나 보이지 않거나 멀리 있거나 가까이 있거나",
+        "태어났거나 앞으로 태어날, 그 모든 중생 부디 행복할지라.",
+        "(한) 보이는 것이나 보이지 않는 것이나, 멀리 사는 것이나 가까이 사는 것이나, 이미 생겨난 것이나 생겨날 것이나, 모든 님들은 행복하여지이다.",
+        "(한) bhūtā va sambhavesī va : 여기서 ‘생길 것(sambhavesī)’이란 자궁에 있는 상태를 말한다.",
+        "(아) 눈에 보이는 것이건 눈으로 볼 수 없는 것이건, 또 멀리 살건 가까이 살건,",
+        "태어났건, 태어나려하고 있건, 모든 중생이 행복하기를!",
+        "(냐) 또 눈에 보이는 것이든, 볼 수 없는 것이든 멀리 살든, 가까이 살든",
+        "존재하고 있든, 존재를 구하고 있든 그 모든 중생들이 다 행복한 마음이 되기를.",
+        "(담) 보았거나 혹은 본 적이 없거나 멀리 머물거나 가까이 머물거나",
+        "이미 있거나 앞으로 태어날 모든 중생이 행복하기를",
+        "(번역) ‘보았던’이란 자신의 눈 영역에 들어와 이전에 보았던 어떤 것들이라는 [뜻이다.]]",
+        "(번역) ‘보지 못한’이란 바다 건너, 산 건너, 다른 우주에 있는 어떤 것들이라는 [뜻이다.]]",
+        "(번역) 태어남을 구한다라고 해서 ‘태어남을 구하는 자들’이다. 존재의 족쇄를 [모두] 제거하지 못했기에, 미래에 태어남을 구하는 유학과 범부를 이르는 용어다. 또는 네 가지 태어나는 방식 중에 알이나 모태에서 태어나는 중생들이 알이나 모태에서 나오기 전까지 ‘태어남을 구하는 자’라고 부른다. 알이나 모태 바깥으로 나오면 ‘태어남을 마친 자’라고 부른다. 습기에서나 화현(化現)으로 나타나는 중생들의 경우, 첫 마음 순간[=재생연결식]에 ‘태어남을 구하는 자’라고 부른다. 두 번째 마음 순간부터는 ‘태어남을 마친 자’라고 부른다. 또는 어떠한 자세로 나타났을 때, 다른 자세를 취하기 전까지는 ‘태어남을 구하는 자’라고 부른다. 다른 자세를 취한 뒤부터는 ‘태어남을 마친 자’라고 부른다."
+      ]
+    },
+    {
+      "n": 6,
+      "pali": [
+        "na paro paraṁ nikubbetha, nātimaññetha katthaci na kañci,",
+        "byārosanā paṭighasaññā, nāññamaññassa dukkhamiccheyya."
+      ],
+      "translations": {},
+      "translation_sources": {},
+      "translation_notes": {},
+      "words": [
+        {
+          "term": "na",
+          "gloss": "(불변화사) ~이 아니다"
+        },
+        {
+          "term": "paro",
+          "gloss": "(남성 단수 주격) 다른 사람이",
+          "extras": [
+            "paraṁ : (남성 단수 목적격) 다른 사람을",
+            "paro paraṁ : 한 사람이 다른 사람을, 서로 서로",
+            "[주석: paroti parajano. paranti parajanaṃ.",
+            "‘다른 이가’란 다른 사람이[라는 뜻이다.] ‘다른 이를’이란 ‘다른 사람을’이라는 [뜻이다.]]"
+          ]
+        },
+        {
+          "term": "nikubbetha",
+          "gloss": "(nikubbati의 3인칭 단수 원망형) 속여야 한다",
+          "extras": [
+            "na nikubbetha : 속이지 말아야 한다"
+          ]
+        },
+        {
+          "term": "atimaññetha",
+          "gloss": "(atimaññati의 3인칭 단수 원망형) 경멸해야 한다, 업신여겨야 한다, 무시해야 한다"
+        },
+        {
+          "term": "nātimaññetha",
+          "gloss": "(na + atimaññetha) 경멸하지 말아야 한다, 업신여기지 말아야 한다, 무시하지 말아야 한다"
+        },
+        {
+          "term": "kattha",
+          "gloss": "(의문사) 어디?"
+        },
+        {
+          "term": "ci",
+          "gloss": "(불변화사) 어떤"
+        },
+        {
+          "term": "katthaci",
+          "gloss": "(불변화사) 어디에서든",
+          "extras": [
+            "[주석: katthacīti katthaci okāse, gāme vā gāmakhette vā ñātimajjhe vā pūgamajjhe vātiādi."
+          ]
+        },
+        {
+          "term": "naṃ",
+          "gloss": "(불변화사/ 남성 단수 목적격) ~이 아니다",
+          "extras": [
+            "[주석: nanti etaṃ."
+          ]
+        },
+        {
+          "term": "kañci",
+          "gloss": "(불변화사/ kaci의 남성 단수 목적격) 누구든지",
+          "extras": [
+            "[주석: kañcīti yaṃ kañci khattiyaṃ vā brāhmaṇaṃ vā gahaṭṭhaṃ vā pabbajitaṃ vā sukhitaṃ vā dukkhitaṃ vātiādi."
+          ]
+        },
+        {
+          "term": "byārosanā",
+          "gloss": "(byāroseti에서 온 명사/ 여성 단수 도구격) 분노, 증오, 분노를 일으키는, 화나게 하는"
+        },
+        {
+          "term": "paṭigha",
+          "gloss": "부딪힘, 강한 반감, 혐오"
+        },
+        {
+          "term": "paṭighasaññā",
+          "gloss": "(paṭigha + saññā/ 여성 단수 도구격) 혐오하는 인식, 혐오하는 생각, 미워하는 인식, 미워하는 생각",
+          "extras": [
+            "[주석] byārosanā paṭighasaññāti kāyavacīvikārehi byārosanāya ca manovikārena paṭighasaññāya ca. “byārosanāya paṭighasaññāyā”ti hi vattabbe “byārosanā paṭighasaññā”ti vuccati, yathā “sammadaññāya vimuttā”ti vattabbe “sammadaññā vimuttā”ti (...)"
+          ]
+        },
+        {
+          "term": "añña",
+          "gloss": "다른, 또 다른, 다른 누군가"
+        },
+        {
+          "term": "aññamañña",
+          "gloss": "서로 서로",
+          "extras": [
+            "nāññamaññassa (na + aññamaññassa/ 남성 단수 소유격) 서로의 ~ 안 된다"
+          ]
+        },
+        {
+          "term": "dukkhaṃ",
+          "gloss": "(중성 단수 목적격) 괴로움을"
+        },
+        {
+          "term": "iccheyya",
+          "gloss": "(3인칭 단수 원망형) 바래야 한다 [na + iccheyya : 바래서는 안 된다.]"
+        },
+        {
+          "term": "dukkhamiccheyya",
+          "gloss": "(dukkhaṃ + iccheyya) 괴로움을 바래야 한다"
+        }
+      ],
+      "extra": [
+        "(초) 남을 속이지 않고, 어떤 곳에서 어떤 이라도 경멸하지 않으며",
+        "성냄과 적개심으로 남의 불행을 바라지 않네.",
+        "(한) 서로가 서로를 속이지 말고 헐뜯지도 말지니, 어디서든지 누구든지, 분노 때문이든 증오 때문이든 서로에게 고통을 바라지 않나이다.",
+        "(아) 누구도 자기 동반을, 그것이 어디에 있든 간에 속이거나 헐뜯는 일이 없게 하라.",
+        "누구도 남들이 잘못되기를 바라지 말라. 원한에서든, 증오에서든.",
+        "(냐) 그 누구도 남에게 해가 되는 일을 하지 말기를 어떤 경우일지라도 남을 경멸해서는 안 된다. 그리고 성내거나 원망하는 마음에서 서로 상대가 잘못되기를 바라서도 안 된다.",
+        "(담) 서로가 서로를 속이면 안 된다네. 어느 곳 누구든지 얕보면 안 된다네.",
+        "분노 때문이든 증오 때문이든 서로에게 고통을 바라면 안 된다네.",
+        "(번역) ‘그’란 ‘이러한’라는 뜻이다.]",
+        "(번역) ‘누구든지’란 캇띠야(왕족)나 브라흐마나(바라문)나, 재가자나 출가자나, 행복한 사람이나 불행한 사람이나 등이다.]",
+        "naṃ kañci : 그 누구든지, 그 누구라도",
+        "(번역) ‘화나게 하고 미워하여’란 몸과 말의 행위인 [상대방을] 화나게 함과 마음의 행위인 미워하는 생각으로[라는 뜻이다.] “화나게 함으로, 미워하는 생각으로”라고 말해야 하는 부분에서 “byārosanā paṭighasaññā”라고 말하기 때문이다. 마치 “완전한 이해로 해탈한”이라고 말해야 하는 부분에서 “sammadaññā vimuttā”라고 말하는 것과 같다.]",
+        "“‘뱌로사나byārosanā’란 화나게 부채질하는 것, ‘빠띠가산냐paṭighasaññā’란 미워하는 것입니다. 서로서로 자극하지 말라, 미워하지 말라는 의미입니다.”",
+        "- <난다말라비왐사 큰스님 가르침> 中"
+      ]
+    },
+    {
+      "n": 7,
+      "pali": [
+        "mātā yathā niyaṁ puttamāyusā ekaputtamanurakkhe.",
+        "evampi sabbabhūtesu, mānasaṁ bhāvaye aparimāṇaṁ."
+      ],
+      "translations": {},
+      "translation_sources": {},
+      "translation_notes": {},
+      "words": [
+        {
+          "term": "mātā",
+          "gloss": "(여성 단수 주격) 어머니가"
+        },
+        {
+          "term": "yathā",
+          "gloss": "(불변화사) 마치",
+          "extras": [
+            "niyaṁ : (남성 단수 목적격) 자신의"
+          ]
+        },
+        {
+          "term": "puttaṃ",
+          "gloss": "(남성 단수 목적격) 아들을, 자식을"
+        },
+        {
+          "term": "āyusā",
+          "gloss": "(중성 단수 도구격) 목숨으로"
+        },
+        {
+          "term": "puttamāyusā",
+          "gloss": "(puttaṃ + āyusā) 아들을 목숨으로, 자식을 목숨으로"
+        },
+        {
+          "term": "ekaputtaṃ",
+          "gloss": "(eka + puttaṃ/ 남성 단수 목적격) 외아들을, 하나뿐인 아들을, 하나뿐인 자식을"
+        },
+        {
+          "term": "anurakkhe",
+          "gloss": "(anurakkhati의 3인칭 단수 원망형) 보호할 것이다, 돌볼 것이다, 보호해야 한다, 돌봐야 한다, 보호하듯이, 돌보듯이"
+        },
+        {
+          "term": "ekaputtamanurakkhe",
+          "gloss": "(eka + puttaṃ + anurakkhe) 외아들을 보호하듯, 하나뿐인 자식을 보호하듯",
+          "extras": [
+            "[주석] tassattho — yathā mātā niyaṃ puttaṃ attani jātaṃ orasaṃ puttaṃ, tañca ekaputtameva āyusā anurakkhe, tassa dukkhāgamappaṭibāhanatthaṃ attano āyumpi cajitvā taṃ anurakkhe, evampi sabbabhūtesu idaṃ mettākhyaṃ mānasaṃ bhāvaye, punappunaṃ janaye vaḍḍhaye, tañca aparimāṇasattārammaṇavasena ekasmiṃ vā satte anavasesapharaṇavasena aparimāṇaṃ bhāvayeti."
+          ]
+        },
+        {
+          "term": "evampi",
+          "gloss": "(evaṃ + pi/ 불변화사) 또한 이와 같이"
+        },
+        {
+          "term": "sabbabhūtesu",
+          "gloss": "(남성 복수 처격) 모든 존재들에 대해, 모든 존재들에서",
+          "extras": [
+            "mānasaṁ : (중성 단수 목적격) 마음을"
+          ]
+        },
+        {
+          "term": "bhāvaye",
+          "gloss": "(bhāvayati의 3인칭 단수 원망형) 길러야 한다, 개발해야 한다, 증장해야 한다",
+          "extras": [
+            "aparimāṇaṁ : (중성 단수 목적격) 한량없는, 한계 없는"
+          ]
+        }
+      ],
+      "extra": [
+        "(초) 어머니가 하나밖에 없는 친아들을 목숨으로 보호하듯",
+        "모든 중생들을 향해 한량없는 마음을 개발할지라.",
+        "(한) 어머니가 하나뿐인 아들을 목숨 바쳐 구하듯, 이와 같이 모든 님들을 위하여 자애로운, 한량없는 마음을 닦게 하여지이다.",
+        "(한) aparimānaṃ : 여기서는 불교적인 명상에서 특히 중요한 네 가지 청정한 삶(四梵住, catāro brahmavihārā)을 말한다.",
+        "(아) 어머니가 자기 아들을, 하나뿐인 자식을 목숨 바쳐 위해로부터 구해내듯",
+        "만중생을 향한 일체 포용의 생각을 자기 것으로 지켜내라.",
+        "(냐) 마치 어머니가 목숨을 걸고 자식을 보호하듯 그것도 하나뿐인 자식을.",
+        "꼭 그와 같이 모든 살아있는 것들에 대해서 한없는 (자애의) 마음을 늘 지니기를",
+        "(담) 마치 어머니가 하나밖에 없는 자식을 목숨 걸고 보호하듯이",
+        "이와 같이 또한 모든 존재 향해서 한계 없는 마음을 닦아야 한다네.",
+        "(번역) 그것의 의미는 이러하다. 마치 어머니가 자신의 아들을, 자신의 가슴에서 태어난 아들을, 그 하나뿐인 아들을 목숨으로 보호하듯, 그 [아들]에게 닥쳐온 고통을 제거하기 위해 자신의 목숨마저도 버리고서 아들을 보호하듯, 이와 같이 모든 존재들에 대해서 이러한 ‘자애’라 이름하는 마음을 개발해야 한다. 거듭해서 일으키고 증장시켜야 한다. 무량한 중생(=모든 존재)들을 대상으로 하거나 한 중생에 대해 [자애가] 남김없이 스며들도록 한량 없이 개발해야 한다."
+      ]
+    },
+    {
+      "n": 8,
+      "pali": [
+        "mettañca sabbalokasmi, mānasaṁ bhāvaye aparimāṇaṁ.",
+        "uddhaṁ adho ca tiriyañca, asambādhaṁ averamasapattaṁ."
+      ],
+      "translations": {},
+      "translation_sources": {},
+      "translation_notes": {},
+      "words": [
+        {
+          "term": "mettañca",
+          "gloss": "(mettaṃ + ca/ 중성 단수 목적격 + 불변화사) 또한 자애를"
+        },
+        {
+          "term": "sabbalokasmi",
+          "gloss": "(=sabbalokasmiṃ/ 남성 단수 처격) 온 세상에서, 온 세상에 대한",
+          "extras": [
+            "mānasaṁ : (중성 단수 목적격) 마음을"
+          ]
+        },
+        {
+          "term": "bhāvaye",
+          "gloss": "(bhāvayati의 3인칭 단수 원망형) 길러야 한다, 개발해야 한다, 증장해야 한다",
+          "extras": [
+            "aparimāṇaṁ : (중성 단수 목적격) 한량없는, 한계 없는",
+            "uddhaṁ : (불변화사) 위로",
+            "[주석: uddhanti upari, tena arūpabhavaṃ gaṇhāti.",
+            "‘위로’란 ‘[가장] 위’라는 뜻이다. 이로써 무색계 존재를 취했다.]"
+          ]
+        },
+        {
+          "term": "adho",
+          "gloss": "(불변화사) 아래로",
+          "extras": [
+            "[주석: adhoti heṭṭhā, tena kāmabhavaṃ gaṇhāti.",
+            "‘아래로’란 ‘[가장] 아래’라는 뜻이다. 이로써 욕계 존재를 취했다.]"
+          ]
+        },
+        {
+          "term": "ca",
+          "gloss": "(불변화사) 그리고, 또한"
+        },
+        {
+          "term": "tiriyañca",
+          "gloss": "(tiriyaṃ + ca/ 불변화사 + 불변화사) 옆으로, 수평으로",
+          "extras": [
+            "[주석: tiriyanti vemajjhaṃ, tena rūpabhavaṃ gaṇhāti.",
+            "‘옆으로’란 ‘중간’이라는 뜻이다. 이로써 색계 존재를 취했다.]",
+            "asambādhaṁ : (중성 단수 목적격) 장애 없는, 제한 없는",
+            "“한계나 제한이 없는 것을 ‘sambādha 좁은’이라고 합니다. 한계가 무너져야 넓습니다. 여기서는 원수를 ‘sīmā 한계’라고 말합니다. 자애를 닦을 때 ‘이 자가 나의 원수다’라며 그 사람에게 자애를 보내지 않고 남겨두면 한계가 있는 것이 됩니다. ‘bhinnasīmā 한계를 부순’ 자애가 되도록 원수도 남겨두지 않고 자애를 보내야 ‘asambādha 좁지 않은, 넓은, 한계 없는’ 자애가 됩니다. - <자애> 中, 담마간다 스님 편역"
+          ]
+        },
+        {
+          "term": "vera",
+          "gloss": "악의, 적개심"
+        },
+        {
+          "term": "averaṃ",
+          "gloss": "(중성 단수 목적격) 적의 없는, 악의 없는, 미움 없는, 원한 없는",
+          "extras": [
+            "[주석: averanti veravirahitaṃ, antarantarāpi veracetanāpātubhāvavirahitanti attho."
+          ]
+        },
+        {
+          "term": "sapatta",
+          "gloss": "적, 적대적인"
+        },
+        {
+          "term": "asapattaṃ",
+          "gloss": "(중성 단수 목적격) 평화로운, [적에 대한] 두려움 없는, 적의 없는, [외부의] 적이 없는",
+          "extras": [
+            "[주석: asapattanti vigatapaccatthikaṃ. mettāvihārī hi puggalo manussānaṃ piyo hoti, amanussānaṃ piyo hoti, nāssa koci paccatthiko hoti, tenassa taṃ mānasaṃ vigatapaccatthikattā asapattanti vuccati."
+          ]
+        }
+      ],
+      "extra": [
+        "(초) 온 세상 위, 아래, 옆으로 장애와 원한과 증오를 넘어",
+        "한량없는 자애의 마음을 개발할지라.",
+        "(한) 그리하여 일체의 세계에 대하여 위로 아래로 옆으로 확장하여 장애 없이, 원한 없이, 적의 없이, 자애로운, 한량없는 마음을 닦게 하여지이다.",
+        "(한) uddhaṃ : Prj. I. 249에 따르면, ‘비물질적인 세계(無色界, arūpadhātu)’를 말한다.",
+        "(한) adho : Prj. I. 249에 따르면, 감각적 쾌락의 세계(慾界, kāmabhava)를 말하는데, 아비지옥(avīcito)에 이르기까지의 존재를 말한다.",
+        "(한) tiriyañ : Prj. I. 249에 따르면, ‘미세한 물질계(色界, rūpadhātu)로 퍼져나가는 것’이다.",
+        "(아) 전 우주를(삼계), 그 높은 곳, 그 깊은 곳, 그 넓은 곳 끝까지 모두를 감싸는 사랑의 마음을 키워라. 미움도 적의도 넘어선 잔잔한 그 사랑을.",
+        "(냐) 또 전세계에 대한 사랑에서 한없는 (자애의) 마음을 늘 지니기를",
+        "위로 아래로 그리고 옆으로 두루 장애 없이, 적의 없이, 경쟁자도 없이.",
+        "(담) 또한 온 세상에 자애로 가득한 한계 없는 마음을 닦아야 한다네.",
+        "위로, 아래로, 그리고 옆으로도 좁지 않게, 원한과 적이 없이.",
+        "(번역) ‘미움 없이’이란 미움에서 벗어난 [상태]다. [수행하는] 중간 중간에 미움의 의도가 생겨나지 않음을 뜻한다.]",
+        "# “진짜 원수는 내 안의 성냄입니다. 자신의 가슴 안에 있는 미움이라는 적이 없도록(아웨라avera) 해야 합니다.” - <난다말라비왐사 큰스님 가르침> 中",
+        "“‘averaṁ 원한이 없다’에서 ‘vera 원한’은 내부의 적인 성냄을 말합니다. 성냄이 없어야 자애를 닦을 수 있기 때문입니다. 사실 자애 자체에는 성냄이 있을 수 없습니다. 수행 중간중간에 가끔씩 ‘원한의 의도 veracetanā’가 생겨나지 않도록 해야 한다는 뜻입니다.” - <자애> 中, 담마간다 스님 편역",
+        "(번역) ‘두려운 [적이] 없이’이란 [외부의] 적이 없는 상태이다. 자애에 머무는 자는 사람들의 사랑을 받고, 비인간 존재들의 사랑을 받고, 그에겐 어떠한 적도 없다. 그로 인해 그 마음이 ‘적 없는 [평화로운] 상태’이기에 ‘두려운 [적이] 없이’라고 한다.]",
+        "# “‘asapattaṁ 적이 없다’는 것은 자신을 괴롭히는 외부의 적이 없다는 뜻입니다. 자애를 닦는 이는 어떠한 중생도 적으로 생각하지 않기 때문에 외부의 적이 없습니다. 자애로 지내는 이를 사람들도 좋아하고 사람 아닌 존재들도 좋아합니다. 그래서 그에게는 어떠한 적도 없습니다. 이러한 그의 마음은 적이 없는 상태이기 때문에 ‘적이 없는 것’이라고 말합니다. 이것은 비유해서 말한 것입니다.(SnA.i.188) ‘asapatta’란 원래 ‘적이 없는 사람’이라는 뜻인데 적이 없는 사람의 마음도 ‘asapatta’라고 표현했다는 뜻입니다. 이렇게 내부와 외부의 적 둘 모두가 없도록 닦아야 합니다.” - <자애> 中, 담마간다 스님 편역",
+        "averamasapattaṁ : (averaṃ + asapattaṃ) 미움과 두려움 없이, 미움과 적의 없이",
+        "[주석] yaṃ vā taṃ bhāvanāsampadaṃ pattaṃ sabbattha okāsalokavasena asambādhaṃ, attano paresu āghātappaṭivinayanena averaṃ, attani ca paresaṃ āghātavinayanena asapattaṃ hoti.",
+        "(번역) 또는 수행의 성취를 얻음이란, 모든 공간 세상에 대해서는 한계 없게 되고, 다른 이에 대한 자신의 원한을 제거하여 미움 없게 되고, 자신에 대한 다른 사람들의 원한을 제거하여 [두려운] 적이 없게 된다.]"
+      ]
+    },
+    {
+      "n": 9,
+      "pali": [
+        "tiṭṭhaṁ caraṁ nisinno va, sayāno yāvatāssa vitamiddho.",
+        "etaṁ satiṁ adhiṭṭheyya, brahmametaṁ vihāramidhamāhu."
+      ],
+      "translations": {},
+      "translation_sources": {},
+      "translation_notes": {},
+      "words": [
+        {
+          "term": "nisinno",
+          "gloss": "(nisīdati의 과거분사/ nisinna의 남성 단수 주격) 앉아 있는"
+        },
+        {
+          "term": "sayāno",
+          "gloss": "(sayati의 현재분사/ sayāna의 남성 단수 주격) 누워 있는"
+        },
+        {
+          "term": "yāvatā",
+          "gloss": "(불변화사) ~하는 한"
+        },
+        {
+          "term": "assa",
+          "gloss": "(atthi의 3인칭 단수 원망형) ~일 것이다, ~일지도 모른다, ~여야 한다"
+        },
+        {
+          "term": "yāvatāssa",
+          "gloss": "(yāvatā + assa) ~인 한에는"
+        },
+        {
+          "term": "vīta",
+          "gloss": "~없이, ~에서 벗어난"
+        },
+        {
+          "term": "middha",
+          "gloss": "졸음, 잠"
+        },
+        {
+          "term": "vitamiddho",
+          "gloss": "(남성 단수 주격) 깨어 있음",
+          "extras": [
+            "etaṁ : (여성 단수 목적격) 이, 이러한",
+            "satiṁ : (여성 단수 목적격) 마음챙김을"
+          ]
+        },
+        {
+          "term": "adhiṭṭheyya",
+          "gloss": "(adhiṭṭhāti의 3인칭 단수 원망형) 확립해야 한다, 확립할 것이다"
+        },
+        {
+          "term": "brahmaṃ",
+          "gloss": "(남성 단수 목적격) 범천, 범천의, 고귀한",
+          "extras": [
+            "etaṁ : (남성 단수 목적격) 이것을",
+            "brahmametaṁ : (brahmaṃ + etaṁ) 이것을 고귀한"
+          ]
+        },
+        {
+          "term": "vihāraṃ",
+          "gloss": "(남성 단수 목적격) 머묾, 삶"
+        },
+        {
+          "term": "idha",
+          "gloss": "(불변화사) 여기, 이 세상에서, 이 교법에서"
+        },
+        {
+          "term": "āhu",
+          "gloss": "(āha의 3인칭 복수 과거) [사람들이] 말했다"
+        },
+        {
+          "term": "vihāramidhamāhu",
+          "gloss": "(vihāraṃ + idha + āhu) 이 교법에서 [고귀한] 머묾이라고 말한다"
+        }
+      ],
+      "extra": [
+        "(초) 섰거나 걷거나 앉았거나 누웠거나 깨어있을 때는 언제나",
+        "이 자애의 마음챙김을 개발할지니, 이를 일러 거룩한 삶(梵住)이라 하네.",
+        "(한) 서있거나 가거나 앉아 있거나 누워 있거나 깨어 있는 한, 자애의 마음을 새기게 하여지이다. 이것이야말로 참으로 청정한 삶이옵니다.",
+        "(한) brahmametaṃ vihāraṃ : 여기서 brahmam ... vihāraṃ는 분리된 복합어이다. 하느님의 삶(brahmavihāra : 梵天의 삶)이라는 말인데, Prj. I. 251에 따르면, 최상의 삶(seṭṭhavihāra)을 말한다. 불교에서는 보통 네 가지 한량없는 마음(四無量心)의 삶을 말한다.",
+        "(아) 서거나 걷거나 앉거나 누웠거나 깨어있는 한 이 (자비의) 염을 놓치지 않도록 전심전력하라. 세상에서 말하는 ‘거룩한 경지’가 바로 그것이다.",
+        "(냐) 그리고 서 있거나 걷거나 앉아있는 동안 또 누워있는 동안도 졸음에 빠지지 않는 한 이 (자애의) 염을 단호히 지켜야 한다. 사람들은 이 염을 세상에서 거룩한 머물 곳[住處]이라 부른다.",
+        "(담) 서서나 걷거나 또는 앉아서나 누워서나 깨어있는 한",
+        "자애의 새김을 굳건히 해야 하네. 여기서는 이것이 거룩한 삶이라네.",
+        "tiṭṭhaṁ : (tiṭṭhati의 현재분사/ tiṭṭhanta의 남성 단수 주격) 서 있는",
+        "caraṁ : (carati의 현재분사/ caranta의 남성 단수 주격) 움직이는, 걷는"
+      ]
+    },
+    {
+      "n": 10,
+      "pali": [
+        "diṭṭhiñca anupaggamma, sīlavā dassanena sampanno.",
+        "kāmesu vinaya gedhaṁ, na hi jātuggabbhaseyya puna retīti."
+      ],
+      "translations": {},
+      "translation_sources": {},
+      "translation_notes": {},
+      "words": [
+        {
+          "term": "diṭṭhiṃ",
+          "gloss": "(여성 단수 목적격) 그릇된 견해를"
+        },
+        {
+          "term": "ca",
+          "gloss": "(불변화사) ~와, 그리고, 또한"
+        },
+        {
+          "term": "diṭṭhiñca",
+          "gloss": "(diṭṭhiṃ + ca) 그릇된 견해를 그리고"
+        },
+        {
+          "term": "upagacchati",
+          "gloss": "다가가다, 도달하다, 붙잡다, 받아들이다"
+        },
+        {
+          "term": "anupaggamma",
+          "gloss": "(na + upagacchati의 절대분사) 다가가지 않고, 따르지 않고, 붙잡지 않고, 매이지 않고"
+        },
+        {
+          "term": "sīlavā",
+          "gloss": "(남성 단수 주격) 계행을 갖춘 자"
+        },
+        {
+          "term": "dassanena",
+          "gloss": "(중성 단수 도구격) 봄, 통찰지, 열반을 보는 지혜"
+        },
+        {
+          "term": "sampanno",
+          "gloss": "(sampajjati의 과거분사/ sampanna의 남성 단수 주격) 성취한 자, 갖춘 자",
+          "extras": [
+            "[주석] tassattho — yvāyaṃ “brahmametaṃ vihāramidhamāhū”ti saṃvaṇṇito mettājhānavihāro, tato vuṭṭhāya ye tattha vitakkavicārādayo dhammā, te tesañca vatthādianusārena rūpadhamme pariggahetvā iminā nāmarūpaparicchedena “suddhasaṅkhārapuñjoyaṃ, nayidha sattūpalabbhatī”ti (saṃ. ni. 1.171; mahāni. 186) evaṃ diṭṭhiñca anupaggamma anupubbena lokuttarasīlena sīlavā hutvā lokuttarasīlasampayutteneva sotāpattimaggasammādiṭṭhisaññitena dassanena sampanno,"
+          ]
+        },
+        {
+          "term": "kāmesu",
+          "gloss": "(남성 복수 처격) 감각적 욕망들에서, 감각적 욕망들에 대해서, 감각적 즐거움들에서, 감각적 즐거움들에 대해서"
+        },
+        {
+          "term": "vinaya",
+          "gloss": "(=vineyya/ vineti의 절대분사) 제거하고서, 다스리고서",
+          "extras": [
+            "gedhaṁ : (남성 단수 목적격) 탐욕을, 욕망을",
+            "[주석] tato paraṃ yopāyaṃ vatthukāmesu gedho kilesakāmo appahīno hoti, tampi sakadāgāmianāgāmimaggehi tanubhāvena anavasesappahānena ca kāmesu gedhaṃ vineyya vinayitvā vūpasametvā"
+          ]
+        },
+        {
+          "term": "na",
+          "gloss": "(불변화사) ~이 아니다"
+        },
+        {
+          "term": "hi",
+          "gloss": "(불변화사) 실로, 참으로"
+        },
+        {
+          "term": "jātu",
+          "gloss": "(불변화사/ 감탄사) 확실히"
+        },
+        {
+          "term": "gabbha",
+          "gloss": "자궁, 모태"
+        },
+        {
+          "term": "seyyā",
+          "gloss": "누움, 자는 곳, 침대"
+        },
+        {
+          "term": "gabbhaseyyā",
+          "gloss": "모태, 자궁, 자궁에 입태함, 자궁에 누움"
+        },
+        {
+          "term": "jātuggabbhaseyya",
+          "gloss": "(jātu + gabbhaseyyaṃ/ 불변화사 + 여성 단수 목적격) 모태로, 자궁에 입태함으로"
+        },
+        {
+          "term": "puna",
+          "gloss": "(불변화사) 다시"
+        },
+        {
+          "term": "eti",
+          "gloss": "가다, 오다, 되다 (+목적격과 함께)"
+        },
+        {
+          "term": "ti",
+          "gloss": "(iti/ 불변화사) ~라고 [말씀하셨다, 이렇게 나는 들었다.]"
+        },
+        {
+          "term": "retīti",
+          "gloss": "(puna + r(연성 삽입) + eti + iti) ‘~로 다시 간다’라고",
+          "extras": [
+            "[주석] na hi jātu gabbhaseyyaṃ puna reti ekaṃseneva puna gabbhaseyyaṃ na eti. suddhāvāsesu nibbattitvā tattheva arahattaṃ pāpuṇitvā parinibbātīti."
+          ]
+        },
+        {
+          "term": "metta",
+          "gloss": "자애"
+        },
+        {
+          "term": "suttaṃ",
+          "gloss": "(중성 단수 주격) 경(經)"
+        },
+        {
+          "term": "niṭṭhitaṃ",
+          "gloss": "(niṭṭhāti의 과거분사/ 중성 단수 주격) 완성된, 끝난, [끝났다]"
+        }
+      ],
+      "extra": [
+        "(초) 계행을 지닌 자, 사견을 따르지 않고 바른 견을 구족하여",
+        "감각적 욕망에 집착을 버려 다시는 모태에 들지 않으리.",
+        "(한) 삿된 견해에 의존하지 않고 계행을 갖추고, 통찰을 갖추어 감각적인 욕망을 다스리면, 결코 다시 윤회에 들지 않을 것이옵니다.",
+        "(한) dassanena sampanno : dassana는 봄, 내관, 통찰 등의 의미를 지니고 있다. 그것의 범어 darsana는 철학 또는 철학적인 세계를 의미하기도 한다. Prj. I. 251에 따르면, ‘진리의 흐름으로 향한 님의 올바른 견해에 의해 조건지어진 통찰을 갖춘 것(sotāpattimaggasammādiṭṭhisaṃkhātena dassanena sampanno)’을 말한다.",
+        "(아) 그릇된 생각에 더 이상 매이지 않고, 계행과 구경의 지견을 갖추었으며,",
+        "모든 감관적 욕망을 이겨냈기에 그는 다시 모태에 들지 않으리.",
+        "(냐) 그래서 그가 그릇된 견해에 말려들지 않고 계를 온전히 하고, 통찰을 완성하면",
+        "그래서 감관적 욕구와 관련된 탐심을 버리면 다시는 모태에 드는 일이 없을 것이다.",
+        "(담) 삿된 견해에 빠지지 않고 계행을 구족하고 지견을 갖추어",
+        "감각욕망 집착을 제거한다면 다시는 입태하지 않을 것이네.",
+        "(번역) 그것의 의미는 이러하다. “이 교법에서는 이것을 고귀한 머묾이라고 부른다”라는 등으로 설명하신 자애 선정에 머무는 이는 그 [선정]으로부터 출정하여, 그 선정의 위딱까, 위짜라 등[=선정의 요소]이라는 [정신]법들과 그것의 [물질적] 토대 등으로 물질법들을 파악하고서, 이렇게 ‘정신과 물질을 구분함’으로써 ‘단지 상카라[정신-물질] 무더기만 있을 뿐 중생을 찾을 수 없다’라고 그릇된 견해를 점차적으로 제거한다. [그로써] 출세간적인 계로 계행을 갖추고, 출세간 계와 함께 ‘수다원 도의 바른 견해’라고 하는 ‘봄’(지혜)을 성취한다.]",
+        "“닷사네나 삼빤노: ‘봄으로(닷사네나) 완전히 채워졌다(삼빤노)’라는 의미입니다. 이 봄으로써 완전해진다는 뜻은 수다원이 된다는 뜻입니다.",
+        "딧틴 짜 아누빡감마: ‘유아견을 뽑아버린다’는 의미입니다. 이 말로써 위빳사나 지혜가 생겨남을 설하셨습니다.” - <난다말라비왐사 큰스님 가르침> 中",
+        "(번역) 그러고 나서도[=수다원이 되고 나서도] 감각적 욕망의 대상에 대한 탐욕, 감각적 욕망이라는 번뇌는 제거되지 않았다. 사다함 도로 엷은 상태가 되고, 아나함 도로 남김없이 제거하여 감각적 즐거움에 대한 탐욕을 다스리고 제거하고 가라앉히고서]",
+        "“까메수 위네이야게당: ‘감각적 욕망을 제거한다’는 의미입니다. 감각적인 대상(까메수)에 들러붙는 마음을 제거한다(위네이야 게당)는 말은 ‘아나함’이 되었다는 뜻입니다. 아나함이 되면 감각적인 대상에 집착함이 없습니다.” - <난다말라비왐사 큰스님 가르침> 中",
+        "(번역) ‘다시는 모태에 들지 않는다’란 절대로 다시는 모태에 들지 않는다[라는 뜻이다]. [아나함은] 정거천에 태어나서 거기서 아라한을 성취하고 반열반에 든다.",
+        "mettasuttaṃ niṭṭhitaṃ."
+      ]
+    }
+  ]
+}

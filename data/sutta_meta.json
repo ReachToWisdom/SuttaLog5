@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "suttas": [
+    {
+      "id": "sn1.8",
+      "ko": "자애경",
+      "pali": "Mettasutta",
+      "ref": "Sn1:8",
+      "abbr": "Metta",
+      "json": "data/sutta/sn1.8-metta.json"
+    }
+  ]
+}
