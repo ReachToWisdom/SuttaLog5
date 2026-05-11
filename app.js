@@ -1,3 +1,18 @@
+
+function _showFatalError(msg) {
+  try {
+    const root = document.getElementById("page");
+    if (root && root.children.length === 0) {
+      root.innerHTML =
+        '<div style="padding:1.2rem;color:#c44;font-size:0.85em;font-family:ui-monospace,monospace;white-space:pre-wrap;line-height:1.5;">앱 오류 발생:\n' +
+        String(msg).replace(/&/g, "&amp;").replace(/</g, "&lt;") +
+        '\n\n[해결] 브라우저에서 강제 새로고침해 주세요.\n  iOS Safari: 주소바 풀다운\n  PC: ⌘+Shift+R</div>';
+    }
+  } catch {}
+}
+window.addEventListener("error", e => _showFatalError((e.message || "error") + " (" + (e.filename || "") + ":" + (e.lineno || "") + ")"));
+window.addEventListener("unhandledrejection", e => _showFatalError("Promise: " + (e.reason && e.reason.message ? e.reason.message : e.reason)));
+
 const SUTTA_PATH = "data/sutta/sn1.8-metta.json";
 const WORDS_PER_PAGE = 4;
 const QUIZ_COUNT = 10;
@@ -1069,6 +1084,39 @@ function renderVerseQuiz(p, card) {
   }
 }
 
+function appendMemoPreview(card) {
+  const pageId = currentPageId();
+  const local = getMemo(pageId);
+  if (local && local.memo) {
+    _appendMemoBox(card, local.memo, "📱 본인 메모", local.updated_at);
+    return;
+  }
+  const expectedCardKind = state.pages[state.pageIdx];
+  getGithubMemos().then(remote => {
+    if (state.pages[state.pageIdx] !== expectedCardKind) return;
+    if (!card.isConnected) return;
+    const m = remote.find(x => x.page_id === pageId);
+    if (m && m.memo) {
+      _appendMemoBox(card, m.memo, "🌐 공유 메모", m.updated_at);
+    }
+  });
+}
+
+function _appendMemoBox(card, text, label, ts) {
+  const existing = card.querySelector(".memo-preview-box");
+  if (existing) existing.remove();
+  const box = el("div", "memo-preview-box");
+  box.appendChild(el("div", "memo-preview-label", label));
+  box.appendChild(el("div", "memo-preview-text", text));
+  if (ts) {
+    try {
+      box.appendChild(el("div", "memo-preview-date", new Date(ts).toLocaleDateString()));
+    } catch {}
+  }
+  box.addEventListener("click", () => openMemoSheet());
+  card.appendChild(box);
+}
+
 function render() {
   closeDictionary();
   const p = state.pages[state.pageIdx];
@@ -1149,4 +1197,4 @@ function attachNav() {
   });
 }
 
-init();
+init().catch(err => _showFatalError("init: " + (err && err.message ? err.message + "\n" + (err.stack || "") : err)));
