@@ -27,6 +27,8 @@ const VISITS_KEY = "suttalog5:visits";
 const LAST_PAGE_KEY = "suttalog5:last_page";
 const STUDY_DAYS_KEY = "suttalog5:study_days";
 const DEFAULT_SETTINGS = { lotusMax: 5, wordLimit: 3, grammarLimit: 3 };
+const MEMO_IMAGE_MAX_WIDTH = 800;
+const MEMO_IMAGE_MAX_BYTES = 5 * 1024 * 1024;
 
 const state = { sutta: null, pages: [], pageIdx: 0 };
 const quizState = { mode: "all", questions: [], idx: 0, correct: 0, answered: false };
@@ -385,16 +387,17 @@ function getMemo(pageId) {
   if (!raw) return null;
   try { return JSON.parse(raw); } catch { return null; }
 }
-function saveMemo(pageId, text) {
+function saveMemo(pageId, text, images) {
   const memo = {
     page_id: pageId,
     page_snapshot: pageSnapshot(),
     memo: text,
+    images: Array.isArray(images) ? images : [],
     status: "active",
     updated_at: new Date().toISOString(),
   };
   localStorage.setItem(MEMO_PREFIX + pageId, JSON.stringify(memo));
-  markPageMemo(pageId, !!text);
+  markPageMemo(pageId, !!text || memo.images.length > 0);
   return memo;
 }
 function deleteMemo(pageId) {
@@ -406,9 +409,40 @@ function listAllMemos() {
   const result = [];
   for (const pageId of index) {
     const m = getMemo(pageId);
-    if (m && m.memo) result.push(m);
+    if (m && (m.memo || (m.images && m.images.length))) result.push(m);
   }
   return result.sort((a, b) => (b.updated_at || "").localeCompare(a.updated_at || ""));
+}
+
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const objUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        let { width, height } = img;
+        if (width > MEMO_IMAGE_MAX_WIDTH) {
+          height = Math.round(height * (MEMO_IMAGE_MAX_WIDTH / width));
+          width = MEMO_IMAGE_MAX_WIDTH;
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        URL.revokeObjectURL(objUrl);
+        resolve(canvas.toDataURL("image/jpeg", 0.8));
+      } catch (e) {
+        URL.revokeObjectURL(objUrl);
+        reject(e);
+      }
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(objUrl);
+      reject(new Error("image load failed"));
+    };
+    img.src = objUrl;
+  });
 }
 
 async function fetchGithubMemos() {
@@ -430,7 +464,7 @@ async function fetchGithubMemos() {
           } catch { return null; }
         })
     );
-    return results.filter(m => m && m.memo);
+    return results.filter(m => m && (m.memo || (m.images && m.images.length)));
   } catch { return []; }
 }
 async function getGithubMemos() {
@@ -453,6 +487,52 @@ function closeMemoSheet() {
   if (o) o.remove();
 }
 
+function closeMemoLightbox() {
+  const o = document.getElementById("memo-lightbox");
+  if (o) o.remove();
+}
+
+function openMemoLightbox(images, startOrder) {
+  closeMemoLightbox();
+  if (!images || !images.length) return;
+  const sorted = [...images].sort((a, b) => a.order - b.order);
+  let idx = sorted.findIndex(i => i.order === startOrder);
+  if (idx < 0) idx = 0;
+  const overlay = el("div", "memo-lightbox");
+  overlay.id = "memo-lightbox";
+  const img = el("img", "memo-lightbox-img");
+  img.alt = "";
+  const counter = el("div", "memo-lightbox-counter");
+  const update = () => {
+    img.src = sorted[idx].dataUrl;
+    counter.textContent = `${idx + 1} / ${sorted.length}`;
+  };
+  const close = el("button", "memo-lightbox-close", "✕");
+  close.addEventListener("click", e => { e.stopPropagation(); closeMemoLightbox(); });
+  const prev = el("button", "memo-lightbox-nav memo-lightbox-prev", "‹");
+  prev.addEventListener("click", e => {
+    e.stopPropagation();
+    idx = (idx - 1 + sorted.length) % sorted.length;
+    update();
+  });
+  const next = el("button", "memo-lightbox-nav memo-lightbox-next", "›");
+  next.addEventListener("click", e => {
+    e.stopPropagation();
+    idx = (idx + 1) % sorted.length;
+    update();
+  });
+  overlay.appendChild(img);
+  overlay.appendChild(counter);
+  overlay.appendChild(close);
+  if (sorted.length > 1) {
+    overlay.appendChild(prev);
+    overlay.appendChild(next);
+  }
+  overlay.addEventListener("click", e => { if (e.target === overlay) closeMemoLightbox(); });
+  document.body.appendChild(overlay);
+  update();
+}
+
 async function openMemoSheet() {
   closeMemoSheet();
   const pageId = currentPageId();
@@ -472,31 +552,165 @@ async function openMemoSheet() {
       "🌐 공유된 메모입니다. 수정하면 본인 기기에만 저장됩니다."));
   }
   const textarea = el("textarea", "memo-textarea");
-  textarea.placeholder = "이 페이지 메모 — 오타, 의견, 인용 등.\n수정 후 [저장] 클릭.";
+  textarea.placeholder = "이 페이지 메모 — 오타, 의견, 인용 등.\n수정 후 [저장] 클릭.\n사진 붙여넣기 가능.";
   textarea.value = memo?.memo || "";
   sheet.appendChild(textarea);
+
+  let editImages = [];
+  let orderCounter = 0;
+  if (memo?.images && memo.images.length) {
+    const sorted = [...memo.images].sort((a, b) => a.order - b.order);
+    editImages = sorted.map((img, i) => ({
+      order: i + 1,
+      dataUrl: img.dataUrl,
+      name: img.name || `image-${i + 1}`,
+      isExisting: true,
+    }));
+    orderCounter = editImages.length;
+  }
+
+  const imgGrid = el("div", "memo-images-grid");
+  sheet.appendChild(imgGrid);
+
+  function renderImgGrid() {
+    imgGrid.innerHTML = "";
+    if (editImages.length === 0) {
+      imgGrid.classList.add("empty");
+      return;
+    }
+    imgGrid.classList.remove("empty");
+    const sorted = [...editImages].sort((a, b) => a.order - b.order);
+    for (const it of sorted) {
+      const cell = el("div", "memo-image-item");
+      const thumb = el("img", "memo-image-thumb");
+      thumb.src = it.preview || it.dataUrl;
+      thumb.alt = "";
+      thumb.addEventListener("click", () => {
+        const previewable = editImages
+          .filter(x => x.dataUrl || x.preview)
+          .map(x => ({ order: x.order, dataUrl: x.dataUrl || x.preview, name: x.name }));
+        openMemoLightbox(previewable, it.order);
+      });
+      cell.appendChild(thumb);
+      const badge = el("span", "memo-image-order", String(it.order));
+      cell.appendChild(badge);
+      const rm = el("button", "memo-image-remove", "×");
+      rm.title = "삭제";
+      rm.addEventListener("click", e => {
+        e.stopPropagation();
+        const removed = editImages.find(x => x.order === it.order);
+        if (removed?.preview) URL.revokeObjectURL(removed.preview);
+        editImages = editImages.filter(x => x.order !== it.order);
+        renderImgGrid();
+      });
+      cell.appendChild(rm);
+      imgGrid.appendChild(cell);
+    }
+  }
+
+  function addFiles(files) {
+    if (!files) return;
+    for (const f of Array.from(files)) {
+      if (!f.type || !f.type.startsWith("image/")) continue;
+      if (f.size > MEMO_IMAGE_MAX_BYTES) continue;
+      orderCounter += 1;
+      editImages.push({
+        file: f,
+        preview: URL.createObjectURL(f),
+        name: f.name || `image-${orderCounter}`,
+        order: orderCounter,
+      });
+    }
+    renderImgGrid();
+  }
+
+  textarea.addEventListener("paste", e => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    const files = [];
+    for (const item of Array.from(items)) {
+      if (item.type && item.type.startsWith("image/")) {
+        const f = item.getAsFile();
+        if (f) files.push(f);
+      }
+    }
+    if (files.length) {
+      e.preventDefault();
+      addFiles(files);
+    }
+  });
+
+  const addBtnRow = el("div", "memo-image-add-row");
+  const fileInput = el("input", "memo-image-file");
+  fileInput.type = "file";
+  fileInput.accept = "image/*";
+  fileInput.multiple = true;
+  fileInput.style.display = "none";
+  fileInput.addEventListener("change", e => {
+    addFiles(e.target.files);
+    e.target.value = "";
+  });
+  const addBtn = el("button", "memo-image-add-btn", "🖼 이미지 첨부");
+  addBtn.addEventListener("click", () => fileInput.click());
+  addBtnRow.appendChild(addBtn);
+  addBtnRow.appendChild(fileInput);
+  sheet.appendChild(addBtnRow);
+
+  renderImgGrid();
+
   if (memo?.updated_at) {
     sheet.appendChild(el("div", "memo-updated",
       `최종 수정: ${new Date(memo.updated_at).toLocaleString()}`));
   }
   const actions = el("div", "memo-actions");
   const saveBtn = el("button", "btn-primary", memo ? "수정 저장" : "저장");
-  saveBtn.addEventListener("click", () => {
+  saveBtn.addEventListener("click", async () => {
     const text = textarea.value.trim();
-    if (!text) { alert("메모 내용을 입력하세요."); return; }
-    saveMemo(pageId, text);
-    updateMemoFab();
-    closeMemoSheet();
+    if (!text && editImages.length === 0) {
+      alert("메모 내용 또는 이미지를 추가하세요.");
+      return;
+    }
+    saveBtn.disabled = true;
+    saveBtn.textContent = "저장 중…";
+    try {
+      const finalImages = [];
+      const sorted = [...editImages].sort((a, b) => a.order - b.order);
+      for (let i = 0; i < sorted.length; i++) {
+        const it = sorted[i];
+        let dataUrl = it.dataUrl;
+        if (it.file) {
+          dataUrl = await fileToDataUrl(it.file);
+        }
+        if (dataUrl) {
+          finalImages.push({ order: i + 1, dataUrl, name: it.name });
+        }
+      }
+      saveMemo(pageId, text, finalImages);
+      for (const it of editImages) {
+        if (it.preview) URL.revokeObjectURL(it.preview);
+      }
+      updateMemoFab();
+      closeMemoSheet();
+      render();
+    } catch (err) {
+      alert("저장 실패: " + (err?.message || err));
+      saveBtn.disabled = false;
+      saveBtn.textContent = memo ? "수정 저장" : "저장";
+    }
   });
   actions.appendChild(saveBtn);
-  if (memo?.memo) {
+  if (memo?.memo || (memo?.images && memo.images.length)) {
     const delBtn = el("button", "btn-text", "삭제");
     delBtn.style.color = "#c44a4a";
     delBtn.addEventListener("click", () => {
       if (!confirm("이 메모를 삭제할까요?")) return;
       deleteMemo(pageId);
+      for (const it of editImages) {
+        if (it.preview) URL.revokeObjectURL(it.preview);
+      }
       updateMemoFab();
       closeMemoSheet();
+      render();
     });
     actions.appendChild(delBtn);
   }
@@ -597,7 +811,24 @@ async function openMemoList() {
       });
       headRow.appendChild(goBtn);
       item.appendChild(headRow);
-      item.appendChild(el("div", "memo-item-preview", memo.memo));
+      if (memo.memo) {
+        item.appendChild(el("div", "memo-item-preview", memo.memo));
+      }
+      if (memo.images && memo.images.length) {
+        const strip = el("div", "memo-item-thumbs");
+        const sorted = [...memo.images].sort((a, b) => a.order - b.order);
+        for (const im of sorted) {
+          const t = el("img", "memo-item-thumb");
+          t.src = im.dataUrl;
+          t.alt = "";
+          t.addEventListener("click", e => {
+            e.stopPropagation();
+            openMemoLightbox(memo.images, im.order);
+          });
+          strip.appendChild(t);
+        }
+        item.appendChild(strip);
+      }
       if (memo.updated_at) {
         item.appendChild(el("div", "memo-item-date",
           new Date(memo.updated_at).toLocaleString()));
@@ -843,7 +1074,6 @@ function openCalendar() {
   const cur = new Date(startDate);
   let lastMonthShown = -1;
   while (cur <= now) {
-    // Month separator row if month changes at start of this week
     const weekStartMonth = cur.getMonth();
     if (weekStartMonth !== lastMonthShown) {
       const monthRow = el("div", "calendar-month-row");
@@ -864,7 +1094,6 @@ function openCalendar() {
         cell.title = `${dateStr}: ${count}회`;
       }
       if (dateStr === todayStr) cell.classList.add("today");
-      // Show "M/D" for first of month, just D otherwise
       if (cur.getDate() === 1) {
         cell.textContent = `${cur.getMonth() + 1}/1`;
         cell.classList.add("month-start");
@@ -1214,8 +1443,8 @@ function renderVerseQuiz(p, card) {
 function appendMemoPreview(card) {
   const pageId = currentPageId();
   const local = getMemo(pageId);
-  if (local && local.memo) {
-    _appendMemoBox(card, local.memo, "📱 본인 메모", local.updated_at);
+  if (local && (local.memo || (local.images && local.images.length))) {
+    _appendMemoBox(card, local, "📱 본인 메모");
     return;
   }
   const expected = state.pages[state.pageIdx];
@@ -1223,18 +1452,34 @@ function appendMemoPreview(card) {
     if (state.pages[state.pageIdx] !== expected) return;
     if (!card.isConnected) return;
     const m = remote.find(x => x.page_id === pageId);
-    if (m && m.memo) _appendMemoBox(card, m.memo, "🌐 공유 메모", m.updated_at);
+    if (m && (m.memo || (m.images && m.images.length))) _appendMemoBox(card, m, "🌐 공유 메모");
   });
 }
 
-function _appendMemoBox(card, text, label, ts) {
+function _appendMemoBox(card, memo, label) {
   const existing = card.querySelector(".memo-preview-box");
   if (existing) existing.remove();
   const box = el("div", "memo-preview-box");
   box.appendChild(el("div", "memo-preview-label", label));
-  box.appendChild(el("div", "memo-preview-text", text));
-  if (ts) {
-    try { box.appendChild(el("div", "memo-preview-date", new Date(ts).toLocaleDateString())); } catch {}
+  if (memo.memo) {
+    box.appendChild(el("div", "memo-preview-text", memo.memo));
+  }
+  if (memo.images && memo.images.length) {
+    const strip = el("div", "memo-preview-thumbs");
+    const sorted = [...memo.images].sort((a, b) => a.order - b.order);
+    for (const im of sorted.slice(0, 4)) {
+      const t = el("img", "memo-preview-thumb");
+      t.src = im.dataUrl;
+      t.alt = "";
+      strip.appendChild(t);
+    }
+    if (sorted.length > 4) {
+      strip.appendChild(el("span", "memo-preview-thumb-more", `+${sorted.length - 4}`));
+    }
+    box.appendChild(strip);
+  }
+  if (memo.updated_at) {
+    try { box.appendChild(el("div", "memo-preview-date", new Date(memo.updated_at).toLocaleDateString())); } catch {}
   }
   box.addEventListener("click", () => openMemoSheet());
   card.appendChild(box);
@@ -1343,7 +1588,8 @@ function attachNav() {
   document.addEventListener("touchend", e => {
     if (document.getElementById("dict-overlay") || document.getElementById("quiz-overlay")
         || document.getElementById("memo-overlay") || document.getElementById("settings-overlay")
-        || document.getElementById("toc-overlay") || document.getElementById("calendar-overlay")) return;
+        || document.getElementById("toc-overlay") || document.getElementById("calendar-overlay")
+        || document.getElementById("memo-lightbox")) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
@@ -1353,6 +1599,7 @@ function attachNav() {
 
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") {
+      closeMemoLightbox();
       closeDictionary(); closeQuiz(); closeMemoSheet();
       closeSettings(); closeTOC(); closeCalendar();
       return;
