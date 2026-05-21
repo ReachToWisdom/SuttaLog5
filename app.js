@@ -1012,8 +1012,10 @@ function openSettings() {
 
   const rm = el("button", "btn-secondary", `🗒 모든 메모 삭제 (현재 ${listAllMemos().length}개)`);
   rm.addEventListener("click", () => {
-    if (listAllMemos().length === 0) { alert("삭제할 메모가 없습니다."); return; }
-    if (!confirm("로컬에 저장된 모든 메모를 삭제할까요?\n공유 메모(GitHub)는 영향받지 않습니다.")) return;
+    const count = listAllMemos().length;
+    if (count === 0) { alert("삭제할 메모가 없습니다."); return; }
+    if (!confirm(`로컬에 저장된 ${count}개 메모를 모두 삭제할까요?\n공유 메모(GitHub)는 영향받지 않습니다.`)) return;
+    if (!confirm("정말로 모든 메모를 삭제할까요?\n이 작업은 되돌릴 수 없습니다.")) return;
     deleteAllLocalMemos();
     updateMemoFab();
     render();
