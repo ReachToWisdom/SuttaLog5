@@ -61,6 +61,32 @@ def is_pali_continuation(line):
     return bool(re.search(r"[a-zA-Zāīūṃ]", line))
 
 
+DIACRIT = str.maketrans({
+    "ā": "a", "ī": "i", "ū": "u", "ē": "e", "ō": "o",
+    "ṃ": "m", "ṁ": "m", "ṅ": "n", "ñ": "n",
+    "ṭ": "t", "ḍ": "d", "ṇ": "n", "ḷ": "l",
+})
+
+
+def normalize_pali(s):
+    return s.lower().translate(DIACRIT)
+
+
+def reorder_verse_words(verse):
+    """Move words whose normalized term is not in verse pali to the end.
+    Preserves source order within each partition."""
+    pali_norm = normalize_pali(" ".join(verse.get("pali") or []))
+    in_pali = []
+    out_of_pali = []
+    for w in verse.get("words") or []:
+        t = normalize_pali(w["term"])
+        if t and t in pali_norm:
+            in_pali.append(w)
+        else:
+            out_of_pali.append(w)
+    verse["words"] = in_pali + out_of_pali
+
+
 def parse_sutta(text):
     lines = text.split("\n")
     result = {
@@ -94,6 +120,7 @@ def parse_sutta(text):
     for idx, (start, num, first_pali) in enumerate(anchors):
         end = anchors[idx + 1][0] if idx + 1 < len(anchors) else len(lines)
         verse = parse_verse(int(num), lines[start:end], first_pali)
+        reorder_verse_words(verse)
         result["verses"].append(verse)
 
     return result

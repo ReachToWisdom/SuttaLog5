@@ -29,17 +29,6 @@
       "translation_notes": {},
       "words": [
         {
-          "term": "metta",
-          "gloss": "자애, 우정",
-          "extras": [
-            "“호의를 가지기(majjati) 때문에 자애(mettā)이다. 애정을 가진다는 뜻이다. 친구에 대한 태도이기 때문에(mitte bhavā), 혹은 이것은 친구에게 일어나기 때문에(mittassa pavatti) 때문에 자애(mettā)이다.” - <청정도론> 中, 초기불전연구원"
-          ]
-        },
-        {
-          "term": "suttaṃ",
-          "gloss": "(중성 단수 주격) 경(經)"
-        },
-        {
           "term": "karaṇīyaṃ",
           "gloss": "(karoti의 미래수동분사/ 중성 단수 주격) 행해져야 할 것이",
           "extras": [
@@ -156,6 +145,17 @@
           "extras": [
             "# atimāna + in = 거만을 가진"
           ]
+        },
+        {
+          "term": "metta",
+          "gloss": "자애, 우정",
+          "extras": [
+            "“호의를 가지기(majjati) 때문에 자애(mettā)이다. 애정을 가진다는 뜻이다. 친구에 대한 태도이기 때문에(mitte bhavā), 혹은 이것은 친구에게 일어나기 때문에(mittassa pavatti) 때문에 자애(mettā)이다.” - <청정도론> 中, 초기불전연구원"
+          ]
+        },
+        {
+          "term": "suttaṃ",
+          "gloss": "(중성 단수 주격) 경(經)"
         }
       ],
       "extra": [
@@ -227,10 +227,6 @@
           "gloss": "거의 없는"
         },
         {
-          "term": "kicca",
-          "gloss": "일, 의무, 역할"
-        },
-        {
           "term": "appakicco",
           "gloss": "(남성 단수 주격) 일이 적은, 분주하지 않음",
           "extras": [
@@ -253,14 +249,6 @@
           ]
         },
         {
-          "term": "santa",
-          "gloss": "고요한, 평온한"
-        },
-        {
-          "term": "indriya",
-          "gloss": "기능, 근(根), 감각기능, 감관"
-        },
-        {
           "term": "santindriyo",
           "gloss": "(남성 단수 주격) 감관이 고요한, 몸과 마음이 고요한"
         },
@@ -272,19 +260,11 @@
           ]
         },
         {
-          "term": "pagabbha",
-          "gloss": "무례한, 불손한, 거친, 대담한, 무모한, 조심스럽지 못한"
-        },
-        {
           "term": "appagabbho",
           "gloss": "(남성 단수 주격) 무례하지 않은, 무모하지 않은, 조심스러운, 신중한, 공손한",
           "extras": [
             "kulesu (kula의 중성 복수 처격) 가정들에서, 재가신도들의 집에서, 후원자들의 집에서"
           ]
-        },
-        {
-          "term": "anugiddha",
-          "gloss": "탐욕스러운"
         },
         {
           "term": "ananugiddho",
@@ -293,6 +273,26 @@
         {
           "term": "kulesvananugiddho",
           "gloss": "(kulesu + ananugiddha) 재가신도들의 집에서 탐욕스럽지 않은, 재가신도들에 집착하지 않는"
+        },
+        {
+          "term": "kicca",
+          "gloss": "일, 의무, 역할"
+        },
+        {
+          "term": "santa",
+          "gloss": "고요한, 평온한"
+        },
+        {
+          "term": "indriya",
+          "gloss": "기능, 근(根), 감각기능, 감관"
+        },
+        {
+          "term": "pagabbha",
+          "gloss": "무례한, 불손한, 거친, 대담한, 무모한, 조심스럽지 못한"
+        },
+        {
+          "term": "anugiddha",
+          "gloss": "탐욕스러운"
         }
       ],
       "extra": [
@@ -334,16 +334,8 @@
           "gloss": "(khuddaṃ + ācare) 사소한 것을 행동해야 한다 (na와 함께 => 사소한 것을 행동하지 말아야 한다.)"
         },
         {
-          "term": "ka",
-          "gloss": "(의문대명사) 무엇, 누구"
-        },
-        {
           "term": "ci",
           "gloss": "(불변화사) 어떤"
-        },
-        {
-          "term": "kaci",
-          "gloss": "어떤 무엇, 어떤 누구"
         },
         {
           "term": "kiñci",
@@ -414,6 +406,14 @@
           "extras": [
             "[주석: sukhitattāti sukhitacittā. ettha ca kāyikena sukhena sukhino, mānasena sukhitattā"
           ]
+        },
+        {
+          "term": "ka",
+          "gloss": "(의문대명사) 무엇, 누구"
+        },
+        {
+          "term": "kaci",
+          "gloss": "어떤 무엇, 어떤 누구"
         }
       ],
       "extra": [
@@ -653,14 +653,6 @@
           ]
         },
         {
-          "term": "sambhava",
-          "gloss": "태어남, 근원, 생산, 태어난, 생산된"
-        },
-        {
-          "term": "esati",
-          "gloss": "찾다, 추구하다"
-        },
-        {
           "term": "esī",
           "gloss": "찾는 사람, 추구하는 사람"
         },
@@ -682,6 +674,14 @@
         {
           "term": "sukhitattā",
           "gloss": "(sukhita + atta/ 남성 복수 주격) 스스로 행복한, 스스로 기쁜"
+        },
+        {
+          "term": "sambhava",
+          "gloss": "태어남, 근원, 생산, 태어난, 생산된"
+        },
+        {
+          "term": "esati",
+          "gloss": "찾다, 추구하다"
         }
       ],
       "extra": [
@@ -1029,10 +1029,6 @@
           "gloss": "~없이, ~에서 벗어난"
         },
         {
-          "term": "middha",
-          "gloss": "졸음, 잠"
-        },
-        {
           "term": "vitamiddho",
           "gloss": "(남성 단수 주격) 깨어 있음",
           "extras": [
@@ -1067,6 +1063,10 @@
         {
           "term": "vihāramidhamāhu",
           "gloss": "(vihāraṃ + idha + āhu) 이 교법에서 [고귀한] 머묾이라고 말한다"
+        },
+        {
+          "term": "middha",
+          "gloss": "졸음, 잠"
         }
       ],
       "extra": []
@@ -1090,20 +1090,12 @@
       "translation_notes": {},
       "words": [
         {
-          "term": "diṭṭhiṃ",
-          "gloss": "(여성 단수 목적격) 그릇된 견해를"
-        },
-        {
           "term": "ca",
           "gloss": "(불변화사) ~와, 그리고, 또한"
         },
         {
           "term": "diṭṭhiñca",
           "gloss": "(diṭṭhiṃ + ca) 그릇된 견해를 그리고"
-        },
-        {
-          "term": "upagacchati",
-          "gloss": "다가가다, 도달하다, 붙잡다, 받아들이다"
         },
         {
           "term": "anupaggamma",
@@ -1182,6 +1174,14 @@
           "extras": [
             "[주석] na hi jātu gabbhaseyyaṃ puna reti ekaṃseneva puna gabbhaseyyaṃ na eti. suddhāvāsesu nibbattitvā tattheva arahattaṃ pāpuṇitvā parinibbātīti."
           ]
+        },
+        {
+          "term": "diṭṭhiṃ",
+          "gloss": "(여성 단수 목적격) 그릇된 견해를"
+        },
+        {
+          "term": "upagacchati",
+          "gloss": "다가가다, 도달하다, 붙잡다, 받아들이다"
         },
         {
           "term": "metta",
