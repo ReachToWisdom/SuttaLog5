@@ -1588,6 +1588,26 @@ function renderWords(p, card) {
       headerRow.appendChild(el("div", "token-header token-header-extra", "기타 단어"));
     }
     groupEl.appendChild(headerRow);
+    const onlyMorph = visibleMorphs[0];
+    const isSimple = g.token && visibleMorphs.length === 1
+      && normPali(onlyMorph.word.term) === normPali(g.token);
+    if (isSimple) {
+      const word = onlyMorph.word;
+      const { grammar, meaning } = parseGloss(word.gloss);
+      if (grammar && !onlyMorph.hideGrammar) {
+        groupEl.appendChild(el("div", "word-grammar-chip word-grammar-chip-prom", grammar));
+      }
+      if (meaning) {
+        groupEl.appendChild(el("div", "token-full-meaning-prom", meaning));
+      }
+      if (word.extras && word.extras.length) {
+        const ex = el("button", "word-more-btn", `주석 ${word.extras.length}개 ▾`);
+        ex.addEventListener("click", () => openDictionary(word));
+        groupEl.appendChild(ex);
+      }
+      wdiv.appendChild(groupEl);
+      continue;
+    }
     if (g.token) {
       const full = tokenFullMeaning(g);
       if (full) {
