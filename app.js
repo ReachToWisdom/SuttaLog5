@@ -72,12 +72,14 @@ function buildPages(sutta) {
   const allMeanings = collectAllMeanings(sutta);
   const quizzedTerms = new Set();
   for (const verse of sutta.verses) {
-    const words = verse.words || [];
-    const wordPageCount = Math.ceil(words.length / WORDS_PER_PAGE);
+    const wordPagesGroups = buildWordPages(verse);
+    const wordPageCount = wordPagesGroups.length;
     for (let i = 0; i < wordPageCount; i++) {
+      const groupsOnPage = wordPagesGroups[i];
       pages.push({
         kind: "words", verse,
-        words: words.slice(i * WORDS_PER_PAGE, (i + 1) * WORDS_PER_PAGE),
+        groups: groupsOnPage,
+        words: groupsOnPage.flatMap(g => g.morphs),
         wordPageIdx: i + 1,
         totalWordPages: wordPageCount,
       });
@@ -165,6 +167,109 @@ function parseGloss(gloss) {
   const m = gloss.match(/^\(([^)]+)\)\s*(.*)$/);
   if (m) return { grammar: m[1].trim(), meaning: m[2].trim() };
   return { grammar: null, meaning: gloss.trim() };
+}
+
+const DIACRIT_MAP = {
+  "ā": "a", "ī": "i", "ū": "u", "ē": "e", "ō": "o",
+  "ṃ": "m", "ṁ": "m", "ṅ": "n", "ñ": "n",
+  "ṭ": "t", "ḍ": "d", "ṇ": "n", "ḷ": "l",
+};
+function normPali(s) {
+  if (!s) return "";
+  return s.toLowerCase().replace(/./gu, c => DIACRIT_MAP[c] || c);
+}
+function tokenizePali(paliLines) {
+  return (paliLines || []).flatMap(l => l.split(/[\s,.;:!?“”‘’—]+/u).filter(Boolean));
+}
+function groupMorphemesByToken(verse) {
+  const tokens = tokenizePali(verse.pali);
+  const tnorms = tokens.map(normPali);
+  const groups = tokens.map(t => ({ token: t, morphs: [] }));
+  const covered = new Array(tokens.length).fill(0);
+  let lastIdx = 0;
+  const orphans = [];
+  for (const m of verse.words || []) {
+    const mn = normPali(m.term);
+    if (!mn) { orphans.push(m); continue; }
+    const mns = mn.replace(/[mn]$/, "");
+    let found = -1;
+    for (let gi = lastIdx; gi < tokens.length; gi++) {
+      const tn = tnorms[gi];
+      const c = covered[gi];
+      if (c < tn.length) {
+        if (tn.startsWith(mn, c)) { found = gi; covered[gi] = c + mn.length; break; }
+        if (mns.length >= 2 && tn.startsWith(mns, c)) { found = gi; covered[gi] = c + mns.length; break; }
+      }
+    }
+    if (found < 0) {
+      for (let gi = lastIdx; gi < tokens.length; gi++) {
+        if (tnorms[gi].includes(mn)) { found = gi; break; }
+      }
+    }
+    if (found < 0) orphans.push(m);
+    else { groups[found].morphs.push(m); lastIdx = found; }
+  }
+  const result = groups.filter(g => g.morphs.length > 0);
+  if (orphans.length) result.push({ token: null, morphs: orphans });
+  return result;
+}
+function firstMeaningPart(word) {
+  const { meaning } = parseGloss(word.gloss);
+  if (!meaning) return "";
+  return meaning.split(/[,，]/)[0].trim();
+}
+function tokenFullMeaning(group) {
+  if (!group.token || !group.morphs.length) {
+    return group.morphs.map(m => parseGloss(m.gloss).meaning).filter(Boolean).join(" + ");
+  }
+  const ntoken = normPali(group.token);
+  const candidates = group.morphs
+    .map(m => ({ m, n: normPali(m.term) }))
+    .filter(c => c.n && ntoken.includes(c.n))
+    .sort((a, b) => b.n.length - a.n.length);
+  const covered = new Array(ntoken.length).fill(false);
+  const claimed = [];
+  for (const c of candidates) {
+    const idx = ntoken.indexOf(c.n);
+    let conflict = false;
+    for (let i = idx; i < idx + c.n.length; i++) if (covered[i]) { conflict = true; break; }
+    if (!conflict) {
+      for (let i = idx; i < idx + c.n.length; i++) covered[i] = true;
+      claimed.push({ m: c.m, idx });
+    }
+  }
+  const unclaimed = group.morphs.filter(m => !claimed.find(c => c.m === m));
+  claimed.sort((a, b) => a.idx - b.idx);
+  const parts = [
+    ...claimed.map(c => firstMeaningPart(c.m)),
+    ...unclaimed.map(m => firstMeaningPart(m)),
+  ].filter(Boolean);
+  const seen = new Set();
+  const final = [];
+  for (const x of parts) {
+    if (!seen.has(x)) { seen.add(x); final.push(x); }
+  }
+  return final.join(" / ");
+}
+function buildWordPages(verse) {
+  const groups = groupMorphemesByToken(verse);
+  const MAX_MORPHS = 4;
+  const pages = [];
+  let cur = [];
+  let count = 0;
+  for (const g of groups) {
+    const n = g.morphs.length;
+    if (n === 0) continue;
+    if (count > 0 && count + n > MAX_MORPHS) {
+      pages.push(cur);
+      cur = [];
+      count = 0;
+    }
+    cur.push(g);
+    count += n;
+  }
+  if (cur.length) pages.push(cur);
+  return pages;
 }
 
 function lookupWord(token, words) {
@@ -1427,32 +1532,53 @@ function renderWords(p, card) {
   recordPageExposure(currentPageId(), p.words);
   const settings = getSettings();
   const exposure = loadExposure();
-  const visibleEntries = [];
-  let suppressedCount = 0;
-  for (const word of p.words) {
-    const { grammar } = parseGloss(word.gloss);
-    const termCount = (exposure.terms[word.term] || 0) - 1;
-    const grammarCount = grammar ? (exposure.grammar[grammar] || 0) - 1 : -1;
-    const termOver = isOverLimit(termCount, settings.wordLimit);
-    const grammarOver = grammar ? isOverLimit(grammarCount, settings.grammarLimit) : true;
-    if (termOver && grammarOver) {
-      suppressedCount++;
-      continue;
-    }
-    visibleEntries.push({ word, hideGrammar: grammarOver });
-  }
   const wdiv = el("div", "words-card");
-  for (const { word, hideGrammar } of visibleEntries) {
-    const w = el("div", "word clickable");
-    w.appendChild(el("div", "word-term", word.term));
-    const { grammar, meaning } = parseGloss(word.gloss);
-    if (grammar && !hideGrammar) w.appendChild(el("div", "word-grammar-chip", grammar));
-    if (meaning) w.appendChild(el("div", "word-meaning", meaning));
-    if (word.extras && word.extras.length) {
-      w.appendChild(el("div", "word-more", `주석 ${word.extras.length}개 ▾`));
+  let suppressedCount = 0;
+  const groups = p.groups || [];
+  for (const g of groups) {
+    const visibleMorphs = [];
+    for (const word of g.morphs) {
+      const { grammar } = parseGloss(word.gloss);
+      const termCount = (exposure.terms[word.term] || 0) - 1;
+      const grammarCount = grammar ? (exposure.grammar[grammar] || 0) - 1 : -1;
+      const termOver = isOverLimit(termCount, settings.wordLimit);
+      const grammarOver = grammar ? isOverLimit(grammarCount, settings.grammarLimit) : true;
+      if (termOver && grammarOver) {
+        suppressedCount++;
+        continue;
+      }
+      visibleMorphs.push({ word, hideGrammar: grammarOver });
     }
-    w.addEventListener("click", () => openDictionary(word));
-    wdiv.appendChild(w);
+    if (visibleMorphs.length === 0) continue;
+    const groupEl = el("div", "token-group");
+    if (g.token) {
+      groupEl.appendChild(el("div", "token-header", g.token));
+    } else {
+      groupEl.appendChild(el("div", "token-header token-header-extra", "기타 단어"));
+    }
+    groupEl.appendChild(el("div", "token-label", "형태소 풀이"));
+    const morphList = el("div", "morph-list");
+    for (const { word, hideGrammar } of visibleMorphs) {
+      const w = el("div", "morph clickable");
+      w.appendChild(el("div", "morph-term", word.term));
+      const { grammar, meaning } = parseGloss(word.gloss);
+      if (grammar && !hideGrammar) w.appendChild(el("div", "word-grammar-chip", grammar));
+      if (meaning) w.appendChild(el("div", "morph-meaning", meaning));
+      if (word.extras && word.extras.length) {
+        w.appendChild(el("div", "word-more", `주석 ${word.extras.length}개 ▾`));
+      }
+      w.addEventListener("click", () => openDictionary(word));
+      morphList.appendChild(w);
+    }
+    groupEl.appendChild(morphList);
+    if (g.token) {
+      const full = tokenFullMeaning(g);
+      if (full) {
+        groupEl.appendChild(el("div", "token-label", "전체 뜻"));
+        groupEl.appendChild(el("div", "token-full-meaning", full));
+      }
+    }
+    wdiv.appendChild(groupEl);
   }
   if (suppressedCount > 0) {
     const note = el("div", "exposure-note",
