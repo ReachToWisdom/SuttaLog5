@@ -798,6 +798,16 @@ body {
   font-style: normal;
   font-size: 0.95em;
 }
+.token-extra-note {
+  font-size: 0.82em;
+  color: var(--muted);
+  background: #f7f4ec;
+  border-left: 3px solid var(--line);
+  padding: 0.5rem 0.7rem;
+  border-radius: 6px;
+  line-height: 1.55;
+}
+
 .token-label {
   font-size: 0.72em;
   font-weight: 700;

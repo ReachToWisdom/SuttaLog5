@@ -1625,9 +1625,13 @@ function renderWords(p, card) {
     if (g.token) {
       headerRow.appendChild(el("div", "token-header", g.token));
     } else {
-      headerRow.appendChild(el("div", "token-header token-header-extra", "기타 단어"));
+      headerRow.appendChild(el("div", "token-header token-header-extra", "어근·구성요소"));
     }
     groupEl.appendChild(headerRow);
+    if (!g.token) {
+      groupEl.appendChild(el("div", "token-extra-note",
+        "본문에 단독으로 등장하지 않지만, 위 게송의 복합어를 이루는 어근입니다. 형태를 알아두면 다른 게송에서도 인식하기 쉽습니다."));
+    }
     const onlyMorph = visibleMorphs[0];
     const isSimple = g.token && visibleMorphs.length === 1
       && normPali(onlyMorph.word.term) === normPali(g.token);
