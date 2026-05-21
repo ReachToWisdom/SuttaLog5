@@ -830,6 +830,54 @@ body {
   font-weight: 500;
 }
 
+/* Highlight current page tokens in pali header */
+.pali-tok-current {
+  background: #fff3a8;
+  color: #5a3e8c;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 0 0.15em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.pali-tok.pali-tok-current {
+  border-bottom: 2px solid #b08800;
+}
+
+/* Token full meaning shown right under token header */
+.token-header-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.token-full-meaning-prom {
+  font-size: 1.02em;
+  font-weight: 600;
+  color: var(--text);
+  background: #fff3a8;
+  border-left: 3px solid var(--accent);
+  padding: 0.5rem 0.7rem;
+  border-radius: 6px;
+  line-height: 1.5;
+}
+
+/* Collapsible morpheme toggle */
+.morph-toggle {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.82em;
+  font-weight: 600;
+  padding: 0.3rem 0.1rem;
+  cursor: pointer;
+  text-align: left;
+  align-self: flex-start;
+}
+.morph-toggle:active { opacity: 0.7; }
+.morph-list.collapsed { display: none; }
+
+
 
 
 

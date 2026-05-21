@@ -1516,25 +1516,55 @@ function _coverStat(icon, value, label) {
   return s;
 }
 
-function appendPaliHeader(card, v) {
+function makePaliClickableWithHighlight(text, words, highlightSet) {
+  const frag = document.createDocumentFragment();
+  const parts = text.split(/(\s+|[,.;:!?])/u);
+  for (const part of parts) {
+    if (!part) continue;
+    if (/^(\s+|[,.;:!?])+$/.test(part)) {
+      frag.appendChild(document.createTextNode(part));
+      continue;
+    }
+    const cleaned = part.toLowerCase().replace(/[.,;:?!"'\u2018\u2019\u201C\u201D]/g, "").trim();
+    const np = normPali(cleaned);
+    const isCurrent = highlightSet && highlightSet.has(np);
+    const entry = lookupWord(part, words);
+    if (entry) {
+      const span = el("span", "pali-tok" + (isCurrent ? " pali-tok-current" : ""), part);
+      span.addEventListener("click", e => {
+        e.stopPropagation();
+        openDictionary(entry);
+      });
+      frag.appendChild(span);
+    } else if (isCurrent) {
+      frag.appendChild(el("span", "pali-tok-current", part));
+    } else {
+      frag.appendChild(document.createTextNode(part));
+    }
+  }
+  return frag;
+}
+
+function appendPaliHeader(card, v, highlightSet) {
   const ph = el("div", "verse-header");
   ph.appendChild(el("span", "verse-header-num", `${v.n}`));
   for (const line of v.pali) {
     const linePart = el("span", "verse-header-pali");
-    linePart.appendChild(makePaliClickable(line, v.words || []));
+    linePart.appendChild(makePaliClickableWithHighlight(line, v.words || [], highlightSet));
     ph.appendChild(linePart);
   }
   card.appendChild(ph);
 }
 
 function renderWords(p, card) {
-  appendPaliHeader(card, p.verse);
+  const groups = p.groups || [];
+  const highlight = new Set(groups.filter(g => g.token).map(g => normPali(g.token)));
+  appendPaliHeader(card, p.verse, highlight);
   recordPageExposure(currentPageId(), p.words);
   const settings = getSettings();
   const exposure = loadExposure();
   const wdiv = el("div", "words-card");
   let suppressedCount = 0;
-  const groups = p.groups || [];
   for (const g of groups) {
     const visibleMorphs = [];
     for (const word of g.morphs) {
@@ -1551,13 +1581,30 @@ function renderWords(p, card) {
     }
     if (visibleMorphs.length === 0) continue;
     const groupEl = el("div", "token-group");
+    const headerRow = el("div", "token-header-row");
     if (g.token) {
-      groupEl.appendChild(el("div", "token-header", g.token));
+      headerRow.appendChild(el("div", "token-header", g.token));
     } else {
-      groupEl.appendChild(el("div", "token-header token-header-extra", "기타 단어"));
+      headerRow.appendChild(el("div", "token-header token-header-extra", "기타 단어"));
     }
-    groupEl.appendChild(el("div", "token-label", "형태소 풀이"));
-    const morphList = el("div", "morph-list");
+    groupEl.appendChild(headerRow);
+    if (g.token) {
+      const full = tokenFullMeaning(g);
+      if (full) {
+        groupEl.appendChild(el("div", "token-full-meaning-prom", full));
+      }
+    }
+    const toggle = el("button", "morph-toggle");
+    const morphList = el("div", "morph-list collapsed");
+    function syncToggle() {
+      const collapsed = morphList.classList.contains("collapsed");
+      toggle.textContent = `${collapsed ? "▸" : "▾"} 형태소 풀이 (${visibleMorphs.length}개)`;
+    }
+    syncToggle();
+    toggle.addEventListener("click", () => {
+      morphList.classList.toggle("collapsed");
+      syncToggle();
+    });
     for (const { word, hideGrammar } of visibleMorphs) {
       const w = el("div", "morph clickable");
       w.appendChild(el("div", "morph-term", word.term));
@@ -1570,14 +1617,8 @@ function renderWords(p, card) {
       w.addEventListener("click", () => openDictionary(word));
       morphList.appendChild(w);
     }
+    groupEl.appendChild(toggle);
     groupEl.appendChild(morphList);
-    if (g.token) {
-      const full = tokenFullMeaning(g);
-      if (full) {
-        groupEl.appendChild(el("div", "token-label", "전체 뜻"));
-        groupEl.appendChild(el("div", "token-full-meaning", full));
-      }
-    }
     wdiv.appendChild(groupEl);
   }
   if (suppressedCount > 0) {
