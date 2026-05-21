@@ -1672,7 +1672,18 @@ function renderTrans(p, card) {
 function renderVerseQuiz(p, card) {
   const v = p.verse;
   const q = p.question;
-  appendPaliHeader(card, v);
+  const highlight = new Set();
+  if (q && q.term) {
+    const tn = normPali(q.term);
+    const tns = tn.replace(/[mn]$/, "");
+    for (const tok of tokenizePali(v.pali)) {
+      const ntok = normPali(tok);
+      if (ntok.includes(tn) || (tns.length >= 2 && ntok.startsWith(tns))) {
+        highlight.add(ntok);
+      }
+    }
+  }
+  appendPaliHeader(card, v, highlight);
   card.appendChild(el("div", "section-label", `문제 ${p.quizIdx} / ${p.quizTotal}`));
   card.appendChild(el("div", "quiz-prompt-inline", "이 단어의 뜻은?"));
   card.appendChild(el("div", "quiz-term-inline", q.term));
