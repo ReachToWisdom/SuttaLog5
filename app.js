@@ -259,7 +259,7 @@ function groupScore(g) {
 
 function buildWordPages(verse) {
   const groups = groupMorphemesByToken(verse);
-  const MAX_SCORE = 4;
+  const MAX_SCORE = 3;
   const MAX_CARDS = 4;
   const pages = [];
   let cur = [];
@@ -1624,17 +1624,8 @@ function renderWords(p, card) {
         groupEl.appendChild(el("div", "token-full-meaning-prom", full));
       }
     }
-    const toggle = el("button", "morph-toggle");
-    const morphList = el("div", "morph-list collapsed");
-    function syncToggle() {
-      const collapsed = morphList.classList.contains("collapsed");
-      toggle.textContent = `${collapsed ? "▸" : "▾"} 형태소 풀이 (${visibleMorphs.length}개)`;
-    }
-    syncToggle();
-    toggle.addEventListener("click", () => {
-      morphList.classList.toggle("collapsed");
-      syncToggle();
-    });
+    groupEl.appendChild(el("div", "token-label", `형태소 (${visibleMorphs.length}개)`));
+    const morphList = el("div", "morph-list");
     for (const { word, hideGrammar } of visibleMorphs) {
       const w = el("div", "morph clickable");
       w.appendChild(el("div", "morph-term", word.term));
@@ -1650,7 +1641,6 @@ function renderWords(p, card) {
       }
       morphList.appendChild(w);
     }
-    groupEl.appendChild(toggle);
     groupEl.appendChild(morphList);
     wdiv.appendChild(groupEl);
   }
