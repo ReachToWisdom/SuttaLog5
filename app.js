@@ -1658,14 +1658,12 @@ function renderWords(p, card) {
 
 function renderTrans(p, card) {
   appendPaliHeader(card, p.verse);
-  card.appendChild(el("div", "section-label", "독해 (탭하여 펼침)"));
+  card.appendChild(el("div", "section-label", "한글 번역 (참고용)"));
   const list = el("div", "trans-list");
   for (const [author, text] of Object.entries(p.verse.translations)) {
     const row = el("div", "tr-row");
     row.appendChild(el("div", "tr-author", author));
-    const body = el("div", "tr-body hidden", text);
-    body.addEventListener("click", () => body.classList.toggle("hidden"));
-    row.appendChild(body);
+    row.appendChild(el("div", "tr-body", text));
     list.appendChild(row);
   }
   card.appendChild(list);
