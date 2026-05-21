@@ -251,22 +251,30 @@ function tokenFullMeaning(group) {
   }
   return final.join(" / ");
 }
+function groupScore(g) {
+  const morphCount = g.morphs.length;
+  const hasExtras = g.morphs.some(m => m.extras && m.extras.length);
+  return Math.max(1, morphCount) + (hasExtras ? 1 : 0);
+}
+
 function buildWordPages(verse) {
   const groups = groupMorphemesByToken(verse);
-  const MAX_MORPHS = 4;
+  const MAX_SCORE = 4;
+  const MAX_CARDS = 4;
   const pages = [];
   let cur = [];
-  let count = 0;
+  let scoreSum = 0;
   for (const g of groups) {
     const n = g.morphs.length;
     if (n === 0) continue;
-    if (count > 0 && count + n > MAX_MORPHS) {
+    const s = groupScore(g);
+    if (cur.length > 0 && (scoreSum + s > MAX_SCORE || cur.length >= MAX_CARDS)) {
       pages.push(cur);
       cur = [];
-      count = 0;
+      scoreSum = 0;
     }
     cur.push(g);
-    count += n;
+    scoreSum += s;
   }
   if (cur.length) pages.push(cur);
   return pages;
@@ -1601,9 +1609,11 @@ function renderWords(p, card) {
         groupEl.appendChild(el("div", "token-full-meaning-prom", meaning));
       }
       if (word.extras && word.extras.length) {
-        const ex = el("button", "word-more-btn", `주석 ${word.extras.length}개 ▾`);
-        ex.addEventListener("click", () => openDictionary(word));
-        groupEl.appendChild(ex);
+        const exBox = el("div", "word-extras-inline");
+        for (const ex of word.extras) {
+          exBox.appendChild(el("div", "word-extra-line", ex));
+        }
+        groupEl.appendChild(exBox);
       }
       wdiv.appendChild(groupEl);
       continue;
@@ -1632,9 +1642,12 @@ function renderWords(p, card) {
       if (grammar && !hideGrammar) w.appendChild(el("div", "word-grammar-chip", grammar));
       if (meaning) w.appendChild(el("div", "morph-meaning", meaning));
       if (word.extras && word.extras.length) {
-        w.appendChild(el("div", "word-more", `주석 ${word.extras.length}개 ▾`));
+        const exBox = el("div", "word-extras-inline");
+        for (const ex of word.extras) {
+          exBox.appendChild(el("div", "word-extra-line", ex));
+        }
+        w.appendChild(exBox);
       }
-      w.addEventListener("click", () => openDictionary(word));
       morphList.appendChild(w);
     }
     groupEl.appendChild(toggle);
