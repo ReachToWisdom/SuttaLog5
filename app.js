@@ -230,7 +230,18 @@ function groupMorphemesByToken(verse) {
       }
     }
   }
-  const result = groups.filter(g => g.morphs.length > 0);
+  // Dedupe: same token appearing multiple times in a verse is explained once
+  const seen = new Set();
+  const result = [];
+  for (const g of groups) {
+    if (g.morphs.length === 0) continue;
+    const key = g.token ? normPali(g.token) : null;
+    if (key) {
+      if (seen.has(key)) continue;
+      seen.add(key);
+    }
+    result.push(g);
+  }
   if (orphans.length) result.push({ token: null, morphs: orphans });
   return result;
 }
