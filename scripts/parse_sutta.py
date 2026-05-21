@@ -23,6 +23,13 @@ TRANSLATORS = [
     "냐나몰리 스님",
     "담마간다 스님",
 ]
+TRANSLATOR_ABBR = {
+    "초": "초기불전연구원",
+    "한": "한국빠알리성전협회",
+    "아": "아짜리야 붓다락키따 스님",
+    "냐": "냐나몰리 스님",
+    "담": "담마간다 스님",
+}
 TR_RE = re.compile(r"^\(([^)]+)\)\s*(.*)")
 VERSE_RE = re.compile(r"^(\d+)\.\s*(.*)")
 WORD_RE = re.compile(r"^([a-zA-ZāīūṃṅñṭḍṇḷĀĪŪṂṄÑṬḌṆḶōōÑà-ſ]+)\s*[:=]\s*(.*)")
@@ -116,6 +123,8 @@ def parse_verse(num, block, first_pali):
         m = TR_RE.match(line)
         if m:
             translator, body = m.group(1), m.group(2)
+            if translator in TRANSLATOR_ABBR:
+                translator = TRANSLATOR_ABBR[translator]
             if translator in TRANSLATORS:
                 state = "translations"
                 current_translator = translator
