@@ -361,6 +361,29 @@ function recordStudyToday() {
 }
 function resetStudyDays() { localStorage.removeItem(STUDY_DAYS_KEY); }
 
+function resetLastPage() {
+  localStorage.removeItem(LAST_PAGE_KEY);
+  state.pageIdx = 0;
+}
+
+function deleteAllLocalMemos() {
+  const idx = loadMemoIndex();
+  for (const pageId of idx) {
+    localStorage.removeItem(MEMO_PREFIX + pageId);
+  }
+  localStorage.removeItem(MEMO_INDEX_KEY);
+}
+
+function resetAllSuttalog5() {
+  const keys = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && (k.startsWith("suttalog5:") || k === storageKey())) keys.push(k);
+  }
+  for (const k of keys) localStorage.removeItem(k);
+  state.pageIdx = 0;
+}
+
 function computePageId(p, fallbackIdx) {
   if (!p) return "p" + (fallbackIdx + 1);
   if (p.kind === "cover") return "cover";
@@ -922,6 +945,15 @@ function openSettings() {
   }
   sheet.appendChild(gg);
 
+  sheet.appendChild(el("div", "dict-section-label", "메모"));
+  const memoListBtn = el("button", "btn-secondary",
+    `📝 메모 목록 보기 (${listAllMemos().length}개)`);
+  memoListBtn.addEventListener("click", () => {
+    closeSettings();
+    openMemoList();
+  });
+  sheet.appendChild(memoListBtn);
+
   sheet.appendChild(el("div", "dict-section-label", "복습"));
   const wrongSet = loadWrongTerms();
   const reviewBtn = el("button", "btn-secondary",
@@ -933,8 +965,18 @@ function openSettings() {
   });
   sheet.appendChild(reviewBtn);
 
-  sheet.appendChild(el("div", "dict-section-label", "초기화"));
+  sheet.appendChild(el("div", "dict-section-label", "부분 초기화"));
   const actions = el("div", "settings-actions");
+
+  const rp = el("button", "btn-secondary", "📖 학습 진도 초기화 (표지로)");
+  rp.addEventListener("click", () => {
+    if (!confirm("학습 진도를 초기화할까요? 다음 실행 시 표지부터 시작합니다.")) return;
+    resetLastPage();
+    render();
+    openSettings();
+  });
+  actions.appendChild(rp);
+
   const re = el("button", "btn-secondary", "🔄 단어/문법 노출 카운터 초기화");
   re.addEventListener("click", () => {
     if (!confirm("노출 카운터를 초기화할까요? 이미 본 단어들이 다시 모두 표시됩니다.")) return;
@@ -943,6 +985,7 @@ function openSettings() {
     openSettings();
   });
   actions.appendChild(re);
+
   const rw = el("button", "btn-secondary", `🪷 연꽃 카운트 초기화 (현재 ${getWrongCount()})`);
   rw.addEventListener("click", () => {
     if (!confirm("연꽃 카운트를 0으로 되돌릴까요?")) return;
@@ -950,6 +993,7 @@ function openSettings() {
     openSettings();
   });
   actions.appendChild(rw);
+
   const rr = el("button", "btn-secondary", `🗑 복습 단어 목록 비우기 (현재 ${loadWrongTerms().size})`);
   rr.addEventListener("click", () => {
     if (!confirm("복습 단어 목록을 모두 비울까요?")) return;
@@ -957,7 +1001,42 @@ function openSettings() {
     openSettings();
   });
   actions.appendChild(rr);
+
+  const rc = el("button", "btn-secondary", `📅 학습 캘린더 초기화 (현재 ${Object.keys(loadStudyDays()).length}일)`);
+  rc.addEventListener("click", () => {
+    if (!confirm("진도 캘린더를 초기화할까요?")) return;
+    resetStudyDays();
+    openSettings();
+  });
+  actions.appendChild(rc);
+
+  const rm = el("button", "btn-secondary", `🗒 모든 메모 삭제 (현재 ${listAllMemos().length}개)`);
+  rm.addEventListener("click", () => {
+    if (listAllMemos().length === 0) { alert("삭제할 메모가 없습니다."); return; }
+    if (!confirm("로컬에 저장된 모든 메모를 삭제할까요?\n공유 메모(GitHub)는 영향받지 않습니다.")) return;
+    deleteAllLocalMemos();
+    updateMemoFab();
+    render();
+    openSettings();
+  });
+  actions.appendChild(rm);
+
   sheet.appendChild(actions);
+
+  sheet.appendChild(el("div", "dict-section-label", "전체 초기화"));
+  const fullReset = el("button", "btn-danger-full",
+    "⚠️ 모든 학습 데이터 전체 초기화");
+  fullReset.addEventListener("click", () => {
+    if (!confirm("⚠️ 경고: 모든 학습 데이터를 삭제합니다.\n\n포함: 진도, 노출 카운터, 연꽃 카운트, 복습 단어, 캘린더, 메모, 환경설정.\n\n계속할까요?")) return;
+    if (!confirm("정말로 전체 초기화할까요?\n이 작업은 되돌릴 수 없습니다.")) return;
+    resetAllSuttalog5();
+    closeSettings();
+    render();
+    updateMemoFab();
+    updateLotusRow();
+    alert("초기화 완료. 표지로 돌아갑니다.");
+  });
+  sheet.appendChild(fullReset);
   overlay.appendChild(sheet);
   overlay.addEventListener("click", e => { if (e.target === overlay) closeSettings(); });
   document.body.appendChild(overlay);

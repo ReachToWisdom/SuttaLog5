@@ -730,6 +730,28 @@ body {
 .memo-lightbox-nav:active,
 .memo-lightbox-close:active { background: rgba(255, 255, 255, 0.22); }
 
+/* ===== DANGER FULL RESET BUTTON ===== */
+.btn-danger-full {
+  display: block;
+  width: 100%;
+  background: #fff0f0;
+  color: #b53030;
+  border: 1.5px solid #e08484;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.92em;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  letter-spacing: 0.01em;
+}
+.btn-danger-full:active {
+  background: #ffe2e2;
+  transform: scale(0.99);
+}
+
+
 
 /* ===== TEXT SELECTION ===== */
 body {
