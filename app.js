@@ -1771,12 +1771,7 @@ function appendCardNav(card) {
     next.disabled = true;
   } else {
     const nextP = state.pages[state.pageIdx + 1];
-    let label = "다음 →";
-    if (nextP.kind === "cover") label = "표지로 →";
-    else if (nextP.kind === "words") label = `${nextP.verse.n}게송 단어 ${nextP.wordPageIdx} →`;
-    else if (nextP.kind === "trans") label = `${nextP.verse.n}게송 독해 →`;
-    else if (nextP.kind === "verseQuiz") label = `${nextP.verse.n}게송 문제 ${nextP.quizIdx} →`;
-    next.textContent = label;
+    next.textContent = "다음 →";
     next.addEventListener("click", () => go(1));
   }
   nav.appendChild(next);
