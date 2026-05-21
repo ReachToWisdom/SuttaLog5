@@ -47,6 +47,7 @@ async function init() {
       '<div style="padding:2rem;color:#c33;">데이터 로드 실패: ' + err.message + '</div>';
     return;
   }
+  state.glossary = buildGlobalGlossary(state.sutta);
   state.pages = buildPages(state.sutta);
   const fromHash = parseHash();
   if (fromHash !== null) {
@@ -181,6 +182,17 @@ function normPali(s) {
 function tokenizePali(paliLines) {
   return (paliLines || []).flatMap(l => l.split(/[\s,.;:!?“”‘’—]+/u).filter(Boolean));
 }
+function buildGlobalGlossary(sutta) {
+  const map = new Map();
+  for (const v of (sutta && sutta.verses) || []) {
+    for (const w of v.words || []) {
+      const k = normPali(w.term);
+      if (k && !map.has(k)) map.set(k, w);
+    }
+  }
+  return map;
+}
+
 function groupMorphemesByToken(verse) {
   const tokens = tokenizePali(verse.pali);
   const tnorms = tokens.map(normPali);
@@ -208,6 +220,15 @@ function groupMorphemesByToken(verse) {
     }
     if (found < 0) orphans.push(m);
     else { groups[found].morphs.push(m); lastIdx = found; }
+  }
+  // Fallback: fill empty tokens from sutta-wide glossary
+  if (state.glossary && state.glossary.size) {
+    for (let gi = 0; gi < groups.length; gi++) {
+      if (groups[gi].morphs.length === 0) {
+        const w = state.glossary.get(tnorms[gi]);
+        if (w) groups[gi].morphs.push(w);
+      }
+    }
   }
   const result = groups.filter(g => g.morphs.length > 0);
   if (orphans.length) result.push({ token: null, morphs: orphans });
